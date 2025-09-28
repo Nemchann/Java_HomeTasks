@@ -45,8 +45,11 @@ public class Fraction {
     public Fraction minus(Fraction fraction){
         int commonMultiply = leastCommonMultiple(fraction.denominator, denominator);
         int divisor1 = commonMultiply / denominator;
-        int divisor2 = commonMultiply /fraction.denominator;
+        int divisor2 = commonMultiply / fraction.denominator;
         int sumNumerators = divisor1 * numerator - divisor2 * fraction.numerator;
+        int divisor = greatestCommonDivisor(sumNumerators, commonMultiply);
+        sumNumerators /= divisor;
+        commonMultiply /= divisor;
         Fraction resultFraction = new Fraction(sumNumerators, commonMultiply);
         return resultFraction;
     }

@@ -114,6 +114,10 @@ public class Main {
         System.out.println(fraction1.sum(fraction2).div(fraction3).minus(5));
         System.out.println(fraction1.mul(fraction2));
 
+//        1.5.8
+        Square square1 = new Square(5, 3, 23);
+        BrokenLine squareLine = square1.polyline();
+        System.out.println(squareLine);
 
 
     }
