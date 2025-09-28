@@ -108,10 +108,11 @@ public class Main {
 
 
 //        1.5.5
-        Fraction fraction1 = new Fraction(1, 2);
+        Fraction fraction1 = new Fraction(1, 3);
         Fraction fraction2 = new Fraction(2, 3);
         Fraction fraction3 = new Fraction(3, 8);
         System.out.println(fraction1.sum(fraction2).div(fraction3).minus(5));
+        System.out.println(fraction1.mul(fraction2));
 
 
 
