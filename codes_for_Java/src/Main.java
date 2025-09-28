@@ -104,8 +104,16 @@ public class Main {
 //        1.5.3
         Line line153 = new Line(1, 1, 10, 15);
         line153.getSpace();
+        System.out.println("\n");
+
 
 //        1.5.5
+        Fraction fraction1 = new Fraction(1, 2);
+        Fraction fraction2 = new Fraction(2, 3);
+        Fraction fraction3 = new Fraction(3, 8);
+        System.out.println(fraction1.sum(fraction2).div(fraction3).minus(5));
+
+
 
     }
 
