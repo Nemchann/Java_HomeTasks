@@ -113,11 +113,30 @@ public class Main {
         Fraction fraction3 = new Fraction(3, 8);
         System.out.println(fraction1.sum(fraction2).div(fraction3).minus(5));
         System.out.println(fraction1.mul(fraction2));
+        System.out.println("\n");
+
+//        1.5.6
+        Student student156_1 = new Student("Вася", new int[]{3, 4, 5, 4});
+        Student student156_2 = new Student("Петя", new int[]{5, 5, 5, 5});
+        System.out.println(student156_1.name + " среднее: " + student156_1.getAverage());
+        System.out.println(student156_1.isExcellentPupil());
+        System.out.println(student156_2.name + " среднее: " + student156_2.getAverage());
+        System.out.println(student156_2.isExcellentPupil());
+        System.out.println("\n");
+
+//        1.5.7
+        Dot dot157_1 = new Dot(1, 5);
+        Dot dot157_2 = new Dot(2, 8);
+        Dot dot157_3 = new Dot(5, 3);
+        BrokenLine spline157 = new BrokenLine(dot157_1, dot157_2, dot157_3);
+        System.out.println(spline157.splineLength());
+        System.out.println("\n");
 
 //        1.5.8
         Square square1 = new Square(5, 3, 23);
         BrokenLine squareLine = square1.polyline();
         System.out.println(squareLine);
+        System.out.println(squareLine.splineLength());
 
 
     }

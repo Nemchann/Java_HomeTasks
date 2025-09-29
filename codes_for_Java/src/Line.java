@@ -12,9 +12,9 @@ public class Line {
         this.end = new Dot(x2, y2);;
     }
 
-    public void getSpace(){
+    public int getSpace(){
         double space = Math.sqrt((Math.pow(end.x - start.x, 2)) + (Math.pow(end.y - start.y, 2)));
-        System.out.println((int)space);;
+        return (int)space;
     }
 
     public String toString(){

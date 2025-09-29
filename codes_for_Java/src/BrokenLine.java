@@ -7,6 +7,19 @@ public class BrokenLine {
         this.points = points;
     }
 
+//    public BrokenLine addDots(Dot...points){
+//
+//    }
+
+    public double splineLength(){
+        double space = 0;
+        for (int i = 1; i < points.length; i++){
+            Line line = new Line(points[i - 1], points[i]);
+            space += line.getSpace();
+        }
+        return space;
+    }
+
     public String toString(){
         String result = "Линия [";
 
