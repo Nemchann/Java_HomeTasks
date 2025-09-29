@@ -6,19 +6,21 @@ public class Fraction {
         this.numerator = numerator;
         this.denominator = denominator;
     }
-
+//    Наибольший общий делитель (НОД)
     private int greatestCommonDivisor(int a, int b){
         if (b == 0){
             return a;
         }
         return greatestCommonDivisor(b, a % b);
     }
+
+//    Наименьшее общее кратное (НОК)
     private int leastCommonMultiple(int a, int b){
         return a / greatestCommonDivisor(a, b) * b;
     }
 
-    public void getFraction() {
-        System.out.println(numerator + "/" + denominator);
+    public String getFraction() {
+        return numerator + "/" + denominator;
     }
 
 //    Сумма

@@ -20,6 +20,38 @@ public class Human {
         this.father = father;
     }
 
+    public String getSelfname(){
+        if (fullName.selfname == null){
+            return "Безымянный";
+        }
+        return fullName.selfname;
+    }
+
+    public String getPatronymic(){
+        if (fullName != null && fullName.patronymic != null) {
+            return fullName.patronymic;
+        }
+        if (father != null && father.getSelfname() != null && !father.getSelfname().equals("Безымянный")) {
+            return father.getSelfname() + "ович";
+        }
+        return null;
+    }
+
+    public String getSurname(){
+        if (fullName != null && fullName.surname != null && !fullName.surname.isEmpty()) {
+            return fullName.surname;
+        }
+
+        if (father != null) {
+            String fatherSurname = father.getSurname();
+            if (fatherSurname != null && !fatherSurname.isEmpty()) {
+                return fatherSurname;
+            }
+        }
+
+        return "Без фамилии";
+    }
+
     public String toString() {
         StringBuilder result = new StringBuilder("Человек с именем");
 

@@ -20,8 +20,8 @@ public class Square {
         int x1 = dot.x;
         int y1 = dot.y;
         Dot dot2 = new Dot(x1 + n, y1);
-        Dot dot3 = new Dot(x1 + n, y1 + n);
-        Dot dot4 = new Dot(x1, y1 + n);
+        Dot dot3 = new Dot(x1 + n, y1 - n);
+        Dot dot4 = new Dot(x1, y1 - n);
         BrokenLine squareLine = new BrokenLine(dot, dot2, dot3, dot4);
         return squareLine;
     }

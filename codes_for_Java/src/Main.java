@@ -4,6 +4,7 @@ public class Main {
         Dot dot1 = new Dot(3, 5);
         Dot dot2 = new Dot(25, 6);
         Dot dot3 = new Dot(7, 8);
+        System.out.println("1.4.1");
         System.out.println(dot1);
         System.out.println(dot2);
         System.out.println(dot3);
@@ -15,6 +16,7 @@ public class Main {
         Line line1 = new Line(dot4, dot5);
         Line line2 = new Line(5, 10, 25, 10);
         Line line3 = new Line(line1.start, line2.end);
+        System.out.println("1.4.2");
         System.out.println(line1);
         System.out.println(line2);
         System.out.println(line3);
@@ -25,6 +27,7 @@ public class Main {
         Dot dot7 = new Dot(25, 6);
         Dot dot8 = new Dot(7, 8);
         BrokenLine spline1 = new BrokenLine(dot6, dot7, dot8);
+        System.out.println("1.4.3");
         System.out.println(spline1);
         System.out.println("\n");
 
@@ -32,6 +35,7 @@ public class Main {
         House house1 = new House(2);
         House house2 = new House(35);
         House house3 = new House(91);
+        System.out.println("1.4.4");
         System.out.println(house1);
         System.out.println(house2);
         System.out.println(house3);
@@ -42,6 +46,7 @@ public class Main {
         Name name2 = new Name("Александр", "Сегреевич", "Пушкин");
         Name name3 = new Name("Владимир", "Маяковский");
         Name name4 = new Name("Христофор", "Бонифатьевич");
+        System.out.println("1.4.5");
         System.out.println(name1);
         System.out.println(name2);
         System.out.println(name3);
@@ -53,6 +58,7 @@ public class Main {
         Name name5 = new Name("Сергей", "Пушкин");
         Human human2 = new Human(human1, name5);
         Human human3 = new Human(human2, "Александр");
+        System.out.println("1.4.6");
         System.out.println(human1);
         System.out.println(human2);
         System.out.println(human3);
@@ -61,6 +67,7 @@ public class Main {
 //        1.4.7
         Student student1 = new Student("Вася", new int[]{3, 4, 5});
         Student student2 = new Student("Максим");
+        System.out.println("1.4.7");
         System.out.println(student1);
         System.out.println(student2);
         System.out.println("\n");
@@ -78,6 +85,7 @@ public class Main {
         A.addPaths(D, 6);
         A.addPaths(F, 1);
         E.addPaths(F, 2);
+        System.out.println("1.4.8");
         System.out.println(A);
         System.out.println(B);
         System.out.println(C);
@@ -88,6 +96,7 @@ public class Main {
 
 //        1.5.1
         Gun gun1 = new Gun(3);
+        System.out.println("1.5.1");
         gun1.fire();
         gun1.fire();
         gun1.fire();
@@ -97,20 +106,43 @@ public class Main {
 
 //        1.5.2
         Cat cat1 = new Cat("Барсик");
+        System.out.println("1.5.2");
         cat1.tellMeow();
         cat1.tellMeow(3);
         System.out.println("\n");
 
 //        1.5.3
         Line line153 = new Line(1, 1, 10, 15);
-        line153.getSpace();
+        System.out.println("1.5.3");
+        System.out.println(line153.getSpace());
         System.out.println("\n");
 
+//        1.5.4
+        System.out.println("1.5.4");
+        Human human154_1 = new Human(new Name("Колыван", "Попов", "Прохорович"));
+        Human human154_2 = new Human(human154_1, "Потап");
+        Human human154_3 = new Human(human154_2, "Шут");
+        System.out.println(human154_2.getSurname());
+        System.out.println(human154_3.getSurname());
+        System.out.println(human154_2);
+        System.out.println(human154_3);
+        System.out.println("\n");
 
 //        1.5.5
         Fraction fraction1 = new Fraction(1, 3);
         Fraction fraction2 = new Fraction(2, 3);
         Fraction fraction3 = new Fraction(3, 8);
+        Fraction fraction4 = new Fraction(5, 9);
+        System.out.println("1.5.5");
+        System.out.println(fraction1.sum(fraction3));
+        System.out.println(fraction2.sum(2));
+        System.out.println(fraction3.minus(fraction4));
+        System.out.println(fraction2.minus(1));
+        System.out.println(fraction4.mul(fraction2));
+        System.out.println(fraction2.mul(2));
+        System.out.println(fraction1.div(fraction4));
+        System.out.println(fraction4.div(5));
+
         System.out.println(fraction1.sum(fraction2).div(fraction3).minus(5));
         System.out.println(fraction1.mul(fraction2));
         System.out.println("\n");
@@ -118,24 +150,31 @@ public class Main {
 //        1.5.6
         Student student156_1 = new Student("Вася", new int[]{3, 4, 5, 4});
         Student student156_2 = new Student("Петя", new int[]{5, 5, 5, 5});
-        System.out.println(student156_1.name + " среднее: " + student156_1.getAverage());
-        System.out.println(student156_1.isExcellentPupil());
-        System.out.println(student156_2.name + " среднее: " + student156_2.getAverage());
-        System.out.println(student156_2.isExcellentPupil());
+        System.out.println("1.5.6");
+        student156_1.getInfo();
+        student156_2.getInfo();
         System.out.println("\n");
 
 //        1.5.7
         Dot dot157_1 = new Dot(1, 5);
         Dot dot157_2 = new Dot(2, 8);
         Dot dot157_3 = new Dot(5, 3);
+        Dot dot157_4 = new Dot(5, 15);
+        Dot dot157_5 = new Dot(8, 10);
+        System.out.println("1.5.7");
         BrokenLine spline157 = new BrokenLine(dot157_1, dot157_2, dot157_3);
         System.out.println(spline157.splineLength());
+        spline157.addDots(dot157_4, dot157_5);
+        System.out.println("Новая длина: " + spline157.splineLength());
         System.out.println("\n");
 
 //        1.5.8
         Square square1 = new Square(5, 3, 23);
         BrokenLine squareLine = square1.polyline();
+        System.out.println("1.5.8");
         System.out.println(squareLine);
+        System.out.println(squareLine.splineLength());
+        squareLine.points[3] = new Dot(15, 25);
         System.out.println(squareLine.splineLength());
 
 
