@@ -95,7 +95,7 @@ public class Main {
         System.out.println("\n");
 
 //        1.5.1
-        Gun gun1 = new Gun(3);
+        Gun gun1 = new Gun(3,5);
         System.out.println("1.5.1");
         gun1.fire();
         gun1.fire();
@@ -176,8 +176,48 @@ public class Main {
         System.out.println(squareLine.splineLength());
         squareLine.points[3] = new Dot(15, 25);
         System.out.println(squareLine.splineLength());
+        System.out.println("\n");
+
+//        1.6.1
+        System.out.println("1.6.1");
+        House house161_1 = new House(5);
+//        House house161_2 = new House(-5);
+        System.out.println(house161_1);
+//        System.out.println(house161_2);
+
+//        1.6.3
+        Square square163_1 = new Square(new Dot(3, 5), 3);
+//        square163_1.setSquare(0, 2, 4);
+//        square163_1.getSquare();
+        Square square163_2 = new Square(new Dot(9, 0), 5);
+        square163_2.setSquare(1, 2, 4);
+        square163_2.getSquare();
+        System.out.println("\n");
+
+//        1.6.4
+        System.out.println("1.6.4");
+        Fraction fraction164_1 = new Fraction(3, 6);
+        System.out.println(fraction164_1);
+//        fraction164_1.numerator = 4;
+//        Fraction fraction164_2 = new Fraction(5, -6);
+        System.out.println("\n");
+        
+//        1.6.5
+        System.out.println("1.6.5");
+        Gun gun2 = new Gun(3, 7);
+        gun2.fire();
+        gun2.fire();
+        gun2.fire();
+        gun2.fire();
+        gun2.fire();
+        gun2.reloading(8);
+        gun2.fire();
+        gun2.fire();
+        gun2.unloading();
+        gun2.fire();
 
 
     }
+
 
 }

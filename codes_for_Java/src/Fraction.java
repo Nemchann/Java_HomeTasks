@@ -1,10 +1,22 @@
 public class Fraction {
-    int numerator;
-    int denominator;
+    private final int numerator;
+    private final int denominator;
 
     public Fraction(int numerator, int denominator){
-        this.numerator = numerator;
-        this.denominator = denominator;
+        if (denominator <= 0){
+            throw new IllegalArgumentException("denominator must be positive");
+        }
+        int divisor = greatestCommonDivisor(Math.abs(numerator), Math.abs(denominator));
+        this.numerator = numerator / divisor;
+        this.denominator = denominator / divisor;
+            }
+
+    public int getNumerator() {
+        return numerator;
+    }
+
+    public int getDenominator() {
+        return denominator;
     }
 //    Наибольший общий делитель (НОД)
     private int greatestCommonDivisor(int a, int b){
@@ -19,9 +31,6 @@ public class Fraction {
         return a / greatestCommonDivisor(a, b) * b;
     }
 
-    public String getFraction() {
-        return numerator + "/" + denominator;
-    }
 
 //    Сумма
     public Fraction sum(Fraction fraction){
@@ -32,15 +41,16 @@ public class Fraction {
         int divisor = greatestCommonDivisor(sumNumerators, commonMultiply);
         sumNumerators /= divisor;
         commonMultiply /= divisor;
+        if (commonMultiply <= 0){
+            commonMultiply = -commonMultiply;
+            sumNumerators = -sumNumerators;
+        }
         Fraction resultFraction = new Fraction(sumNumerators, commonMultiply);
         return resultFraction;
     }
 
     public Fraction sum(int n){
-        int newNumerator = n * denominator;
-        int newDenominator = denominator;
-        Fraction resultFraction = new Fraction(newNumerator, newDenominator);
-        return sum(resultFraction);
+        return sum(new Fraction(n, 1));
     }
 
 //    Разность
@@ -52,15 +62,16 @@ public class Fraction {
         int divisor = greatestCommonDivisor(sumNumerators, commonMultiply);
         sumNumerators /= divisor;
         commonMultiply /= divisor;
+        if (commonMultiply <= 0){
+            commonMultiply = -commonMultiply;
+            sumNumerators = -sumNumerators;
+        }
         Fraction resultFraction = new Fraction(sumNumerators, commonMultiply);
         return resultFraction;
     }
 
     public Fraction minus(int n){
-        int newNumerator = n * denominator;
-        int newDenominator = denominator;
-        Fraction resultFraction = new Fraction(newNumerator, newDenominator);
-        return minus(resultFraction);
+        return minus(new Fraction(n, 1));
     }
 
 //    Умножение
@@ -70,17 +81,17 @@ public class Fraction {
         int divisor = greatestCommonDivisor(newNumerator, newDenominator);
         newNumerator /= divisor;
         newDenominator /= divisor;
+
+        if (newDenominator <= 0){
+            newDenominator = -newDenominator;
+            newNumerator = -newNumerator;
+        }
         Fraction resultFraction = new Fraction(newNumerator, newDenominator);
         return resultFraction;
     }
 
     public Fraction mul(int n){
-        int newNumerator = n * numerator;
-        int divisor = greatestCommonDivisor(newNumerator, denominator);
-        newNumerator /= divisor;
-        denominator /= divisor;
-        Fraction resultFraction = new Fraction(newNumerator, denominator);
-        return resultFraction;
+        return mul(new Fraction(n, 1));
     }
 
 //    Деление
@@ -90,17 +101,17 @@ public class Fraction {
         int divisor = greatestCommonDivisor(newNumerator, newDenominator);
         newNumerator /= divisor;
         newDenominator /= divisor;
+
+        if (newDenominator <= 0){
+            newDenominator = -newDenominator;
+            newNumerator = -newNumerator;
+        }
         Fraction resultFraction = new Fraction(newNumerator, newDenominator);
         return resultFraction;
     }
 
     public Fraction div(int n){
-        int newDenominator = denominator * n;
-        int divisor = greatestCommonDivisor(numerator, newDenominator);
-        numerator /= divisor;
-        newDenominator /= divisor;
-        Fraction resultFraction = new Fraction(numerator, newDenominator);
-        return resultFraction;
+        return div(new Fraction(n, 1));
     }
 
 
