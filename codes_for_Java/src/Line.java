@@ -12,6 +12,22 @@ public class Line {
         this.end = new Dot(x2, y2);;
     }
 
+    public Dot getStart() {
+        return start;
+    }
+
+    public Dot getEnd() {
+        return end;
+    }
+
+    public void setStart(Dot start) {
+        this.start = start;
+    }
+
+    public void setEnd(Dot end) {
+        this.end = end;
+    }
+
     public int getSpace(){
         double space = Math.sqrt((Math.pow(end.x - start.x, 2)) + (Math.pow(end.y - start.y, 2)));
         return (int)space;

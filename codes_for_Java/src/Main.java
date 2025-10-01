@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
 //        1.4.1
@@ -65,7 +67,7 @@ public class Main {
         System.out.println("\n");
 
 //        1.4.7
-        Student student1 = new Student("Вася", new int[]{3, 4, 5});
+        Student student1 = new Student("Вася", 3, 4, 5);
         Student student2 = new Student("Максим");
         System.out.println("1.4.7");
         System.out.println(student1);
@@ -184,8 +186,18 @@ public class Main {
 //        House house161_2 = new House(-5);
         System.out.println(house161_1);
 //        System.out.println(house161_2);
+        System.out.println("\n");
+
+//        1.6.2
+        System.out.println("1.6.2");
+        Name name6 = new Name("", "Смирнов");
+//        Name name7 = new Name("");
+        System.out.println(name6);
+//        System.out.println(name7);
+        System.out.println("\n");
 
 //        1.6.3
+        System.out.println("1.6.3");
         Square square163_1 = new Square(new Dot(3, 5), 3);
 //        square163_1.setSquare(0, 2, 4);
 //        square163_1.getSquare();
@@ -198,8 +210,8 @@ public class Main {
         System.out.println("1.6.4");
         Fraction fraction164_1 = new Fraction(3, 6);
         System.out.println(fraction164_1);
-//        fraction164_1.numerator = 4;
-//        Fraction fraction164_2 = new Fraction(5, -6);
+//        fraction164_1.numerator = 4; - нельзя изменить
+//        Fraction fraction164_2 = new Fraction(5, -6); - нельзя сделать отрицательный знаменатель
         System.out.println("\n");
         
 //        1.6.5
@@ -215,7 +227,48 @@ public class Main {
         gun2.fire();
         gun2.unloading();
         gun2.fire();
+        System.out.println("\n");
 
+//        1.6.7
+        System.out.println("1.6.7");
+        Human human167_1 = new Human(new Name("Александр", "Сидоров"));
+        Human human167_2 = new Human(human167_1, "Ярослав");
+        Human human167_3 = new Human("Антон");
+//        human167_2.father = human167_3;  - выведет исключение
+        System.out.println(human167_2);
+        System.out.println("\n");
+//        1.6.8
+        System.out.println("1.6.8");
+        Student student3 = new Student("Саша", 4, 5, 2);
+//        Student student4 = new Student("Коля", 1, 0, 10);
+        System.out.println(Arrays.toString(student3.getGrades()));
+//        System.out.println(student4);
+        System.out.println("\n");
+
+//        1.6.10
+        Department itDepartment = new Department("IT");
+
+        Employee boss = itDepartment.addBoss("Петров");
+        System.out.println(boss);
+
+        itDepartment.addEmployee(new Employee("Иванов"));
+        itDepartment.addEmployee(new Employee("Сидоров"));
+
+        System.out.println("Все сотрудники отдела:");
+        for (Employee emp : itDepartment.getEmployees()) {
+            System.out.println("- " + emp.getName());
+        }
+
+        Employee ivanov = itDepartment.getEmployees().get(1); // Иванов
+        itDepartment.setBoss(ivanov);
+        System.out.println(ivanov);
+
+        Department hrDepartment = new Department("HR");
+        Employee hrEmployee = new Employee("Козлов");
+        hrDepartment.addEmployee(hrEmployee);
+
+        itDepartment.setBoss(hrEmployee);
+        System.out.println(hrEmployee);
 
     }
 

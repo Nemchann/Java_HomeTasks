@@ -4,18 +4,24 @@ public class Student {
     String name;
     int[] grades;
 
-    public Student(String name, Object... params) {
+    public Student(String name, int... params) {
         this.name = name;
 
         // Если передан один параметр и это массив оценок
-        if (params.length == 1 && params[0] instanceof int[]) {
-            this.grades = (int[]) params[0];
+        if (params.length == 1) {
+            if (params[0] > 5 || params[0] < 2){
+                throw new IllegalArgumentException("Grades must be between 2 and 5");
+            }
+            this.grades = params;
         }
         // Если переданы отдельные оценки как числа
         else if (params.length > 0) {
             this.grades = new int[params.length];
             for (int i = 0; i < params.length; i++) {
-                this.grades[i] = (Integer) params[i];
+                if (params[i]> 5 || params[i] < 2){
+                    throw new IllegalArgumentException("Grades must be between 2 and 5");
+                }
+                this.grades[i] = params[i];
             }
         }
         // Если параметров нет - grades останется null
@@ -30,8 +36,13 @@ public class Student {
 //        this.grades = grades;
 //    }
 
+
+    public int[] getGrades() {
+        return grades;
+    }
+
     public double getAverage(){
-        if (grades.length == 0){
+        if (grades == null || grades.length == 0) {
             return 0;
         }
         double average = 0;
@@ -58,7 +69,7 @@ public class Student {
         if (grades != null){
             result += Arrays.toString(grades) + "\n";
         }
-        if (isExcellentPupil() == false){
+        if (!isExcellentPupil()){
             result += "Не";
         }
         result += "отличник\nСреднее арифм. оценок: ";
