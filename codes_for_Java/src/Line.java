@@ -1,10 +1,10 @@
 public class Line {
-    Dot start;
-    Dot end;
+    private Dot start;
+    private Dot end;
 
     public Line(Dot start, Dot end) {
-        this.start = start;
-        this.end = end;
+        this.start = new Dot(start.x, start.y);
+        this.end = new Dot(end.x, end.y);
     }
 
     public Line(int x1, int y1, int x2, int y2){
@@ -13,19 +13,19 @@ public class Line {
     }
 
     public Dot getStart() {
-        return start;
+        return new Dot(start.x, start.y);
     }
 
     public Dot getEnd() {
-        return end;
+        return new Dot(end.x, end.y);
     }
 
     public void setStart(Dot start) {
-        this.start = start;
+        this.start = new Dot(start.x, start.y);
     }
 
     public void setEnd(Dot end) {
-        this.end = end;
+        this.end = new Dot(end.x, end.y);
     }
 
     public int getSpace(){

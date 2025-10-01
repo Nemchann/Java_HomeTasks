@@ -17,7 +17,7 @@ public class Main {
         Dot dot5 = new Dot(23, 8);
         Line line1 = new Line(dot4, dot5);
         Line line2 = new Line(5, 10, 25, 10);
-        Line line3 = new Line(line1.start, line2.end);
+        Line line3 = new Line(line1.getStart(), line2.getEnd());
         System.out.println("1.4.2");
         System.out.println(line1);
         System.out.println(line2);
@@ -229,6 +229,25 @@ public class Main {
         gun2.fire();
         System.out.println("\n");
 
+//        1.6.6
+        System.out.println("1.6.6");
+        Dot dot166_1 = new Dot(0, 0);
+        Dot dot166_2 = new Dot(5, 5);
+        Dot dot166_3 = new Dot(-10, -10);
+
+        Line line166_1 = new Line(dot166_1, dot166_2);
+        Line line166_2 = new Line(dot166_2, dot166_3);
+
+        dot166_2.x = 20;
+        dot166_2.y = -20;
+        System.out.println("Line1: " + line166_1);
+        System.out.println("Line2: " + line166_2);
+
+        Dot dotGetter1 = line166_1.getStart();
+        dotGetter1.x = 100;
+        System.out.println("Line1 после применения геттера: " + line166_1);
+        System.out.println("\n");
+
 //        1.6.7
         System.out.println("1.6.7");
         Human human167_1 = new Human(new Name("Александр", "Сидоров"));
@@ -237,6 +256,7 @@ public class Main {
 //        human167_2.father = human167_3;  - выведет исключение
         System.out.println(human167_2);
         System.out.println("\n");
+
 //        1.6.8
         System.out.println("1.6.8");
         Student student3 = new Student("Саша", 4, 5, 2);
@@ -244,6 +264,32 @@ public class Main {
         System.out.println(Arrays.toString(student3.getGrades()));
 //        System.out.println(student4);
         System.out.println("\n");
+
+//        1.6.9
+        System.out.println("1.6.9");
+        City Aa = new City("A");
+        City Cc = new City("C");
+        City Dd = new City("D");
+        City Bb = new City("B");
+
+        Aa.addPath(Bb, 5);
+        Aa.addPath(Dd, 6);
+        System.out.println("Для А обновили пути:\n" + Aa);
+
+        Aa.addPath(Bb, 3);
+        System.out.println("Снова для А обновили путь:\n " + Aa);
+
+        Bb.addPath(Aa, 3);
+        Dd.addPath(Aa, 6);
+        System.out.println("Добавили обратные пути:\n" + Bb);
+
+        Aa.removePath(Dd);
+        System.out.println("Для А удалили один путь:\n " + Aa);
+
+        int cost = Aa.getPathCost(Bb);
+        System.out.println("Стоимость пути A-B: " + cost);
+        System.out.println("\n");
+
 
 //        1.6.10
         Department itDepartment = new Department("IT");
