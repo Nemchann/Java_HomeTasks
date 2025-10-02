@@ -1,7 +1,8 @@
 import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
 //        1.4.1
         Dot dot1 = new Dot(3, 5);
         Dot dot2 = new Dot(25, 6);
@@ -315,6 +316,20 @@ public class Main {
 
         itDepartment.setBoss(hrEmployee);
         System.out.println(hrEmployee);
+        System.out.println("\n");
+
+
+//        Банковский аккаунт
+        BankAccount bankAccount = new BankAccount("fff", "01.01.2000", "1234 123456");
+        bankAccount.addAccount(100, 1);
+        bankAccount.addAccount(300, 6);
+        bankAccount.addAccount(1000, 3);
+        bankAccount.addAccount(1090, 5);
+        System.out.println(Arrays.toString(bankAccount.getAccounts()));
+        bankAccount.outMoney(6);
+        bankAccount.addAccount(1000, 3);
+        System.out.println(Arrays.toString(bankAccount.getAccounts()));
+//        BankAccount bankAccount1 = new BankAccount("", "01.01.2000", "1234 123456");
 
     }
 

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BankAccount {
@@ -27,8 +28,11 @@ public class BankAccount {
         if (accountNum > 8 || accountNum < 1){
             throw new IllegalArgumentException("U have got only 8 accounts");
         }
+        if (account < 0){
+            throw new IllegalArgumentException("U can't add negative sum");
+        }
         else{
-            accounts[accountNum - 1] = account;
+            accounts[accountNum - 1] += account;
         }
     }
 
@@ -45,6 +49,6 @@ public class BankAccount {
     }
 
     public int[] getAccounts() {
-        return accounts;
+        return Arrays.copyOf(this.accounts, this.accounts.length);
     }
 }

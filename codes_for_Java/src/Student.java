@@ -27,18 +27,10 @@ public class Student {
         // Если параметров нет - grades останется null
     }
 
-//    public Student(String name){
-//        this.name = name;
-//    }
-//
-//    public Student(String name, int[] grades){
-//        this.name = name;
-//        this.grades = grades;
-//    }
 
 
     public int[] getGrades() {
-        return grades;
+        return Arrays.copyOf(this.grades, this.grades.length);
     }
 
     public double getAverage(){
