@@ -18,14 +18,14 @@ public class City {
 
     // Добавление/обновление пути
     public void addPath(City targetCity, int cost) {
-        // Ищем существующий путь к этому городу
+
         Path existingPath = findPathToCity(targetCity);
 
         if (existingPath != null) {
-            // Если путь уже существует - обновляем стоимость
+
             existingPath.cost = cost;
         } else {
-            // Если пути нет - создаем новый
+
             paths.add(new Path(targetCity, cost));
         }
     }
@@ -64,7 +64,7 @@ public class City {
     }
 
     public List<Path> getPaths() {
-        return new ArrayList<>(paths); // Возвращаем копию для защиты от изменений
+        return new ArrayList<>(paths);
     }
 
 
