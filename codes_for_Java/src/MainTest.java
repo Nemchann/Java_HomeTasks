@@ -356,16 +356,16 @@ public class MainTest {
     }
 
     public static void task2_1_1(){
-        class NewFraction extends Fraction{
-            public Fraction(int numerator, int denominator){
-                if (denominator <= 0){
-                    throw new IllegalArgumentException("denominator must be positive");
-                }
-                int divisor = greatestCommonDivisor(Math.abs(numerator), Math.abs(denominator));
-                this.numerator = numerator / divisor;
-                this.denominator = denominator / divisor;
-            }
-        }
+//        class NewFraction extends Fraction{
+//            public Fraction(int numerator, int denominator){
+//                if (denominator <= 0){
+//                    throw new IllegalArgumentException("denominator must be positive");
+//                }
+//                int divisor = greatestCommonDivisor(Math.abs(numerator), Math.abs(denominator));
+//                this.numerator = numerator / divisor;
+//                this.denominator = denominator / divisor;
+//            }
+//        }
     }
 
     public static void task2_1_2(){
@@ -444,5 +444,34 @@ public class MainTest {
         ThreeCoordinatesDot dot2 = new ThreeCoordinatesDot(4, -8, 10);
         System.out.println(dot1);
         System.out.println(dot2);
+    }
+
+    public static void task2_2_3(){
+        Sparrow sparrow = new Sparrow();
+        Cuckoo cuckoo = new Cuckoo();
+        Parrot parrot = new Parrot("Тралалеро-тралала");
+        sparrow.sing();
+        cuckoo.sing();
+        parrot.sing();
+    }
+
+    public static void task2_2_4(){
+        Dot dotCircle = new Dot(0, 5);
+        Dot dotSquare = new Dot(10, 5);
+        Dot dotTriangle1 = new Dot(4, 8);
+        Dot dotTriangle2 = new Dot(-3, 0);
+        Dot dotTriangle3 = new Dot(6, -9);
+        Dot dotRectangle = new Dot(1, 4);
+
+        Circle circle = new Circle(dotCircle, 4);
+        NewSquare square = new NewSquare(dotSquare, 5);
+        Triangle triangle = new Triangle(dotTriangle1, dotTriangle2, dotTriangle3);
+        Rectangle rectangle = new Rectangle(dotRectangle, 4, 7);
+
+        System.out.println(circle.getArea());
+        System.out.println(square.getArea());
+        System.out.println(triangle.getArea());
+        System.out.println(rectangle.getArea());
+
     }
 }
