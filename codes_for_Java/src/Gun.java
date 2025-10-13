@@ -3,6 +3,10 @@ public class Gun {
     static final int DEFAULT_PATRONS = 5;
     private final int patronsValue;
 
+    public Gun(){
+        this.patronsValue = 30;
+    }
+
     public Gun(int patrons, int patronsValue){
         this.patronsValue = patronsValue;
         this.patrons = patrons;
@@ -45,6 +49,11 @@ public class Gun {
     public int getPatrons() {
         return patrons;
     }
+
+    public int getPatronsValue() {
+        return patronsValue;
+    }
+
 
     public boolean isUploaded(){
         return patrons != 0;

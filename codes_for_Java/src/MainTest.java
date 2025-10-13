@@ -354,4 +354,39 @@ public class MainTest {
         System.out.println(Arrays.toString(bankAccount.getAccounts()));
 //        BankAccount bankAccount1 = new BankAccount("", "01.01.2000", "1234 123456");
     }
+
+    public static void task2_1_1(){
+
+    }
+
+    public static void task2_1_2(){
+        Dot dot1 = new Dot(3, 4);
+        Dot dot2 = new Dot(3, -4);
+        Dot dot3 = new Dot(6, -4);
+        Dot dot4 = new Dot(6, 4);
+        ClosedPolyline spline1 = new ClosedPolyline(dot1, dot2, dot3, dot4);
+        System.out.println(spline1.splineLength());
+    }
+
+    public static void task2_1_4(){
+        MachineGun gun1 = new MachineGun();
+        MachineGun gun2 = new MachineGun(20);
+        MachineGun gun3 = new MachineGun(40, 10);
+        System.out.println("Gun1:\n");
+        gun1.patrons = 30;
+        gun1.fire();
+        System.out.println("Gun2:\n");
+        gun2.patrons = 10;
+        gun2.fire(3);
+        System.out.println("Gun3:\n");
+        gun3.patrons = 30;
+        gun3.fire(2);
+    }
+
+    public static void task2_1_5(){
+        ThreeCoordinatesDot dot1 = new ThreeCoordinatesDot(5, 3);
+        ThreeCoordinatesDot dot2 = new ThreeCoordinatesDot(4, -8, 10);
+        System.out.println(dot1);
+        System.out.println(dot2);
+    }
 }

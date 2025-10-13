@@ -1,4 +1,4 @@
-class Dot{
+sealed class Dot permits ThreeCoordinatesDot{
     int x;
     int y;
 

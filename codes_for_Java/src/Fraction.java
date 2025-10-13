@@ -11,11 +11,11 @@ public class Fraction {
         this.denominator = denominator / divisor;
             }
 
-    public int getNumerator() {
+    final public int getNumerator() {
         return numerator;
     }
 
-    public int getDenominator() {
+    final public int getDenominator() {
         return denominator;
     }
 //    Наибольший общий делитель (НОД)
