@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class City {
-    private List<Path> paths = new ArrayList<>() ;
+    protected List<Path> paths = new ArrayList<>() ;
     private String name;
 
     public City(String name){
@@ -31,7 +31,7 @@ public class City {
     }
 
     // Удаление пути
-    public void removePath(City targetCity) {
+    protected void removePath(City targetCity) {
         Path pathToRemove = findPathToCity(targetCity);
         if (pathToRemove != null) {
             paths.remove(pathToRemove);
@@ -39,7 +39,7 @@ public class City {
     }
 
     // Поиск пути к конкретному городу
-    private Path findPathToCity(City targetCity) {
+    protected Path findPathToCity(City targetCity) {
         for (Path path : paths) {
             if (path.city.equals(targetCity)) {
                 return path;

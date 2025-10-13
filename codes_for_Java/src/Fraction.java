@@ -9,13 +9,13 @@ public class Fraction {
         int divisor = greatestCommonDivisor(Math.abs(numerator), Math.abs(denominator));
         this.numerator = numerator / divisor;
         this.denominator = denominator / divisor;
-            }
+    }
 
-    final public int getNumerator() {
+    public final int getNumerator() {
         return numerator;
     }
 
-    final public int getDenominator() {
+    public final int getDenominator() {
         return denominator;
     }
 //    Наибольший общий делитель (НОД)

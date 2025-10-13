@@ -10,24 +10,39 @@ public class InnovativeCity extends City{
         super(name, paths);
     }
 
-    public void addPath(InnovativeCity targetCity, int cost){
-        Path existingPath = findPathToCity(targetCity);
+    // Переопределенный метод добавления пути с созданием обратного пути
+    @Override
+    public void addPath(City targetCity, int cost) {
+        // Сначала вызываем родительский метод для добавления пути
+        super.addPath(targetCity, cost);
 
-        if (existingPath != null) {
+        // Затем добавляем обратный путь из targetCity в этот город
+        // Проверяем, что targetCity тоже InnovativeCity
+        if (targetCity instanceof InnovativeCity) {
+            InnovativeCity innovativeTarget = (InnovativeCity) targetCity;
 
-            existingPath.cost = cost;
-        } else {
-
-            paths.add(new Path(targetCity, cost));
-        }
-    }
-
-    private Path findPathToCity(InnovativeCity targetCity) {
-        for (Path path : paths) {
-            if (path.city.equals(targetCity)) {
-                return path;
+            // Добавляем обратный путь, используя protected метод findPathToCity
+            Path existingReversePath = innovativeTarget.findPathToCity(this);
+            if (existingReversePath != null) {
+                existingReversePath.setCost(cost);  // Обновляем стоимость обратного пути
+            } else {
+                innovativeTarget.paths.add(new Path(this, cost));  // Создаем новый обратный путь
             }
         }
-        return null;
+    }
+//    Старый метод removePath() было решено оставить
+
+    public void removeBidirectionalPath(InnovativeCity targetCity) {
+        // Удаляем прямой путь
+        super.removePath(targetCity);
+
+        // Удаляем обратный путь
+        targetCity.removePath(this);
+    }
+    // НОВЫЙ метод для удобного добавления двусторонних путей
+    public void addBidirectionalPath(InnovativeCity targetCity, int cost) {
+        // Добавляем путь в обе стороны
+        this.addPath(targetCity, cost);
+        targetCity.addPath(this, cost);
     }
 }

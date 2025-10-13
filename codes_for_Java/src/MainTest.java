@@ -356,7 +356,16 @@ public class MainTest {
     }
 
     public static void task2_1_1(){
-
+        class NewFraction extends Fraction{
+            public Fraction(int numerator, int denominator){
+                if (denominator <= 0){
+                    throw new IllegalArgumentException("denominator must be positive");
+                }
+                int divisor = greatestCommonDivisor(Math.abs(numerator), Math.abs(denominator));
+                this.numerator = numerator / divisor;
+                this.denominator = denominator / divisor;
+            }
+        }
     }
 
     public static void task2_1_2(){
@@ -366,6 +375,53 @@ public class MainTest {
         Dot dot4 = new Dot(6, 4);
         ClosedPolyline spline1 = new ClosedPolyline(dot1, dot2, dot3, dot4);
         System.out.println(spline1.splineLength());
+    }
+
+    public static void task2_1_3(){
+        // Создаем инновационные города
+        InnovativeCity moscow = new InnovativeCity("Москва");
+        InnovativeCity spb = new InnovativeCity("Санкт-Петербург");
+        InnovativeCity kazan = new InnovativeCity("Казань");
+
+        System.out.println("До добавления путей:");
+        System.out.println(moscow);
+        System.out.println(spb);
+
+        // Добавляем путь - автоматически создается обратный
+        moscow.addPath(spb, 700);
+
+        System.out.println("\nПосле добавления пути Москва-СПб:");
+        System.out.println("Москва:");
+        System.out.println(moscow);
+        System.out.println("СПб:");
+        System.out.println(spb);
+
+        // Добавляем еще один путь
+        moscow.addPath(kazan, 800);
+
+        System.out.println("\nПосле добавления пути Москва-Казань:");
+        System.out.println("Москва:");
+        System.out.println(moscow);
+        System.out.println("Казань:");
+        System.out.println(kazan);
+
+        // Обновляем стоимость - обновляются оба пути
+        moscow.addPath(spb, 650);
+
+        System.out.println("\nПосле обновления стоимости Москва-СПб:");
+        System.out.println("Москва:");
+        System.out.println(moscow);
+        System.out.println("СПб:");
+        System.out.println(spb);
+
+        // Удаляем путь - удаляются оба направления
+        moscow.removeBidirectionalPath(kazan);
+
+        System.out.println("\nПосле удаления пути Москва-Казань:");
+        System.out.println("Москва:");
+        System.out.println(moscow);
+        System.out.println("Казань:");
+        System.out.println(kazan);
     }
 
     public static void task2_1_4(){
