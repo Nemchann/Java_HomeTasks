@@ -14,15 +14,16 @@ public class Rectangle extends Figure{
         Dot dot3 = new Dot(dot.x + side1, dot.y + side2);
         Dot dot4 = new Dot(dot.x, dot.y + side2);
 
-//        this.points[0] = dot;
-//        this.points[1] = dot2;
-//        this.points[2] = dot3;
-//        this.points[3] = dot4;
+        this.points = new Dot[]{dot, dot2, dot3, dot4};
+    }
+
+    @Override
+    public String getType() {
+        return "Rectangle";
     }
 
     @Override
     public double getArea() {
-        double area = (side1 + side2) * 2;
-        return area;
+        return side1 * side2;
     }
 }

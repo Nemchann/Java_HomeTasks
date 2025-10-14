@@ -26,17 +26,19 @@ public class Gun {
         }
     }
 
-    public void reloading(int extraPatrons){
+    public int reloading(int extraPatrons){
         if (extraPatrons < 0){
             throw new IllegalArgumentException("extraPatrons must be positive");
         }
         if (extraPatrons > patronsValue - patrons){
             patrons = patronsValue;
             extraPatrons -= patronsValue - patrons;
+            return extraPatrons;
         }
         else{
             patrons += extraPatrons;
         }
+        return 0;
     }
 
     public int unloading(){

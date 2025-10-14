@@ -446,6 +446,16 @@ public class MainTest {
         System.out.println(dot2);
     }
 
+    public static void task2_2_2(){
+        Fraction fraction1 = new Fraction(4, 3);
+        Fraction fraction2 = new Fraction(2, 3);
+        Fraction fraction3 = new Fraction(56473957, 5768);
+        System.out.println(fraction1.intValue());
+        System.out.println(fraction3.longValue());
+        System.out.println(fraction2.floatValue());
+        System.out.println(fraction2.doubleValue());
+    }
+
     public static void task2_2_3(){
         Sparrow sparrow = new Sparrow();
         Cuckoo cuckoo = new Cuckoo();
@@ -473,5 +483,18 @@ public class MainTest {
         System.out.println(triangle.getArea());
         System.out.println(rectangle.getArea());
 
+    }
+
+    public static void task2_2_5(){
+        // Точка в координате 3, красного цвета
+        AbstractDot point1 = DotWithCharacteristics.wrap(new Dot(3, 0))
+                .withColor("красный");
+        System.out.println(point1.getDescription());
+        // Точка в координате {3; 0}, красного цвета
+
+        AbstractDot point2 = DotWithCharacteristics.wrap(new Dot(-3, 10))
+                .withColor("синий")
+                .withSize(20);
+        System.out.println(point2.getDescription());
     }
 }

@@ -7,13 +7,12 @@ public class Circle extends Figure{
         }
 
         this.radius = radius;
-        //this.points[0] = dot;
+        this.points = new Dot[]{dot};
     }
 
-    public Circle(Dot dot1, Dot dot2){
-        //this.points[0] = dot1;
-        Line radiusLine = new Line(dot1, dot2);
-        this.radius = radiusLine.getSpace();
+    @Override
+    public String getType() {
+        return "Circle";
     }
 
     @Override

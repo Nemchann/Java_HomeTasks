@@ -1,6 +1,11 @@
-public class Fraction {
+public class Fraction extends Number{
     private final int numerator;
     private final int denominator;
+
+    public Fraction(){
+        this.numerator = 1;
+        this.denominator = 1;
+    }
 
     public Fraction(int numerator, int denominator){
         if (denominator <= 0){
@@ -114,6 +119,26 @@ public class Fraction {
         return div(new Fraction(n, 1));
     }
 
+
+    @Override
+    public int intValue() {
+        return numerator / denominator;
+    }
+
+    @Override
+    public long longValue() {
+        return (long) numerator / denominator;
+    }
+
+    @Override
+    public float floatValue() {
+        return (float) numerator / denominator;
+    }
+
+    @Override
+    public double doubleValue() {
+        return (double) numerator / denominator;
+    }
 
     public String toString(){
         return (numerator + "/" + denominator);

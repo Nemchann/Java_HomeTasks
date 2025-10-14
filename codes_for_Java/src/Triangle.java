@@ -9,9 +9,8 @@ public class Triangle extends Figure{
             throw new IllegalArgumentException("Dots must be different");
         }
 
-//        this.points[0] = dot1;
-//        this.points[1] = dot2;
-//        this.points[2] = dot3;
+        this.points = new Dot[]{dot1, dot2, dot3};
+
         Line line1 = new Line(dot1, dot2);
         Line line2 = new Line(dot2, dot3);
         Line line3 = new Line(dot1, dot3);
@@ -20,6 +19,11 @@ public class Triangle extends Figure{
         this.side2 = line2.getSpace();
         this.side3 = line3.getSpace();
 
+    }
+
+    @Override
+    public String getType() {
+        return "Triangle";
     }
 
     @Override

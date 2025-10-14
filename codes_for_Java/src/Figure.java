@@ -1,8 +1,14 @@
 abstract class Figure {
     protected Dot[] points;
 
-    public double getArea() {
-        return 0;
+    public Dot[] getPoints() {
+        return points != null ? points.clone() : new Dot[0];
     }
+
+
+
+    public abstract double getArea();
+
+    public abstract String getType();
 
 }

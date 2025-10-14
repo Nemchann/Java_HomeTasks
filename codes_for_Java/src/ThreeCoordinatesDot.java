@@ -9,7 +9,13 @@ final class ThreeCoordinatesDot extends Dot{
         this(x, y);
         this.z = z;
     }
-    public String toString(){
-        return "{" + x + "; " + y +  "; " + z + "}";
+    @Override
+    public String getDescription() {
+        return "Точка в координате " + getCoordinates();
+    }
+
+    @Override
+    public String getCoordinates() {
+        return "{" + x + "; " + y + "; " + z + "}";
     }
 }

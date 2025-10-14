@@ -1,32 +1,32 @@
 abstract class Weapon {
-    private int ammo;
+    private int patrons;
 
-    public Weapon(int ammo){
-        if (ammo < 0){
-            throw new IllegalArgumentException("Ammo must be positive");
+    public Weapon(int patrons){
+        if (patrons < 0){
+            throw new IllegalArgumentException("patrons must be positive");
         }
-        this.ammo = ammo;
+        this.patrons = patrons;
     }
 
     abstract void fire();
 
     public int ammo() {
-        return ammo;
+        return patrons;
     }
 
-    public boolean getAmmo(){
-        if(ammo == 0) return false;
-        ammo--;
+    public boolean getPatrons(){
+        if(patrons == 0) return false;
+        patrons--;
         return false;
     }
 
-    public int load(int ammo){
-        if (ammo < 0){
-            throw new IllegalArgumentException("Ammo must bo positive");
+    public int load(int patrons){
+        if (patrons < 0){
+            throw new IllegalArgumentException("patrons must bo positive");
 
         }
-        int tmp = ammo;
-        this.ammo = ammo;
+        int tmp = patrons;
+        this.patrons = patrons;
         return tmp;
     }
 }
