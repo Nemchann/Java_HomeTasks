@@ -1,19 +1,16 @@
-public class Gun {
-    int patrons;
+public class Gun extends Weapon{
     static final int DEFAULT_PATRONS = 5;
     private final int patronsValue;
 
-    public Gun(){
-        this.patronsValue = 30;
-    }
 
     public Gun(int patrons, int patronsValue){
+        super(patrons);
         this.patronsValue = patronsValue;
-        this.patrons = patrons;
     }
     public Gun(int patronsValue){
+        super(DEFAULT_PATRONS);
         this.patronsValue = patronsValue;
-        this.patrons = DEFAULT_PATRONS;
+
     }
 
     public void fire(){
@@ -26,19 +23,21 @@ public class Gun {
         }
     }
 
-    public int reloading(int extraPatrons){
+    @Override
+    public int load(int extraPatrons){
         if (extraPatrons < 0){
             throw new IllegalArgumentException("extraPatrons must be positive");
         }
-        if (extraPatrons > patronsValue - patrons){
-            patrons = patronsValue;
-            extraPatrons -= patronsValue - patrons;
-            return extraPatrons;
-        }
-        else{
-            patrons += extraPatrons;
-        }
-        return 0;
+
+        int availableSpace = patronsValue - patrons;
+        int actuallyLoaded = Math.min(extraPatrons, availableSpace);
+        patrons += actuallyLoaded;
+
+        return extraPatrons - actuallyLoaded; // Возвращаем остаток
+    }
+
+    public int reloading(int extraPatrons){
+        return load(extraPatrons);
     }
 
     public int unloading(){
@@ -48,9 +47,6 @@ public class Gun {
 
     }
 
-    public int getPatrons() {
-        return patrons;
-    }
 
     public int getPatronsValue() {
         return patronsValue;

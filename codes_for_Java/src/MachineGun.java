@@ -12,7 +12,7 @@ public class MachineGun extends Gun{
         if (patronsValue <= 0){
             throw new IllegalArgumentException("patronsValue must be positive");
         }
-        this.speed = (patronsValue / 2);
+        this.speed = Math.max(1, patronsValue / 2);
     }
 
     public MachineGun(int patronsValue, int speed){
@@ -27,21 +27,9 @@ public class MachineGun extends Gun{
         this.speed = speed;
     }
 
+    @Override
     public void fire(){
-        String result = "";
-        for (int i = 0; i < speed; i++){
-            if (patrons > 0){
-                result += (i + 1) + ". Бах! ";
-                result += "\n";
-                patrons--;
-            }
-            else{
-                result += (i + 1) + ". Клац!";
-                result += "\n";
-            }
-        }
-
-        System.out.println(result);
+        fire(1);
     }
 
     public void fire(int n){

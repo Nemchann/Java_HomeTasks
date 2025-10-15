@@ -1,5 +1,5 @@
 abstract class Weapon {
-    private int patrons;
+    protected int patrons;
 
     public Weapon(int patrons){
         if (patrons < 0){
@@ -10,23 +10,22 @@ abstract class Weapon {
 
     abstract void fire();
 
-    public int ammo() {
+    public int patrons() {
         return patrons;
     }
 
     public boolean getPatrons(){
         if(patrons == 0) return false;
         patrons--;
-        return false;
+        return true;
     }
 
     public int load(int patrons){
         if (patrons < 0){
-            throw new IllegalArgumentException("patrons must bo positive");
+            throw new IllegalArgumentException("patrons must be positive");
 
         }
-        int tmp = patrons;
-        this.patrons = patrons;
-        return tmp;
+        this.patrons += patrons;
+        return 0;
     }
 }

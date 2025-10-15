@@ -435,8 +435,8 @@ public class MainTest {
         gun2.patrons = 10;
         gun2.fire(3);
         System.out.println("Gun3:\n");
-        gun3.patrons = 30;
-        gun3.fire(2);
+        gun3.patrons = 20;
+        gun3.fire(3);
     }
 
     public static void task2_1_5(){
@@ -444,6 +444,31 @@ public class MainTest {
         ThreeCoordinatesDot dot2 = new ThreeCoordinatesDot(4, -8, 10);
         System.out.println(dot1);
         System.out.println(dot2);
+    }
+
+    public static void task2_2_1(){
+        Gun gun1 = new Gun(20);
+        Gun gun2 = new Gun(4, 15);
+        System.out.println("Пистолет 1, патронов: " + gun1.patrons());
+        gun1.fire();
+        gun1.fire();
+        gun1.fire();
+        System.out.println("Вынимаем патрон: " + gun1.getPatrons());
+        System.out.println("Вынимаем патрон: " + gun1.getPatrons());
+        System.out.println("Вынимаем патрон: " + gun1.getPatrons());
+        gun1.fire();
+
+        System.out.println("Пистолет 2, патронов: " + gun2.patrons());
+        gun2.fire();
+        System.out.println("Возвращено патронов при разрядке: " + gun2.unloading());
+        gun2.fire();
+        System.out.println("Возвращено патронов: " + gun2.load(20));
+        gun2.fire();
+        gun2.fire();
+        gun2.fire();
+        gun2.fire();
+        gun2.fire();
+        System.out.println("Всего патронов: " + gun2.patrons());
     }
 
     public static void task2_2_2(){
