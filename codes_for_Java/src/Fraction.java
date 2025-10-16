@@ -23,7 +23,9 @@ public class Fraction extends Number{
     public final int getDenominator() {
         return denominator;
     }
-//    Наибольший общий делитель (НОД)
+
+
+    //    Наибольший общий делитель (НОД)
     private int greatestCommonDivisor(int a, int b){
         if (b == 0){
             return a;

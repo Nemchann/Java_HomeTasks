@@ -379,49 +379,49 @@ public class MainTest {
 
     public static void task2_1_3(){
         // Создаем инновационные города
-        InnovativeCity moscow = new InnovativeCity("Москва");
-        InnovativeCity spb = new InnovativeCity("Санкт-Петербург");
-        InnovativeCity kazan = new InnovativeCity("Казань");
+        InnovativeCity A = new InnovativeCity("A");
+        InnovativeCity B = new InnovativeCity("B");
+        InnovativeCity C = new InnovativeCity("C");
 
         System.out.println("До добавления путей:");
-        System.out.println(moscow);
-        System.out.println(spb);
+        System.out.println(A);
+        System.out.println(B);
 
         // Добавляем путь - автоматически создается обратный
-        moscow.addPath(spb, 700);
+        A.addPath(B, 700);
 
-        System.out.println("\nПосле добавления пути Москва-СПб:");
-        System.out.println("Москва:");
-        System.out.println(moscow);
-        System.out.println("СПб:");
-        System.out.println(spb);
+        System.out.println("\nПосле добавления пути A-B:");
+        System.out.println("A:");
+        System.out.println(A);
+        System.out.println("B:");
+        System.out.println(B);
 
         // Добавляем еще один путь
-        moscow.addPath(kazan, 800);
+        A.addPath(C, 800);
 
-        System.out.println("\nПосле добавления пути Москва-Казань:");
-        System.out.println("Москва:");
-        System.out.println(moscow);
-        System.out.println("Казань:");
-        System.out.println(kazan);
+        System.out.println("\nПосле добавления пути A-C:");
+        System.out.println("A:");
+        System.out.println(A);
+        System.out.println("C:");
+        System.out.println(C);
 
         // Обновляем стоимость - обновляются оба пути
-        moscow.addPath(spb, 650);
+        A.addPath(B, 650);
 
-        System.out.println("\nПосле обновления стоимости Москва-СПб:");
-        System.out.println("Москва:");
-        System.out.println(moscow);
-        System.out.println("СПб:");
-        System.out.println(spb);
+        System.out.println("\nПосле обновления стоимости A-B:");
+        System.out.println("A:");
+        System.out.println(A);
+        System.out.println("B:");
+        System.out.println(B);
 
         // Удаляем путь - удаляются оба направления
-        moscow.removeBidirectionalPath(kazan);
+        A.removeBidirectionalPath(C);
 
-        System.out.println("\nПосле удаления пути Москва-Казань:");
-        System.out.println("Москва:");
-        System.out.println(moscow);
-        System.out.println("Казань:");
-        System.out.println(kazan);
+        System.out.println("\nПосле удаления пути A-C:");
+        System.out.println("A:");
+        System.out.println(A);
+        System.out.println("C:");
+        System.out.println(C);
     }
 
     public static void task2_1_4(){
@@ -511,11 +511,9 @@ public class MainTest {
     }
 
     public static void task2_2_5(){
-        // Точка в координате 3, красного цвета
         AbstractDot point1 = DotWithCharacteristics.wrap(new Dot(3, 0))
                 .withColor("красный");
         System.out.println(point1.getDescription());
-        // Точка в координате {3; 0}, красного цвета
 
         AbstractDot point2 = DotWithCharacteristics.wrap(new Dot(-3, 10))
                 .withColor("синий")
