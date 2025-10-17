@@ -1,4 +1,4 @@
-public class NewSquare extends Figure{
+public class NewSquare extends Figure implements AreasSummary{
     private final int side;
 
     public NewSquare(Dot dot, int side){
@@ -23,5 +23,10 @@ public class NewSquare extends Figure{
     public double getArea() {
         double area = side * side;
         return area;
+    }
+
+    @Override
+    public double sumAreas() {
+        return getArea();
     }
 }

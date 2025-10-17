@@ -1,4 +1,4 @@
-public class Triangle extends Figure{
+public class Triangle extends Figure implements AreasSummary{
     private final double side1;
     private final double side2;
     private final double side3;
@@ -32,5 +32,10 @@ public class Triangle extends Figure{
 
         double area = Math.sqrt(p * (p - side1) * (p - side2) * (p - side3));
         return area;
+    }
+
+    @Override
+    public double sumAreas() {
+        return getArea();
     }
 }

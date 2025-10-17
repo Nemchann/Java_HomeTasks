@@ -1,4 +1,4 @@
-public class Circle extends Figure{
+public class Circle extends Figure implements AreasSummary{
     private final double radius;
 
     public Circle(Dot dot, double radius){
@@ -19,5 +19,10 @@ public class Circle extends Figure{
     public double getArea() {
         double area = Math.PI * radius * radius;
         return area;
+    }
+
+    @Override
+    public double sumAreas() {
+        return getArea();
     }
 }

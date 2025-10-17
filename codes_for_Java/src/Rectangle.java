@@ -1,4 +1,4 @@
-public class Rectangle extends Figure{
+public class Rectangle extends Figure implements AreasSummary{
     private final int side1;
     private final int side2;
 
@@ -25,5 +25,10 @@ public class Rectangle extends Figure{
     @Override
     public double getArea() {
         return side1 * side2;
+    }
+
+    @Override
+    public double sumAreas() {
+        return getArea();
     }
 }

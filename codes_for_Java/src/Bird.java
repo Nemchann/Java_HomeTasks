@@ -4,5 +4,5 @@ abstract class Bird {
     protected String areal;
     protected boolean isFlying;
 
-    public abstract void sing();
+    public abstract String sing();
 }

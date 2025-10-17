@@ -1,4 +1,4 @@
-public class Line {
+public class Line implements Sizeable{
     private Dot start;
     private Dot end;
 
@@ -31,6 +31,11 @@ public class Line {
     public int getSpace(){
         double space = Math.sqrt((Math.pow(end.x - start.x, 2)) + (Math.pow(end.y - start.y, 2)));
         return (int)space;
+    }
+
+    @Override
+    public double getSize() {
+        return getSpace();
     }
 
     public String toString(){

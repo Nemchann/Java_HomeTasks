@@ -520,4 +520,74 @@ public class MainTest {
                 .withSize(20);
         System.out.println(point2.getDescription());
     }
+
+    public static void task2_3_1(){
+        double res1 = Calculator.sum(
+                new IntegerWrapper(2),
+                new Fraction(3, 5),
+                new DoubleWrapper(2.3)
+        );
+        System.out.println(res1);
+        double res2 = Calculator.sum(
+                new DoubleWrapper(3.6),
+                new Fraction(49, 12),
+                new IntegerWrapper(3),
+                new Fraction(3, 2)
+        );
+        double res3 = Calculator.sum(
+                new Fraction(1, 3),
+                new IntegerWrapper(1)
+        );
+        System.out.println(res2);
+        System.out.println(res3);
+    }
+
+    public static void task2_3_2(){
+        Sparrow sparrow1 = new Sparrow();
+        Sparrow sparrow2 = new Sparrow();
+        Cuckoo cuckoo1 = new Cuckoo();
+        Cuckoo cuckoo2 = new Cuckoo();
+        Parrot parrot1 = new Parrot("Тралалело-тралала");
+        Parrot parrot2 = new Parrot("Трипи-тропи, тропа-трипа");
+        Parrot parrot3 = new Parrot("Балерина-капучина!");
+
+        String birdsSongs = BirdsMarket.singingSongs(parrot1, sparrow1, cuckoo1, parrot2, cuckoo2, sparrow2, parrot3);
+        System.out.println(birdsSongs);
+    }
+
+    public static void task2_3_3(){
+        Circle circle = new Circle(new Dot(0,0), 4);
+        NewSquare square = new NewSquare(new Dot(5, 10), 3);
+        Rectangle rectangle = new Rectangle(new Dot(3, -10), 3, 5);
+        Triangle triangle = new Triangle(new Dot(6, 3), new Dot(2, -4), new Dot(0, 6));
+
+        double res = AreasCalculator.sum(circle, square, rectangle, triangle);
+        System.out.println(res);
+    }
+
+    public static void task2_3_4(){
+        Cat cat1 = new Cat("Барсик");
+        Cat cat2 = new Cat("Кузя");
+        Cat cat3 = new Cat("Маркиза");
+        Student student = new Student("Василий", 5, 4, 3, 5);
+        WildCat wildCat1 = new WildCat("Тигр");
+        WildCat wildCat2 = new WildCat("Рысь");
+
+        CatUtils.makeAllMeow(cat2, wildCat2, cat3, cat1, student, wildCat1);
+
+    }
+
+    public static void task2_3_5(){
+        Line line1 = new Line(2, 5, -10, 0);
+        Line line2 = new Line(new Dot(6, -8), new Dot(1, 5));
+        Dot dot1 = new Dot(4, 9);
+        Dot dot2 = new Dot(-9, -5);
+        Dot dot3 = new Dot(0, 5);
+        Dot dot4 = new Dot(-3, 2);
+        Dot dot5 = new Dot(0, 0);
+        BrokenLine brokenLine = new BrokenLine(dot1, dot2, dot3, dot4, dot5);
+
+        double sumSizes = AllSizes.sumAllSizes(line1, line2, brokenLine);
+        System.out.println(sumSizes);
+    }
 }

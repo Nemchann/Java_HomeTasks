@@ -1,4 +1,4 @@
-public class Fraction extends Number{
+public class Fraction extends Number implements Numeric{
     private final int numerator;
     private final int denominator;
 
@@ -140,6 +140,11 @@ public class Fraction extends Number{
     @Override
     public double doubleValue() {
         return (double) numerator / denominator;
+    }
+
+    @Override
+    public double toDouble() {
+        return doubleValue(); // используем уже существующий метод
     }
 
     public String toString(){

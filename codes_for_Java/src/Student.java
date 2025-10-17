@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class Student {
+public class Student implements Meowable{
     String name;
     int[] grades;
 
@@ -68,6 +68,11 @@ public class Student {
         result += getAverage();
         System.out.println(result);
 
+    }
+
+    @Override
+    public void meow() {
+        System.out.println(name + ": Мяу! Мои оценки: " + Arrays.toString(getGrades()));
     }
 
     public String toString(){

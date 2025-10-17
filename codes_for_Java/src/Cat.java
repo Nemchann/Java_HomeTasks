@@ -1,4 +1,4 @@
-public class Cat {
+public class Cat implements Meowable{
     String name;
 
     public Cat(String name){
@@ -22,4 +22,8 @@ public class Cat {
         System.out.println(meows);
     }
 
+    @Override
+    public void meow() {
+        tellMeow();
+    }
 }

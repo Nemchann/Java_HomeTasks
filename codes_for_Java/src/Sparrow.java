@@ -1,10 +1,15 @@
-public class Sparrow extends Bird{
+public class Sparrow extends Bird implements Singable{
 
     public Sparrow(){
 
     }
     @Override
-    public void sing(){
-        System.out.println("Воробей поет: Чирик!");
+    public String sing(){
+        return "Воробей поет: Чирик!";
+    }
+
+    @Override
+    public String songs() {
+        return sing();
     }
 }
