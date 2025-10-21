@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class BrokenLine implements Sizeable{
+public class BrokenLine implements Sizeable, Brokable{
     Dot[] points;
 
     public BrokenLine(){
@@ -32,6 +32,11 @@ public class BrokenLine implements Sizeable{
     @Override
     public double getSize() {
         return splineLength();
+    }
+
+    @Override
+    public BrokenLine getPolyline() {
+        return this;
     }
 
     public String toString(){

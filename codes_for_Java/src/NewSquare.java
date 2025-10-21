@@ -1,4 +1,4 @@
-public class NewSquare extends Figure implements AreasSummary{
+public class NewSquare extends Figure implements AreasSummary, Brokable{
     private final int side;
 
     public NewSquare(Dot dot, int side){
@@ -28,5 +28,10 @@ public class NewSquare extends Figure implements AreasSummary{
     @Override
     public double sumAreas() {
         return getArea();
+    }
+
+    @Override
+    public BrokenLine getPolyline() {
+        return new ClosedPolyline(points);
     }
 }

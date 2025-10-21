@@ -6,14 +6,6 @@ public class Student implements Meowable{
 
     public Student(String name, int... params) {
         this.name = name;
-
-        // Если передан один параметр и это массив оценок
-//        if (params.length == 1) {
-//            if (params[0] > 5 || params[0] < 2){
-//                throw new IllegalArgumentException("Grades must be between 2 and 5");
-//            }
-//            this.grades = params;
-//        }
         // Если переданы отдельные оценки как числа
         if (params.length > 0) {
             this.grades = new int[params.length];

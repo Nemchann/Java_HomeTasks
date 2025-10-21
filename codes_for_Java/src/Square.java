@@ -42,7 +42,7 @@ public class Square {
         Dot dot2 = new Dot(x1 + n, y1);
         Dot dot3 = new Dot(x1 + n, y1 - n);
         Dot dot4 = new Dot(x1, y1 - n);
-        BrokenLine squareLine = new BrokenLine(dot, dot2, dot3, dot4);
+        BrokenLine squareLine = new ClosedPolyline(dot, dot2, dot3, dot4);
         return squareLine;
     }
 

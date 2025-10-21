@@ -22,4 +22,11 @@ public class ClosedPolyline extends BrokenLine{
         space += lastSpace;
         return space;
     }
+
+    @Override
+    public BrokenLine getPolyline() {
+        ClosedPolyline closedPolyline = new ClosedPolyline(points);
+        closedPolyline.addDots(points[0]);
+        return closedPolyline;
+    }
 }

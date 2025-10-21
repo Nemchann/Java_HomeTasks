@@ -1,4 +1,4 @@
-public class Triangle extends Figure implements AreasSummary{
+public class Triangle extends Figure implements AreasSummary, Brokable{
     private final double side1;
     private final double side2;
     private final double side3;
@@ -37,5 +37,10 @@ public class Triangle extends Figure implements AreasSummary{
     @Override
     public double sumAreas() {
         return getArea();
+    }
+
+    @Override
+    public BrokenLine getPolyline() {
+        return new ClosedPolyline(points);
     }
 }

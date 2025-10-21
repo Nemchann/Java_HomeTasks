@@ -1,4 +1,4 @@
-public class Rectangle extends Figure implements AreasSummary{
+public class Rectangle extends Figure implements AreasSummary, Brokable{
     private final int side1;
     private final int side2;
 
@@ -30,5 +30,10 @@ public class Rectangle extends Figure implements AreasSummary{
     @Override
     public double sumAreas() {
         return getArea();
+    }
+
+    @Override
+    public BrokenLine getPolyline() {
+        return new ClosedPolyline(points);
     }
 }
