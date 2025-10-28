@@ -3,20 +3,25 @@ import java.util.Arrays;
 public class Student implements Meowable{
     String name;
     int[] grades;
+    private GradeValidator validator;
 
-    public Student(String name, int... params) {
+    public Student(String name, GradeValidator validator, int... params) {
         this.name = name;
-        // Если переданы отдельные оценки как числа
+        this.validator = (validator != null) ? validator : GradeValidator.any();
         if (params.length > 0) {
             this.grades = new int[params.length];
             for (int i = 0; i < params.length; i++) {
-                if (params[i]> 5 || params[i] < 2){
-                    throw new IllegalArgumentException("Grades must be between 2 and 5");
+                if (!this.validator.isValid(grades[i])) {
+                    throw new IllegalArgumentException("Оценка " + grades[i] + " недопустима для студента " + name);
                 }
                 this.grades[i] = params[i];
             }
         }
         // Если параметров нет - grades останется null
+    }
+    // Конструктор без валидатора (все оценки допустимы)
+    public Student(String name, int... grades) {
+        this(name, GradeValidator.any(), grades);
     }
 
 

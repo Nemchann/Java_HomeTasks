@@ -623,4 +623,11 @@ public class MainTest {
         shooter3.fire();
 
     }
+
+    public static void task2_3_9(){
+        Student student1 = new Student("Вася", grade -> grade == 1 || grade == 0, 0, 1, 1, 1, 0, 0, 1);
+        Student student2 = new Student("Петя", grade -> grade % 2 == 0, 2, 6, 6, 4, 8, 14);
+        System.out.println(student1);
+        System.out.println(student2);
+    }
 }
