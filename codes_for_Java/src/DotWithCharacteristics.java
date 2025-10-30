@@ -24,7 +24,7 @@ public class DotWithCharacteristics extends AbstractDot{
     @Override
     public String getCoordinates() {
         return dot.getCoordinates();
-    }
+    }   
 
     @Override
     public String getDescription() {
