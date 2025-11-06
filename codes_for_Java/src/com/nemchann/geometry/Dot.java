@@ -1,6 +1,6 @@
 package com.nemchann.geometry;
 
-sealed class Dot extends AbstractDot permits ThreeCoordinatesDot {
+public sealed class Dot extends AbstractDot permits ThreeCoordinatesDot {
     protected int x;
     protected int y;
 

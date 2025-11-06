@@ -1,14 +1,17 @@
+package com.nemchann.util;
+
 import com.nemchann.animals.*;
 import com.nemchann.banks.BankAccount;
 import com.nemchann.cities.InnovativeCity;
-import com.nemchann.mathematic.Calculator;
-import com.nemchann.mathematic.DoubleWrapper;
-import com.nemchann.mathematic.Fraction;
-import com.nemchann.mathematic.IntegerWrapper;
+import com.nemchann.geometry.Dot;
+import com.nemchann.mathematic.*;
 import com.nemchann.students.Student;
 import com.nemchann.war.Gun;
 
+import java.math.BigInteger;
 import java.util.Arrays;
+import java.awt.Point;
+import java.util.Scanner;
 
 public class MainTest {
 //    public static void task1_4_1(){
@@ -638,5 +641,30 @@ public class MainTest {
         Student student2 = new Student("Петя", grade -> grade % 2 == 0, 2, 6, 6, 4, 8, 14);
         System.out.println(student1);
         System.out.println(student2);
+    }
+
+    public static void task3_1_3(){
+        BigInteger bi = new BigInteger("12345678912345678912");
+        double sum = Calculator.sum(new IntegerWrapper(7), new Fraction(11, 3), new DoubleWrapper(3.21), new BigIntegerWrapper(bi));
+        System.out.println(sum);
+    }
+    public static void task3_1_4(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите первое число:");
+        String strX = scanner.nextLine();
+        System.out.println("Введите второе число:");
+        String strY = scanner.nextLine();
+        double newPow = NewPow.powXtoY(strX, strY);
+        System.out.println(strX + " в степени " + strY + " равно " + newPow);
+
+    }
+
+    public static void task3_1_5(){
+        Dot dot = new Dot(4, -6);
+        Point point = new Point();
+        point.x = 1;
+        point.y = 0;
+        System.out.println(dot);
+        System.out.println(point);
     }
 }
