@@ -4,6 +4,8 @@ import com.nemchann.animals.*;
 import com.nemchann.banks.BankAccount;
 import com.nemchann.cities.InnovativeCity;
 import com.nemchann.geometry.Dot;
+import com.nemchann.internet_connections.Connection;
+import com.nemchann.internet_connections.TestConnect;
 import com.nemchann.mathematic.*;
 import com.nemchann.students.Student;
 import com.nemchann.war.Gun;
@@ -667,4 +669,29 @@ public class MainTest {
         System.out.println(dot);
         System.out.println(point);
     }
+
+    public static void task4_1_1(){
+        Student student = new Student("Вася", grade -> grade % 2 == 0, 2, 5, 6, 8, 0);
+        System.out.println(student);
+
+    }
+
+    public static void task4_1_4(){
+        Connection connection = new Connection("032:134:52:0");
+        System.out.println(connection);
+        Connection connection1 = new Connection("56:255:8:0");
+        connection1.closeConnection();
+        System.out.println(connection1);
+    }
+
+    public static void task4_2_1(){
+        TestConnect.readData();
+    }
+
+    public static void task4_2_2(){
+        double result = DividedParsedStrings.dividedStrings("64", "8", "2");
+        System.out.println(result);
+    }
+
+
 }
