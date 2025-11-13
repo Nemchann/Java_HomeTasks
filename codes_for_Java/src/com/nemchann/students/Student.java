@@ -1,8 +1,10 @@
 package com.nemchann.students;
 
 import com.nemchann.animals.Meowable;
+import com.nemchann.mathematic.Fraction;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Student implements Meowable {
     String name;
@@ -88,6 +90,16 @@ public class Student implements Meowable {
     @Override
     public void meow() {
         System.out.println(name + ": Мяу! Мои оценки: " + Arrays.toString(getGrades()));
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (this == obj) return true;
+        if (getClass() != obj.getClass()) return false;
+        Student student = (Student) obj;
+        if (!Objects.equals(this.name, student.name) || this.getAverage() != student.getAverage()) return false;
+        return true;
     }
 
     public String toString(){

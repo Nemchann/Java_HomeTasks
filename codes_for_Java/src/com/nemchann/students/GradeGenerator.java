@@ -6,7 +6,7 @@ public class GradeGenerator {
 
     public void generateGrades(Student...students){
         int[] generatedGrades = new int[students.length];
-        // 1. Сначала генерируем ВСЕ оценки и проверяем их ВАЛИДНОСТЬ
+        // Сначала генерируем ВСЕ оценки и проверяем их ВАЛИДНОСТЬ
         for (int i = 0; i < students.length; i++) {
             int randomGrade = new Random().nextInt(10) + 1;
             generatedGrades[i] = randomGrade;
@@ -20,7 +20,7 @@ public class GradeGenerator {
             }
         }
 
-        // 2. Если все оценки валидны - присваиваем их студентам
+        // Если все оценки валидны - присваиваем их студентам
         for (int i = 0; i < students.length; i++) {
             students[i].addGrade(generatedGrades[i]);
         }

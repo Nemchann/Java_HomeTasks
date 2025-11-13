@@ -1,5 +1,7 @@
 package com.nemchann.mathematic;
 
+import java.util.Objects;
+
 public class Fraction extends Number implements Numeric {
     private final int numerator;
     private final int denominator;
@@ -147,6 +149,21 @@ public class Fraction extends Number implements Numeric {
     @Override
     public double toDouble() {
         return doubleValue(); // используем уже существующий метод
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (this == obj) return true;
+        if (getClass() != obj.getClass()) return false;
+        Fraction fraction = (Fraction) obj;
+        if (this.numerator != fraction.numerator || this.denominator != fraction.denominator) return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numerator, denominator);
     }
 
     public String toString(){

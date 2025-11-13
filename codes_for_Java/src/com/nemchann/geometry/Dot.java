@@ -1,5 +1,9 @@
 package com.nemchann.geometry;
 
+import com.nemchann.mathematic.Fraction;
+
+import java.util.Objects;
+
 public sealed class Dot extends AbstractDot permits ThreeCoordinatesDot {
     protected int x;
     protected int y;
@@ -16,5 +20,22 @@ public sealed class Dot extends AbstractDot permits ThreeCoordinatesDot {
     @Override
     public String getCoordinates() {
         return "{" + x + "; " + y + "}";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (this == obj) return true;
+        if (getClass() != obj.getClass()) return false;
+        Dot dot = (Dot) obj;
+        if (this.x != dot.x || this.y != dot.y){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }

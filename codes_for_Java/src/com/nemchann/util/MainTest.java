@@ -712,4 +712,28 @@ public class MainTest {
         ec.makeConnect(connection);
     }
 
+    public static void task5_1_1(){
+        Fraction fraction1 = new Fraction(1, 3);
+        Fraction fraction2 = new Fraction(1, 3);
+        Fraction fraction3 = new Fraction(1, 5);
+        System.out.println(fraction1.equals(fraction2));
+        System.out.println(fraction1.equals(fraction3));
+    }
+
+    public static void task5_1_2(){
+        Dot dot1 = new Dot(4, 5);
+        Dot dot2 = new Dot(4, 5);
+        Dot dot3 = new Dot(4, 7);
+        System.out.println(dot1.equals(dot2));
+        System.out.println(dot1.equals(dot3));
+    }
+
+    public static void task5_1_6(){
+        Student student1 = new Student("Петя", 1, 2, 3, 4, 5);
+        Student student2 = new Student("Петя", 1, 4, 5, 3, 2);
+        Student student3 = new Student("Петя", 7, 2, 3, 4, 5);
+        System.out.println(student1.equals(student2));
+        System.out.println(student1.equals(student3));
+    }
+
 }
