@@ -5,7 +5,7 @@ import com.nemchann.util.MainTest;
 public class Main {
     public static void main(String[] args)
     {
-        MainTest.task4_2_1();
+        MainTest.task4_2_3();
     }
 
 }

@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class Student implements Meowable {
     String name;
     int[] grades;
-    private GradeValidator validator;
+    GradeValidator validator;
 
     public Student(String name, GradeValidator validator, int... params) {
         this.name = name;
@@ -30,6 +30,18 @@ public class Student implements Meowable {
         this(name, GradeValidator.any(), grades);
     }
 
+    public void addGrade(int grade){
+        if (!validator.isValid(grade)){
+            throw new IncorrectGradeException("Студенту " + name + " нельзя присвоить оценку: " + grade);
+        }
+        if (grades == null) {
+            grades = new int[]{grade};
+        } else {
+            int[] newGrades = Arrays.copyOf(grades, grades.length + 1);
+            newGrades[newGrades.length - 1] = grade;
+            grades = newGrades;
+        }
+    }
 
 
     public int[] getGrades() {

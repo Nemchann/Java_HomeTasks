@@ -22,14 +22,13 @@ public class Connection {
         status = Status.OPENED;
     }
 
-    @Override
-    public String toString() {
+    public String nextString(){
         String result = "";
         boolean shouldThrowException = random.nextBoolean();
         if (status == Status.CLOSED){
             throw new IsClosedException();
         }
-        if (!shouldThrowException){
+        if (shouldThrowException){
             try {
                 throw new LostCommunicationException("Потеря связи");
             } catch (LostCommunicationException e) {
@@ -41,4 +40,24 @@ public class Connection {
         }
         return result;
     }
+
+//    @Override
+//    public String toString() {
+//        String result = "";
+//        boolean shouldThrowException = random.nextBoolean();
+//        if (status == Status.CLOSED){
+//            throw new IsClosedException();
+//        }
+//        if (!shouldThrowException){
+//            try {
+//                throw new LostCommunicationException("Потеря связи");
+//            } catch (LostCommunicationException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
+//        else{
+//            result = "test connecting";
+//        }
+//        return result;
+//    }
 }

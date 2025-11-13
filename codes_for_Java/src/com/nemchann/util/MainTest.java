@@ -4,9 +4,11 @@ import com.nemchann.animals.*;
 import com.nemchann.banks.BankAccount;
 import com.nemchann.cities.InnovativeCity;
 import com.nemchann.geometry.Dot;
-import com.nemchann.internet_connections.Connection;
+import com.nemchann.internet_connections.*;
+import com.nemchann.internet_connections.ExampleConnector;
 import com.nemchann.internet_connections.TestConnect;
 import com.nemchann.mathematic.*;
+import com.nemchann.students.GradeGenerator;
 import com.nemchann.students.Student;
 import com.nemchann.war.Gun;
 
@@ -693,5 +695,21 @@ public class MainTest {
         System.out.println(result);
     }
 
+    public static void task4_2_3(){
+        Student student1 = new Student("N", grade -> grade <= 5, 2, 3, 4, 5);
+        Student student2 = new Student("T", grade -> grade >= 5, 7, 8, 5);
+        Student student3 = new Student("H", grade -> grade != 5, 7, 8, 4, 1);
+        GradeGenerator gg = new GradeGenerator();
+        gg.generateGrades(student1, student2, student3);
+        System.out.println(student1);
+        System.out.println(student2);
+        System.out.println(student3);
+    }
+
+    public static void task4_2_4(){
+        ExampleConnector ec = new ExampleConnector();
+        Connection connection = new Connection("8747348");
+        ec.makeConnect(connection);
+    }
 
 }
