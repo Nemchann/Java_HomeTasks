@@ -1,6 +1,7 @@
 package com.nemchann.geometry;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class BrokenLine implements Sizeable, Brokable {
     Dot[] points;
@@ -39,6 +40,91 @@ public class BrokenLine implements Sizeable, Brokable {
     @Override
     public BrokenLine getPolyline() {
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+
+        // Проверяем, что оба объекта являются BrokenLine или его наследниками
+        if (!(o instanceof BrokenLine)) return false;
+
+        BrokenLine that = (BrokenLine) o;
+
+        // Если классы одинаковые - сравниваем все точки
+        if (this.getClass() == that.getClass()) {
+            return Arrays.equals(this.points, that.points);
+        }
+
+        return compareDifferentTypes(that);
+
+//        if (points.length == bl.points.length && !(bl instanceof ClosedPolyline)){
+//            for (int i = 0; i < points.length; i++){
+//                if (points[i].equals(bl.points[i])){
+//                    continue;
+//                }
+//                else return false;
+//            }
+//        }
+//        else{
+//            if (bl instanceof ClosedPolyline && !(this instanceof ClosedPolyline)){
+//                for (int i = 0; i < points.length - 1; i++){
+//                    if (points[i].equals(bl.points[i])){
+//                        continue;
+//                    }
+//                    else return false;
+//                }
+//                if(this.points[0].equals(this.points[points.length - 1]) && this.points[0].equals(bl.points[0])){
+//                    return true;
+//                }
+//                else return false;
+//            }
+//        }
+
+    }
+
+    private boolean compareDifferentTypes(BrokenLine that) {
+        // Определяем, кто из объектов замкнут, а кто нет
+        BrokenLine broken, closed;
+
+        if (this instanceof ClosedPolyline && that instanceof BrokenLine) {
+            closed = this;
+            broken = that;
+        } else if (this instanceof BrokenLine && that instanceof ClosedPolyline) {
+            broken = this;
+            closed = that;
+        } else {
+            return false;
+        }
+
+        return isBrokenEqualClosed(broken, (ClosedPolyline) closed);
+    }
+    private boolean isBrokenEqualClosed(BrokenLine broken, ClosedPolyline closed) {
+        // BrokenLine должен быть замкнут (первая точка == последняя)
+        if (broken.points.length == 0 ||
+                !broken.points[0].equals(broken.points[broken.points.length - 1])) {
+            return false;
+        }
+
+        // Количество точек: у BrokenLine на 1 больше (из-за замыкания)
+        if (broken.points.length - 1 != closed.points.length) {
+            return false;
+        }
+
+        // Сравниваем все точки (кроме последней точки BrokenLine)
+        for (int i = 0; i < closed.points.length; i++) {
+            if (!broken.points[i].equals(closed.points[i])) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(points);
     }
 
     public String toString(){

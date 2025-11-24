@@ -7,6 +7,7 @@ public class GradeGenerator {
     public void generateGrades(Student...students){
         int[] generatedGrades = new int[students.length];
         // Сначала генерируем ВСЕ оценки и проверяем их ВАЛИДНОСТЬ
+//        Тоже переделать
         for (int i = 0; i < students.length; i++) {
             int randomGrade = new Random().nextInt(10) + 1;
             generatedGrades[i] = randomGrade;

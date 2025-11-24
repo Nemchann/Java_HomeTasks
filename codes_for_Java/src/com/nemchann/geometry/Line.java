@@ -1,6 +1,6 @@
 package com.nemchann.geometry;
 
-public class Line implements Sizeable {
+public class Line implements Sizeable, Cloneable {
     private Dot start;
     private Dot end;
 
@@ -38,6 +38,30 @@ public class Line implements Sizeable {
     @Override
     public double getSize() {
         return getSpace();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (this == obj) return true;
+        if (getClass() != obj.getClass()) return false;
+        Line line = (Line) obj;
+//        if ((this.start.equals(line.start) && this.end.equals(line.end)) || (this.start.equals(line.end) && this.end.equals(line.start))){
+//            return true;
+//        }
+        return (this.start.equals(line.start) && this.end.equals(line.end)) || (this.start.equals(line.end) && this.end.equals(line.start));
+    }
+
+    @Override
+    public Line clone(){
+        try{
+            Line result = (Line) super.clone();
+            result.start = this.start.clone();
+            result.end = this.end.clone();
+            return result;
+        }catch (CloneNotSupportedException e){
+            throw new RuntimeException(e);
+        }
     }
 
     public String toString(){

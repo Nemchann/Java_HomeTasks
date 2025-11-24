@@ -4,9 +4,9 @@ import com.nemchann.mathematic.Fraction;
 
 import java.util.Objects;
 
-public sealed class Dot extends AbstractDot permits ThreeCoordinatesDot {
-    protected int x;
-    protected int y;
+public sealed class Dot extends AbstractDot implements Cloneable permits ThreeCoordinatesDot {
+    final int x;
+    final int y;
 
     public Dot(int x, int y) {
         this.x = x;
@@ -38,4 +38,13 @@ public sealed class Dot extends AbstractDot permits ThreeCoordinatesDot {
     public int hashCode() {
         return Objects.hash(x, y);
     }
+    @Override
+    public Dot clone(){
+        try{
+            return (Dot) super.clone();
+        }catch(CloneNotSupportedException e){
+            throw new RuntimeException(e);
+        }
+    }
+
 }

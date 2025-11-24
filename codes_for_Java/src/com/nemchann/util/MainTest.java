@@ -2,8 +2,12 @@ package com.nemchann.util;
 
 import com.nemchann.animals.*;
 import com.nemchann.banks.BankAccount;
+import com.nemchann.cities.City;
 import com.nemchann.cities.InnovativeCity;
+import com.nemchann.geometry.BrokenLine;
+import com.nemchann.geometry.ClosedPolyline;
 import com.nemchann.geometry.Dot;
+import com.nemchann.geometry.Line;
 import com.nemchann.internet_connections.*;
 import com.nemchann.internet_connections.ExampleConnector;
 import com.nemchann.internet_connections.TestConnect;
@@ -728,12 +732,78 @@ public class MainTest {
         System.out.println(dot1.equals(dot3));
     }
 
+    public static void task5_1_3(){
+        Line line1 = new Line(new Dot(1, 3), new Dot(4,5 ));
+        Line line2 = new Line(new Dot(1, 3), new Dot(4,5 ));
+        Line line3 = new Line(new Dot(4, 5), new Dot(1,3 ));
+        Line line4 = new Line(new Dot(5, 3), new Dot(8,5 ));
+        System.out.println(line1.equals(line2));
+        System.out.println(line1.equals(line3));
+        System.out.println(line1.equals(line4));
+    }
+
+    public static void task5_1_4(){
+        BrokenLine brokenLine1 = new BrokenLine(new Dot(1,2), new Dot(3, 4), new Dot(7, 8));
+        ClosedPolyline closedPolyline = new ClosedPolyline(new Dot(1, 2), new Dot(3, 4), new Dot(7, 8));
+        BrokenLine brokenLine2 = new BrokenLine(new Dot(1, 2), new Dot(3, 4), new Dot(7, 8), new Dot(1, 2));
+        BrokenLine brokenLine3 = new BrokenLine(new Dot(1,2), new Dot(3, 4), new Dot(7, 8));
+        System.out.println(brokenLine1.equals(brokenLine2));
+        System.out.println(brokenLine2.equals(closedPolyline));
+        System.out.println(closedPolyline.equals(brokenLine2));
+        System.out.println(brokenLine1.equals(brokenLine3));
+    }
+
+    public static void task5_1_5(){
+        City A = new City("A");
+        City B = new City("B");
+        City C = new City("C");
+
+        InnovativeCity AInnovative = new InnovativeCity("A");
+        InnovativeCity BInnovative = new InnovativeCity("B");
+
+        A.addPath(B, 100);
+        A.addPath(C, 200);
+
+        City A2 = new City("Москва");
+        A2.addPath(B, 150); // разная стоимость
+        A2.addPath(C, 250);
+
+        System.out.println("A.equals(A2): " + A.equals(A2));
+
+        AInnovative.addPath(B, 100);
+        AInnovative.addPath(C, 200);
+
+        System.out.println("AInnovative.equals(A): " + AInnovative.equals(A));
+        System.out.println("A.equals(AInnovative): " + A.equals(AInnovative));
+    }
+
     public static void task5_1_6(){
         Student student1 = new Student("Петя", 1, 2, 3, 4, 5);
         Student student2 = new Student("Петя", 1, 4, 5, 3, 2);
         Student student3 = new Student("Петя", 7, 2, 3, 4, 5);
         System.out.println(student1.equals(student2));
         System.out.println(student1.equals(student3));
+    }
+
+    public static void task5_2_1(){
+        Fraction fraction1 = new Fraction(1, 5);
+        Fraction fraction2 = fraction1.clone();
+        System.out.println(fraction1);
+        System.out.println(fraction2);
+    }
+
+    public static void task5_2_2(){
+        Dot dot1 = new Dot(2, 7);
+        Dot dot2 = dot1.clone();
+        System.out.println(dot1);
+        System.out.println(dot2);
+    }
+
+    public static void task5_2_3(){
+        Line line1 = new Line(new Dot(1, 4), new Dot(5, -3));
+        Line line2 = line1.clone();
+        System.out.println(line1);
+        System.out.println(line2);
     }
 
 }

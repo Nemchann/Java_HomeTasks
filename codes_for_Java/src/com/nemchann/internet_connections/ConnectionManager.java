@@ -2,13 +2,13 @@ package com.nemchann.internet_connections;
 
 public class ConnectionManager {
 
-    public static void main(String[] args) {
-        ExampleConnector connector = new ExampleConnector();
-        Connection connection = new Connection("example.com");
-
-        // Вызываем makeConnect с правильной обработкой исключений
-        callMakeConnectSafely(connector, connection);
-    }
+//    public static void main(String[] args) {
+//        ExampleConnector connector = new ExampleConnector();
+//        Connection connection = new Connection("example.com");
+//
+//        // Вызываем makeConnect с правильной обработкой исключений
+//        callMakeConnectSafely(connector, connection);
+//    }
 
     public static void callMakeConnectSafely(ExampleConnector connector, Connection connection) {
         try {

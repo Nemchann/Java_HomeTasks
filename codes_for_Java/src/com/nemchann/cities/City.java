@@ -2,10 +2,11 @@ package com.nemchann.cities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class City {
     protected List<Path> paths = new ArrayList<>() ;
-    private String name;
+    String name;
 
     public City(String name){
         this.name = name;
@@ -69,6 +70,54 @@ public class City {
         return new ArrayList<>(paths);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (!(obj instanceof City)) return false;
+
+        City otherCity = (City) obj;
+
+        return haveSamePaths(this, otherCity);
+    }
+
+    protected boolean haveSamePaths(City city1, City city2) {
+        // Получаем множества целевых городов для каждого города
+        List<City> city1Targets = getTargetCities(city1);
+        List<City> city2Targets = getTargetCities(city2);
+
+        return city1Targets.size() == city2Targets.size() &&
+                city1Targets.containsAll(city2Targets);
+    }
+
+    private List<City> getTargetCities(City city) {
+        List<City> targetCities = new ArrayList<>();
+        for (Path path : city.paths) {
+
+            if (!containsCity(targetCities, path.city)) {
+                targetCities.add(path.city);
+            }
+        }
+        return targetCities;
+    }
+
+    private boolean containsCity(List<City> cities, City targetCity) {
+        for (City city : cities) {
+            if (city.equals(targetCity)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        List<City> targetCities = getTargetCities(this);
+
+        targetCities.sort((c1, c2) -> c1.name.compareTo(c2.name));
+
+        return Objects.hash(name, targetCities);
+    }
 
     public String toString(){
         String result = name + ":\n";

@@ -2,7 +2,7 @@ package com.nemchann.mathematic;
 
 import java.util.Objects;
 
-public class Fraction extends Number implements Numeric {
+public class Fraction extends Number implements Numeric, Cloneable {
     private final int numerator;
     private final int denominator;
 
@@ -164,6 +164,14 @@ public class Fraction extends Number implements Numeric {
     @Override
     public int hashCode() {
         return Objects.hash(numerator, denominator);
+    }
+    @Override
+    public Fraction clone(){
+        try{
+            return (Fraction) super.clone();
+        }catch(CloneNotSupportedException e){
+            throw new RuntimeException(e);
+        }
     }
 
     public String toString(){

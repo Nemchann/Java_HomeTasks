@@ -28,6 +28,7 @@ public class Connection {
         if (status == Status.CLOSED){
             throw new IsClosedException();
         }
+//        Чуть-чуть переделать
         if (shouldThrowException){
             try {
                 throw new LostCommunicationException("Потеря связи");
