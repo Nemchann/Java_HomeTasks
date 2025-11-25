@@ -22,4 +22,23 @@ public class StructuresTest {
         System.out.println("Представление в виде массива: " + Arrays.toString(array.getArray()));
 
     }
+
+    public static void a_1_2(){
+        FixedSizeArray fixedSizeArray = new FixedSizeArray(30);
+        for (int i = 1; i < 20; i++){
+            fixedSizeArray.addValue(i);
+        }
+        System.out.println("Представление строкой: " + fixedSizeArray.becomeString());
+        System.out.println("Получение значения по индексу n = 5: " + fixedSizeArray.getByPosition(5));
+        fixedSizeArray.changeValue(8, 0);
+        System.out.println("Изменение 0-го элемента на 8: " + Arrays.toString(fixedSizeArray.getArray()));
+        fixedSizeArray.addValue(100, 7);
+        System.out.println("После добавления 100: " + Arrays.toString(fixedSizeArray.getArray()));
+        fixedSizeArray.deleteByPosition(13);
+        System.out.println("После удаления элемента с индексом 12: " + Arrays.toString(fixedSizeArray.getArray()));
+        fixedSizeArray.addValues(3, 22, 33, 44);
+        System.out.println("После добавления значений (22, 33, 44), начиная с индекса 3: " + Arrays.toString(fixedSizeArray.getArray()));
+        System.out.println("Размер хранимых значений: " + fixedSizeArray.getSize());
+        System.out.println("Возможность дальнейшей вставки: " + fixedSizeArray.isAvailableToAdd());
+    }
 }
