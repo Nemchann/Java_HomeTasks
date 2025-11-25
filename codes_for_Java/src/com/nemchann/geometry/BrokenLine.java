@@ -47,12 +47,10 @@ public class BrokenLine implements Sizeable, Brokable {
         if (this == o) return true;
         if (o == null) return false;
 
-        // Проверяем, что оба объекта являются BrokenLine или его наследниками
         if (!(o instanceof BrokenLine)) return false;
 
         BrokenLine that = (BrokenLine) o;
 
-        // Если классы одинаковые - сравниваем все точки
         if (this.getClass() == that.getClass()) {
             return Arrays.equals(this.points, that.points);
         }
@@ -85,7 +83,6 @@ public class BrokenLine implements Sizeable, Brokable {
     }
 
     private boolean compareDifferentTypes(BrokenLine that) {
-        // Определяем, кто из объектов замкнут, а кто нет
         BrokenLine broken, closed;
 
         if (this instanceof ClosedPolyline && that instanceof BrokenLine) {
@@ -101,18 +98,17 @@ public class BrokenLine implements Sizeable, Brokable {
         return isBrokenEqualClosed(broken, (ClosedPolyline) closed);
     }
     private boolean isBrokenEqualClosed(BrokenLine broken, ClosedPolyline closed) {
-        // BrokenLine должен быть замкнут (первая точка == последняя)
+        // BrokenLine должен быть замкнут
         if (broken.points.length == 0 ||
                 !broken.points[0].equals(broken.points[broken.points.length - 1])) {
             return false;
         }
 
-        // Количество точек: у BrokenLine на 1 больше (из-за замыкания)
+        // Количество точек: у BrokenLine на 1 больше
         if (broken.points.length - 1 != closed.points.length) {
             return false;
         }
 
-        // Сравниваем все точки (кроме последней точки BrokenLine)
         for (int i = 0; i < closed.points.length; i++) {
             if (!broken.points[i].equals(closed.points[i])) {
                 return false;

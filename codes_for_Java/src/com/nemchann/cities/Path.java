@@ -36,6 +36,6 @@ public class Path {
 
     @Override
     public int hashCode() {
-        return Objects.hash(cost, city);
+        return Objects.hash(city);
     }
 }

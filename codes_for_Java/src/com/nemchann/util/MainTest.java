@@ -740,6 +740,10 @@ public class MainTest {
         System.out.println(line1.equals(line2));
         System.out.println(line1.equals(line3));
         System.out.println(line1.equals(line4));
+        System.out.println(line1.hashCode());
+        System.out.println(line2.hashCode());
+        System.out.println(line3.hashCode());
+        System.out.println(line4.hashCode());
     }
 
     public static void task5_1_4(){

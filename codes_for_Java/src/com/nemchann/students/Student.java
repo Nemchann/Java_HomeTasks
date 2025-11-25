@@ -102,6 +102,11 @@ public class Student implements Meowable {
         return true;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, this.getAverage());
+    }
+
     public String toString(){
         String result = name;
         if (grades != null){
