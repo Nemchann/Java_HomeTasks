@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class FixedSizeArray {
     int[] array;
-    private int size ;
+    private int size;
     final int maxSize;
     private final static int DEFAULT_SIZE = 100;
 
@@ -50,6 +50,9 @@ public class FixedSizeArray {
         }
         if (n == size - 1){
             addValue(value);
+        }
+        if (n < 0 || n >= array.length){
+            throw new OutOfArrayScopeException("N must be in scopes of array size!");
         }
         else{
             int[] tempArray = new int[size + 1];
