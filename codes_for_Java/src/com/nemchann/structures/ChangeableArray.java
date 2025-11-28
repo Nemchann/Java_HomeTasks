@@ -7,16 +7,17 @@ public class ChangeableArray {
     int[] array;
     private int size;
 
+//    Конструктор без параметров
     public ChangeableArray(){
         this.size = 0;
         this.array = new int[size];
     }
-
+//    Конструктор с массивом
     public ChangeableArray(int[] values){
         this.array = values;
         this.size = values.length;
     }
-
+//  Конструктор с числами через запятую
     public ChangeableArray(Integer...values){
         this.array = new int[values.length];
 
@@ -27,7 +28,7 @@ public class ChangeableArray {
         }
         this.size = values.length;
     }
-
+//    Конструктор со списком
     public ChangeableArray(ArrayList<Integer> arrayList){
         this.array = new int[arrayList.size()];
 
@@ -39,13 +40,14 @@ public class ChangeableArray {
 
         this.size = arrayList.size();
     }
-
+//    Добавить значение в конец
     public void addValueEnd(int value){
         array = Arrays.copyOf(array, array.length + 1);
         array[size] = value;
         size++;
     }
 
+//    Добавить значение в позицию n
     public void addToPosition(int value, int n){
         if (n < 0 || n >= array.length){
             throw new OutOfArrayScopeException("N must be in scopes of array size!");
@@ -60,7 +62,7 @@ public class ChangeableArray {
         array = Arrays.copyOf(tempArray, tempArray.length);
         size++;
     }
-
+//    Добавить значения (отдельные числа) в позицию n
     public void addValues(int n, int...values){
         if (n < 0 || n >= array.length){
             throw new OutOfArrayScopeException("N must be in scopes of array size!");
@@ -124,10 +126,16 @@ public class ChangeableArray {
 
     //Получить по индексу
     public int getByPosition(int n){
+        if (n < 0 || n >= array.length){
+            throw new OutOfArrayScopeException("N must be in scopes of array size!");
+        }
         return array[n];
     }
     //    Поменять значение по индексу
     public void changeValue(int value, int n){
+        if (n < 0 || n >= array.length){
+            throw new OutOfArrayScopeException("N must be in scopes of array size!");
+        }
         array[n] = value;
     }
 

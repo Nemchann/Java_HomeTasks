@@ -1,4 +1,6 @@
 package com.nemchann.util;
+import com.nemchann.binary_tree.BinaryTree;
+import com.nemchann.binary_tree.Node;
 import com.nemchann.structures.*;
 
 import java.util.ArrayList;
@@ -55,5 +57,31 @@ public class StructuresTest {
         System.out.println("После вставки -10 на позицию 10: " + Arrays.toString(array.getArray()));
         array.deleteByPosition(13);
         System.out.println("После удаления 13 элемента: " + Arrays.toString(array.getArray()));
+    }
+
+    public static void a_1_5(){
+        String[] strs = new String[]{"aaa", "bbb", "ccc"};
+        UniqueStrings us = new UniqueStrings(strs);
+        System.out.println(us);
+        System.out.println(us.addString("ddd"));
+        System.out.println(us);
+        System.out.println(us.deleteString("bbb"));
+        System.out.println(us);
+        System.out.println(us.getSize());
+        System.out.println(us.addStrings("ddd", "fff", "aaa", "ttt"));
+        System.out.println(us);
+        System.out.println(us.deleteStrings("ddd", "aaa", "hhh"));
+        System.out.println(us);
+    }
+
+    public static void a_1_10(){
+        BinaryTree bTree = new BinaryTree();
+        bTree.addValue(3);
+        bTree.addValue(5);
+        bTree.addValue(4);
+        bTree.addValue(7);
+        bTree.addValue(1);
+        bTree.addValue(2);
+        System.out.println(bTree);
     }
 }
