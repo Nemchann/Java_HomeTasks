@@ -1,6 +1,6 @@
 package com.nemchann.geometry;
 
-final class ThreeCoordinatesDot extends Dot {
+public final class ThreeCoordinatesDot extends Dot {
     private int z;
 
     public ThreeCoordinatesDot(int x, int y){

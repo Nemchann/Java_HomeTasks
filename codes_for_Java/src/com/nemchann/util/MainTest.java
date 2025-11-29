@@ -4,14 +4,13 @@ import com.nemchann.animals.*;
 import com.nemchann.banks.BankAccount;
 import com.nemchann.cities.City;
 import com.nemchann.cities.InnovativeCity;
-import com.nemchann.geometry.BrokenLine;
-import com.nemchann.geometry.ClosedPolyline;
-import com.nemchann.geometry.Dot;
-import com.nemchann.geometry.Line;
+import com.nemchann.geometry.*;
 import com.nemchann.internet_connections.*;
 import com.nemchann.internet_connections.ExampleConnector;
 import com.nemchann.internet_connections.TestConnect;
 import com.nemchann.mathematic.*;
+import com.nemchann.storages.Box;
+import com.nemchann.storages.Storage;
 import com.nemchann.students.GradeGenerator;
 import com.nemchann.students.Student;
 import com.nemchann.war.Gun;
@@ -808,6 +807,43 @@ public class MainTest {
         Line line2 = line1.clone();
         System.out.println(line1);
         System.out.println(line2);
+    }
+
+    public static void task6_1_1(){
+        Box<Integer> box = new Box<>();
+        box.putObj(3);
+        System.out.println(box);
+        System.out.println(box.getObj());
+        box.takeObj();
+        System.out.println(box);
+        box.putObj(7);
+        System.out.println(box);
+        box.putObj(99);
+        System.out.println(box);
+    }
+
+    public static void task6_1_2(){
+        Storage<Integer> integerStorage1 = new Storage<>(null, 0);
+        Storage<Integer> integerStorage2 = new Storage<>(99, -1);
+        Storage<String> integerStorage3 = new Storage<String>(null, "default");
+        Storage<String> integerStorage4 = new Storage<String>("hello world", "hello");
+
+        System.out.println(integerStorage1.getObj());
+        System.out.println(integerStorage2.getObj());
+        System.out.println(integerStorage3.getObj());
+        System.out.println(integerStorage4.getObj());
+    }
+
+    public static void task6_1_5(){
+        Dot dot1 = new Dot(1, 4);
+        Dot dot2 = new Dot(9, -4);
+        Line<Dot> line1 = new Line<>(dot1, dot2);
+        ThreeCoordinatesDot dot3 = new ThreeCoordinatesDot(3, 9, 2);
+        ThreeCoordinatesDot dot4 = new ThreeCoordinatesDot(-5, 1, 8);
+        Line<ThreeCoordinatesDot> line2 = new Line<>(dot3, dot4);
+        System.out.println(line1);
+        System.out.println(line2);
+
     }
 
 }

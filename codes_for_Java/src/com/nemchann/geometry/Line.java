@@ -2,40 +2,33 @@ package com.nemchann.geometry;
 
 import java.util.Objects;
 
-public class Line implements Sizeable, Cloneable {
-    private Dot start;
-    private Dot end;
+public class Line<T extends Dot> implements Sizeable, Cloneable {
+    private T start;
+    private T end;
 
-    public Line(Dot start, Dot end) {
+    public Line(T start, T end) {
         if (start.equals(end)){
             throw new IllegalArgumentException();
         }
-        this.start = new Dot(start.x, start.y);
-        this.end = new Dot(end.x, end.y);
+        this.start = start;
+        this.end = end;
     }
 
-    public Line(int x1, int y1, int x2, int y2){
-        if (x1 == x2 && y1 == y2){
-            throw new IllegalArgumentException();
-        }
-        this.start = new Dot(x1, y1);
-        this.end = new Dot(x2, y2);;
-    }
 
     public Dot getStart() {
-        return new Dot(start.x, start.y);
+        return (T) start.clone();
     }
 
     public Dot getEnd() {
-        return new Dot(end.x, end.y);
+        return (T) end.clone();
     }
 
-    public void setStart(Dot start) {
-        this.start = new Dot(start.x, start.y);
+    public void setStart(T start) {
+        this.start = (T) start.clone();
     }
 
-    public void setEnd(Dot end) {
-        this.end = new Dot(end.x, end.y);
+    public void setEnd(T end) {
+        this.start = (T) end.clone();
     }
 
     public int getSpace(){
@@ -53,7 +46,7 @@ public class Line implements Sizeable, Cloneable {
         if (obj == null) return false;
         if (this == obj) return true;
         if (getClass() != obj.getClass()) return false;
-        Line line = (Line) obj;
+        Line<?> line = (Line<?>) obj;
         return (this.start.equals(line.start) && this.end.equals(line.end)) || (this.start.equals(line.end) && this.end.equals(line.start));
     }
 
@@ -92,9 +85,9 @@ public class Line implements Sizeable, Cloneable {
     @Override
     public Line clone(){
         try{
-            Line result = (Line) super.clone();
-            result.start = this.start.clone();
-            result.end = this.end.clone();
+            Line<T> result = (Line<T>) super.clone();
+            result.start = (T) this.start.clone();
+            result.end = (T) this.end.clone();
             return result;
         }catch (CloneNotSupportedException e){
             throw new RuntimeException(e);
