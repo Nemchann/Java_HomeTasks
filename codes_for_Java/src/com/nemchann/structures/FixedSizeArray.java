@@ -3,8 +3,7 @@ package com.nemchann.structures;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class FixedSizeArray {
-    int[] array;
+public class FixedSizeArray extends UnchangeableArray{
     private int size;
     final int maxSize;
     private final static int DEFAULT_SIZE = 100;
@@ -24,13 +23,15 @@ public class FixedSizeArray {
     }
 //    С указанием списка
     public FixedSizeArray(ArrayList<Integer> arrayList){
-        this.array = new int[arrayList.size()];
 
-        for (int i = 0; i < arrayList.size(); i++){
-            if (arrayList.get(i) != null){
-                array[i] = arrayList.get(i);
-            }
-        }
+        super(arrayList);
+        //this.array = new int[arrayList.size()];
+//
+//        for (int i = 0; i < arrayList.size(); i++){
+//            if (arrayList.get(i) != null){
+//                array[i] = arrayList.get(i);
+//            }
+//        }
         this.maxSize = arrayList.size();
         this.size = arrayList.size();
     }
@@ -141,15 +142,29 @@ public class FixedSizeArray {
         size--;
     }
 //Получить по индексу
-    public int getByPosition(int n){
-        return array[n];
-    }
-//    Поменять значение по индексу
-    public void changeValue(int value, int n){
-        array[n] = value;
+
+    @Override
+    public int getPosition(int n) {
+        return super.getPosition(n);
     }
 
+//    public int getByPosition(int n){
+//        return array[n];
+//    }
+//    Поменять значение по индексу
+
+
+    @Override
+    public void changeOneValue(int newValue, int n) {
+        super.changeOneValue(newValue, n);
+    }
+
+//    public void changeValue(int value, int n){
+//        array[n] = value;
+//    }
+
 //    Строковое представление
+    @Override
     public String becomeString(){
         StringBuilder stringBuilder = new StringBuilder("[");
         for (int i = 0; i < size - 1; i++){
@@ -160,21 +175,20 @@ public class FixedSizeArray {
         stringBuilder.append("]");
         return stringBuilder.toString();
     }
-//    Проверка на пустоту
-    public boolean checkIsEmpty(){
-        return array.length == 0;
-    }
-//    Проверка на возможность вставки
+
+    //    Проверка на возможность вставки
     public boolean isAvailableToAdd(){
         return size != maxSize;
     }
 
 //    Получить размер
+    @Override
     public int getSize(){
         return size;
     }
 
 //    Получить массив
+    @Override
     public int[] getArray(){
         return Arrays.copyOf(array, size);
     }

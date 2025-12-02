@@ -22,15 +22,19 @@ public class Stack<T> {
     }
 
     public T pop(){
-        T lastValue = stack.getLast();
-        //stack.getLast() = null;
+        if (size == 0) {
+            throw new IllegalStateException("Stack is empty");
+        }
+
+        T lastValue = stack.get(size - 1); // Получаем последний элемент
+        stack.remove(size - 1); // Удаляем его из списка
         size--;
+
         return lastValue;
     }
 
     public T peak(){
         T lastValue = stack.getLast();
-        size--;
         return lastValue;
     }
 }

@@ -10,7 +10,10 @@ import com.nemchann.internet_connections.ExampleConnector;
 import com.nemchann.internet_connections.TestConnect;
 import com.nemchann.mathematic.*;
 import com.nemchann.storages.Box;
+import com.nemchann.storages.Dot3DPutter;
+import com.nemchann.storages.MaximumFinder;
 import com.nemchann.storages.Storage;
+import com.nemchann.structures.Stack;
 import com.nemchann.students.GradeGenerator;
 import com.nemchann.students.Student;
 import com.nemchann.war.Gun;
@@ -18,6 +21,7 @@ import com.nemchann.war.Gun;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.awt.Point;
+import java.util.List;
 import java.util.Scanner;
 
 public class MainTest {
@@ -375,7 +379,7 @@ public class MainTest {
 //        com.sstu.banks.BankAccount bankAccount1 = new com.sstu.banks.BankAccount("", "01.01.2000", "1234 123456");
     }
 
-    public static void task2_1_1(){
+  //  public static void task2_1_1(){
 //        class NewFraction extends com.sstu.mathematic.Fraction{
 //            public com.sstu.mathematic.Fraction(int numerator, int denominator){
 //                if (denominator <= 0){
@@ -386,7 +390,7 @@ public class MainTest {
 //                this.denominator = denominator / divisor;
 //            }
 //        }
-    }
+ //   }
 
 //    public static void task2_1_2(){
 //        Dot dot1 = new Dot(3, 4);
@@ -397,52 +401,52 @@ public class MainTest {
 //        System.out.println(spline1.splineLength());
 //    }
 
-    public static void task2_1_3(){
-        // Создаем инновационные города
-        InnovativeCity A = new InnovativeCity("A");
-        InnovativeCity B = new InnovativeCity("B");
-        InnovativeCity C = new InnovativeCity("C");
-
-        System.out.println("До добавления путей:");
-        System.out.println(A);
-        System.out.println(B);
-
-        // Добавляем путь - автоматически создается обратный
-        A.addPath(B, 700);
-
-        System.out.println("\nПосле добавления пути A-B:");
-        System.out.println("A:");
-        System.out.println(A);
-        System.out.println("B:");
-        System.out.println(B);
-
-        // Добавляем еще один путь
-        A.addPath(C, 800);
-
-        System.out.println("\nПосле добавления пути A-C:");
-        System.out.println("A:");
-        System.out.println(A);
-        System.out.println("C:");
-        System.out.println(C);
-
-        // Обновляем стоимость - обновляются оба пути
-        A.addPath(B, 650);
-
-        System.out.println("\nПосле обновления стоимости A-B:");
-        System.out.println("A:");
-        System.out.println(A);
-        System.out.println("B:");
-        System.out.println(B);
-
-        // Удаляем путь - удаляются оба направления
-        A.removeBidirectionalPath(C);
-
-        System.out.println("\nПосле удаления пути A-C:");
-        System.out.println("A:");
-        System.out.println(A);
-        System.out.println("C:");
-        System.out.println(C);
-    }
+//    public static void task2_1_3(){
+//        // Создаем инновационные города
+//        InnovativeCity A = new InnovativeCity("A");
+//        InnovativeCity B = new InnovativeCity("B");
+//        InnovativeCity C = new InnovativeCity("C");
+//
+//        System.out.println("До добавления путей:");
+//        System.out.println(A);
+//        System.out.println(B);
+//
+//        // Добавляем путь - автоматически создается обратный
+//        A.addPath(B, 700);
+//
+//        System.out.println("\nПосле добавления пути A-B:");
+//        System.out.println("A:");
+//        System.out.println(A);
+//        System.out.println("B:");
+//        System.out.println(B);
+//
+//        // Добавляем еще один путь
+//        A.addPath(C, 800);
+//
+//        System.out.println("\nПосле добавления пути A-C:");
+//        System.out.println("A:");
+//        System.out.println(A);
+//        System.out.println("C:");
+//        System.out.println(C);
+//
+//        // Обновляем стоимость - обновляются оба пути
+//        A.addPath(B, 650);
+//
+//        System.out.println("\nПосле обновления стоимости A-B:");
+//        System.out.println("A:");
+//        System.out.println(A);
+//        System.out.println("B:");
+//        System.out.println(B);
+//
+//        // Удаляем путь - удаляются оба направления
+//        A.removeBidirectionalPath(C);
+//
+//        System.out.println("\nПосле удаления пути A-C:");
+//        System.out.println("A:");
+//        System.out.println(A);
+//        System.out.println("C:");
+//        System.out.println(C);
+//    }
 
 //    public static void task2_1_4(){
 //        MachineGun gun1 = new MachineGun();
@@ -466,49 +470,49 @@ public class MainTest {
 //        System.out.println(dot2);
 //    }
 
-    public static void task2_2_1(){
-        Gun gun1 = new Gun(20);
-        Gun gun2 = new Gun(4, 15);
-        System.out.println("Пистолет 1, патронов: " + gun1.patrons());
-        gun1.fire();
-        gun1.fire();
-        gun1.fire();
-        System.out.println("Вынимаем патрон: " + gun1.getPatrons());
-        System.out.println("Вынимаем патрон: " + gun1.getPatrons());
-        System.out.println("Вынимаем патрон: " + gun1.getPatrons());
-        gun1.fire();
-
-        System.out.println("Пистолет 2, патронов: " + gun2.patrons());
-        gun2.fire();
-        System.out.println("Возвращено патронов при разрядке: " + gun2.unloading());
-        gun2.fire();
-        System.out.println("Возвращено патронов: " + gun2.load(20));
-        gun2.fire();
-        gun2.fire();
-        gun2.fire();
-        gun2.fire();
-        gun2.fire();
-        System.out.println("Всего патронов: " + gun2.patrons());
-    }
-
-    public static void task2_2_2(){
-        Fraction fraction1 = new Fraction(4, 3);
-        Fraction fraction2 = new Fraction(2, 3);
-        Fraction fraction3 = new Fraction(56473957, 5768);
-        System.out.println(fraction1.intValue());
-        System.out.println(fraction3.longValue());
-        System.out.println(fraction2.floatValue());
-        System.out.println(fraction2.doubleValue());
-    }
-
-    public static void task2_2_3(){
-        Sparrow sparrow = new Sparrow();
-        Cuckoo cuckoo = new Cuckoo();
-        Parrot parrot = new Parrot("Тралалеро-тралала");
-        sparrow.sing();
-        cuckoo.sing();
-        parrot.sing();
-    }
+//    public static void task2_2_1(){
+//        Gun gun1 = new Gun(20);
+//        Gun gun2 = new Gun(4, 15);
+//        System.out.println("Пистолет 1, патронов: " + gun1.patrons());
+//        gun1.fire();
+//        gun1.fire();
+//        gun1.fire();
+//        System.out.println("Вынимаем патрон: " + gun1.getPatrons());
+//        System.out.println("Вынимаем патрон: " + gun1.getPatrons());
+//        System.out.println("Вынимаем патрон: " + gun1.getPatrons());
+//        gun1.fire();
+//
+//        System.out.println("Пистолет 2, патронов: " + gun2.patrons());
+//        gun2.fire();
+//        System.out.println("Возвращено патронов при разрядке: " + gun2.unloading());
+//        gun2.fire();
+//        System.out.println("Возвращено патронов: " + gun2.load(20));
+//        gun2.fire();
+//        gun2.fire();
+//        gun2.fire();
+//        gun2.fire();
+//        gun2.fire();
+//        System.out.println("Всего патронов: " + gun2.patrons());
+//    }
+//
+//    public static void task2_2_2(){
+//        Fraction fraction1 = new Fraction(4, 3);
+//        Fraction fraction2 = new Fraction(2, 3);
+//        Fraction fraction3 = new Fraction(56473957, 5768);
+//        System.out.println(fraction1.intValue());
+//        System.out.println(fraction3.longValue());
+//        System.out.println(fraction2.floatValue());
+//        System.out.println(fraction2.doubleValue());
+//    }
+//
+//    public static void task2_2_3(){
+//        Sparrow sparrow = new Sparrow();
+//        Cuckoo cuckoo = new Cuckoo();
+//        Parrot parrot = new Parrot("Тралалеро-тралала");
+//        sparrow.sing();
+//        cuckoo.sing();
+//        parrot.sing();
+//    }
 
 //    public static void task2_2_4(){
 //        Dot dotCircle = new Dot(0, 5);
@@ -541,39 +545,39 @@ public class MainTest {
 //        System.out.println(point2.getDescription());
 //    }
 
-    public static void task2_3_1(){
-        double res1 = Calculator.sum(
-                new IntegerWrapper(2),
-                new Fraction(3, 5),
-                new DoubleWrapper(2.3)
-        );
-        System.out.println(res1);
-        double res2 = Calculator.sum(
-                new DoubleWrapper(3.6),
-                new Fraction(49, 12),
-                new IntegerWrapper(3),
-                new Fraction(3, 2)
-        );
-        double res3 = Calculator.sum(
-                new Fraction(1, 3),
-                new IntegerWrapper(1)
-        );
-        System.out.println(res2);
-        System.out.println(res3);
-    }
-
-    public static void task2_3_2(){
-        Sparrow sparrow1 = new Sparrow();
-        Sparrow sparrow2 = new Sparrow();
-        Cuckoo cuckoo1 = new Cuckoo();
-        Cuckoo cuckoo2 = new Cuckoo();
-        Parrot parrot1 = new Parrot("Тралалело-тралала");
-        Parrot parrot2 = new Parrot("Трипи-тропи, тропа-трипа");
-        Parrot parrot3 = new Parrot("Балерина-капучина!");
-
-        String birdsSongs = BirdsMarket.singingSongs(parrot1, sparrow1, cuckoo1, parrot2, cuckoo2, sparrow2, parrot3);
-        System.out.println(birdsSongs);
-    }
+//    public static void task2_3_1(){
+//        double res1 = Calculator.sum(
+//                new IntegerWrapper(2),
+//                new Fraction(3, 5),
+//                new DoubleWrapper(2.3)
+//        );
+//        System.out.println(res1);
+//        double res2 = Calculator.sum(
+//                new DoubleWrapper(3.6),
+//                new Fraction(49, 12),
+//                new IntegerWrapper(3),
+//                new Fraction(3, 2)
+//        );
+//        double res3 = Calculator.sum(
+//                new Fraction(1, 3),
+//                new IntegerWrapper(1)
+//        );
+//        System.out.println(res2);
+//        System.out.println(res3);
+//    }
+//
+//    public static void task2_3_2(){
+//        Sparrow sparrow1 = new Sparrow();
+//        Sparrow sparrow2 = new Sparrow();
+//        Cuckoo cuckoo1 = new Cuckoo();
+//        Cuckoo cuckoo2 = new Cuckoo();
+//        Parrot parrot1 = new Parrot("Тралалело-тралала");
+//        Parrot parrot2 = new Parrot("Трипи-тропи, тропа-трипа");
+//        Parrot parrot3 = new Parrot("Балерина-капучина!");
+//
+//        String birdsSongs = BirdsMarket.singingSongs(parrot1, sparrow1, cuckoo1, parrot2, cuckoo2, sparrow2, parrot3);
+//        System.out.println(birdsSongs);
+//    }
 
 //    public static void task2_3_3(){
 //        Circle circle = new Circle(new Dot(0,0), 4);
@@ -585,17 +589,17 @@ public class MainTest {
 //        System.out.println(res);
 //    }
 
-    public static void task2_3_4(){
-        Cat cat1 = new Cat("Барсик");
-        Cat cat2 = new Cat("Кузя");
-        Cat cat3 = new Cat("Маркиза");
-        Student student = new Student("Василий", 5, 4, 3, 5);
-        WildCat wildCat1 = new WildCat("Тигр");
-        WildCat wildCat2 = new WildCat("Рысь");
-
-        CatUtils.makeAllMeow(cat2, wildCat2, cat3, cat1, student, wildCat1);
-
-    }
+//    public static void task2_3_4(){
+//        Cat cat1 = new Cat("Барсик");
+//        Cat cat2 = new Cat("Кузя");
+//        Cat cat3 = new Cat("Маркиза");
+//        Student student = new Student("Василий", 5, 4, 3, 5);
+//        WildCat wildCat1 = new WildCat("Тигр");
+//        WildCat wildCat2 = new WildCat("Рысь");
+//
+//        CatUtils.makeAllMeow(cat2, wildCat2, cat3, cat1, student, wildCat1);
+//
+//    }
 
 //    public static void task2_3_5(){
 //        Line line1 = new Line(2, 5, -10, 0);
@@ -643,171 +647,171 @@ public class MainTest {
 //
 //    }
 
-    public static void task2_3_9(){
-        Student student1 = new Student("Вася", grade -> grade == 1 || grade == 0, 0, 1, 1, 1, 0, 0, 1);
-        Student student2 = new Student("Петя", grade -> grade % 2 == 0, 2, 6, 6, 4, 8, 14);
-        System.out.println(student1);
-        System.out.println(student2);
-    }
+//    public static void task2_3_9(){
+//        Student student1 = new Student("Вася", grade -> grade == 1 || grade == 0, 0, 1, 1, 1, 0, 0, 1);
+//        Student student2 = new Student("Петя", grade -> grade % 2 == 0, 2, 6, 6, 4, 8, 14);
+//        System.out.println(student1);
+//        System.out.println(student2);
+//    }
+//
+//    public static void task3_1_3(){
+//        BigInteger bi = new BigInteger("12345678912345678912");
+//        double sum = Calculator.sum(new IntegerWrapper(7), new Fraction(11, 3), new DoubleWrapper(3.21), new BigIntegerWrapper(bi));
+//        System.out.println(sum);
+//    }
+//    public static void task3_1_4(){
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Введите первое число:");
+//        String strX = scanner.nextLine();
+//        System.out.println("Введите второе число:");
+//        String strY = scanner.nextLine();
+//        double newPow = NewPow.powXtoY(strX, strY);
+//        System.out.println(strX + " в степени " + strY + " равно " + newPow);
+//
+//    }
+//
+//    public static void task3_1_5(){
+//        Dot dot = new Dot(4, -6);
+//        Point point = new Point();
+//        point.x = 1;
+//        point.y = 0;
+//        System.out.println(dot);
+//        System.out.println(point);
+//    }
+//
+//    public static void task4_1_1(){
+//        Student student = new Student("Вася", grade -> grade % 2 == 0, 2, 5, 6, 8, 0);
+//        System.out.println(student);
+//
+//    }
+//
+//    public static void task4_1_4(){
+//        Connection connection = new Connection("032:134:52:0");
+//        System.out.println(connection);
+//        Connection connection1 = new Connection("56:255:8:0");
+//        connection1.closeConnection();
+//        System.out.println(connection1);
+//    }
+//
+//    public static void task4_2_1(){
+//        TestConnect.readData();
+//    }
+//
+//    public static void task4_2_2(){
+//        double result = DividedParsedStrings.dividedStrings("64", "8", "2");
+//        System.out.println(result);
+//    }
+//
+//    public static void task4_2_3(){
+//        Student student1 = new Student("N", grade -> grade <= 5, 2, 3, 4, 5);
+//        Student student2 = new Student("T", grade -> grade >= 5, 7, 8, 5);
+//        Student student3 = new Student("H", grade -> grade != 5, 7, 8, 4, 1);
+//        GradeGenerator gg = new GradeGenerator();
+//        gg.generateGrades(student1, student2, student3);
+//        System.out.println(student1);
+//        System.out.println(student2);
+//        System.out.println(student3);
+//    }
+//
+//    public static void task4_2_4(){
+//        ExampleConnector ec = new ExampleConnector();
+//        Connection connection = new Connection("8747348");
+//        ec.makeConnect(connection);
+//    }
 
-    public static void task3_1_3(){
-        BigInteger bi = new BigInteger("12345678912345678912");
-        double sum = Calculator.sum(new IntegerWrapper(7), new Fraction(11, 3), new DoubleWrapper(3.21), new BigIntegerWrapper(bi));
-        System.out.println(sum);
-    }
-    public static void task3_1_4(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите первое число:");
-        String strX = scanner.nextLine();
-        System.out.println("Введите второе число:");
-        String strY = scanner.nextLine();
-        double newPow = NewPow.powXtoY(strX, strY);
-        System.out.println(strX + " в степени " + strY + " равно " + newPow);
+//    public static void task5_1_1(){
+//        Fraction fraction1 = new Fraction(1, 3);
+//        Fraction fraction2 = new Fraction(1, 3);
+//        Fraction fraction3 = new Fraction(1, 5);
+//        System.out.println(fraction1.equals(fraction2));
+//        System.out.println(fraction1.equals(fraction3));
+//    }
 
-    }
+//    public static void task5_1_2(){
+//        Dot dot1 = new Dot(4, 5);
+//        Dot dot2 = new Dot(4, 5);
+//        Dot dot3 = new Dot(4, 7);
+//        System.out.println(dot1.equals(dot2));
+//        System.out.println(dot1.equals(dot3));
+//    }
 
-    public static void task3_1_5(){
-        Dot dot = new Dot(4, -6);
-        Point point = new Point();
-        point.x = 1;
-        point.y = 0;
-        System.out.println(dot);
-        System.out.println(point);
-    }
+//    public static void task5_1_3(){
+//        Line line1 = new Line(new Dot(1, 3), new Dot(4,5 ));
+//        Line line2 = new Line(new Dot(1, 3), new Dot(4,5 ));
+//        Line line3 = new Line(new Dot(4, 5), new Dot(1,3 ));
+//        Line line4 = new Line(new Dot(5, 3), new Dot(8,5 ));
+//        System.out.println(line1.equals(line2));
+//        System.out.println(line1.equals(line3));
+//        System.out.println(line1.equals(line4));
+//        System.out.println(line1.hashCode());
+//        System.out.println(line2.hashCode());
+//        System.out.println(line3.hashCode());
+//        System.out.println(line4.hashCode());
+//    }
 
-    public static void task4_1_1(){
-        Student student = new Student("Вася", grade -> grade % 2 == 0, 2, 5, 6, 8, 0);
-        System.out.println(student);
+//    public static void task5_1_4(){
+//        BrokenLine brokenLine1 = new BrokenLine(new Dot(1,2), new Dot(3, 4), new Dot(7, 8));
+//        ClosedPolyline closedPolyline = new ClosedPolyline(new Dot(1, 2), new Dot(3, 4), new Dot(7, 8));
+//        BrokenLine brokenLine2 = new BrokenLine(new Dot(1, 2), new Dot(3, 4), new Dot(7, 8), new Dot(1, 2));
+//        BrokenLine brokenLine3 = new BrokenLine(new Dot(1,2), new Dot(3, 4), new Dot(7, 8));
+//        System.out.println(brokenLine1.equals(brokenLine2));
+//        System.out.println(brokenLine2.equals(closedPolyline));
+//        System.out.println(closedPolyline.equals(brokenLine2));
+//        System.out.println(brokenLine1.equals(brokenLine3));
+//    }
 
-    }
-
-    public static void task4_1_4(){
-        Connection connection = new Connection("032:134:52:0");
-        System.out.println(connection);
-        Connection connection1 = new Connection("56:255:8:0");
-        connection1.closeConnection();
-        System.out.println(connection1);
-    }
-
-    public static void task4_2_1(){
-        TestConnect.readData();
-    }
-
-    public static void task4_2_2(){
-        double result = DividedParsedStrings.dividedStrings("64", "8", "2");
-        System.out.println(result);
-    }
-
-    public static void task4_2_3(){
-        Student student1 = new Student("N", grade -> grade <= 5, 2, 3, 4, 5);
-        Student student2 = new Student("T", grade -> grade >= 5, 7, 8, 5);
-        Student student3 = new Student("H", grade -> grade != 5, 7, 8, 4, 1);
-        GradeGenerator gg = new GradeGenerator();
-        gg.generateGrades(student1, student2, student3);
-        System.out.println(student1);
-        System.out.println(student2);
-        System.out.println(student3);
-    }
-
-    public static void task4_2_4(){
-        ExampleConnector ec = new ExampleConnector();
-        Connection connection = new Connection("8747348");
-        ec.makeConnect(connection);
-    }
-
-    public static void task5_1_1(){
-        Fraction fraction1 = new Fraction(1, 3);
-        Fraction fraction2 = new Fraction(1, 3);
-        Fraction fraction3 = new Fraction(1, 5);
-        System.out.println(fraction1.equals(fraction2));
-        System.out.println(fraction1.equals(fraction3));
-    }
-
-    public static void task5_1_2(){
-        Dot dot1 = new Dot(4, 5);
-        Dot dot2 = new Dot(4, 5);
-        Dot dot3 = new Dot(4, 7);
-        System.out.println(dot1.equals(dot2));
-        System.out.println(dot1.equals(dot3));
-    }
-
-    public static void task5_1_3(){
-        Line line1 = new Line(new Dot(1, 3), new Dot(4,5 ));
-        Line line2 = new Line(new Dot(1, 3), new Dot(4,5 ));
-        Line line3 = new Line(new Dot(4, 5), new Dot(1,3 ));
-        Line line4 = new Line(new Dot(5, 3), new Dot(8,5 ));
-        System.out.println(line1.equals(line2));
-        System.out.println(line1.equals(line3));
-        System.out.println(line1.equals(line4));
-        System.out.println(line1.hashCode());
-        System.out.println(line2.hashCode());
-        System.out.println(line3.hashCode());
-        System.out.println(line4.hashCode());
-    }
-
-    public static void task5_1_4(){
-        BrokenLine brokenLine1 = new BrokenLine(new Dot(1,2), new Dot(3, 4), new Dot(7, 8));
-        ClosedPolyline closedPolyline = new ClosedPolyline(new Dot(1, 2), new Dot(3, 4), new Dot(7, 8));
-        BrokenLine brokenLine2 = new BrokenLine(new Dot(1, 2), new Dot(3, 4), new Dot(7, 8), new Dot(1, 2));
-        BrokenLine brokenLine3 = new BrokenLine(new Dot(1,2), new Dot(3, 4), new Dot(7, 8));
-        System.out.println(brokenLine1.equals(brokenLine2));
-        System.out.println(brokenLine2.equals(closedPolyline));
-        System.out.println(closedPolyline.equals(brokenLine2));
-        System.out.println(brokenLine1.equals(brokenLine3));
-    }
-
-    public static void task5_1_5(){
-        City A = new City("A");
-        City B = new City("B");
-        City C = new City("C");
-
-        InnovativeCity AInnovative = new InnovativeCity("A");
-        InnovativeCity BInnovative = new InnovativeCity("B");
-
-        A.addPath(B, 100);
-        A.addPath(C, 200);
-
-        City A2 = new City("Москва");
-        A2.addPath(B, 150); // разная стоимость
-        A2.addPath(C, 250);
-
-        System.out.println("A.equals(A2): " + A.equals(A2));
-
-        AInnovative.addPath(B, 100);
-        AInnovative.addPath(C, 200);
-
-        System.out.println("AInnovative.equals(A): " + AInnovative.equals(A));
-        System.out.println("A.equals(AInnovative): " + A.equals(AInnovative));
-    }
-
-    public static void task5_1_6(){
-        Student student1 = new Student("Петя", 1, 2, 3, 4, 5);
-        Student student2 = new Student("Петя", 1, 4, 5, 3, 2);
-        Student student3 = new Student("Петя", 7, 2, 3, 4, 5);
-        System.out.println(student1.equals(student2));
-        System.out.println(student1.equals(student3));
-    }
-
-    public static void task5_2_1(){
-        Fraction fraction1 = new Fraction(1, 5);
-        Fraction fraction2 = fraction1.clone();
-        System.out.println(fraction1);
-        System.out.println(fraction2);
-    }
-
-    public static void task5_2_2(){
-        Dot dot1 = new Dot(2, 7);
-        Dot dot2 = dot1.clone();
-        System.out.println(dot1);
-        System.out.println(dot2);
-    }
-
-    public static void task5_2_3(){
-        Line line1 = new Line(new Dot(1, 4), new Dot(5, -3));
-        Line line2 = line1.clone();
-        System.out.println(line1);
-        System.out.println(line2);
-    }
+//    public static void task5_1_5(){
+//        City A = new City("A");
+//        City B = new City("B");
+//        City C = new City("C");
+//
+//        InnovativeCity AInnovative = new InnovativeCity("A");
+//        InnovativeCity BInnovative = new InnovativeCity("B");
+//
+//        A.addPath(B, 100);
+//        A.addPath(C, 200);
+//
+//        City A2 = new City("Москва");
+//        A2.addPath(B, 150); // разная стоимость
+//        A2.addPath(C, 250);
+//
+//        System.out.println("A.equals(A2): " + A.equals(A2));
+//
+//        AInnovative.addPath(B, 100);
+//        AInnovative.addPath(C, 200);
+//
+//        System.out.println("AInnovative.equals(A): " + AInnovative.equals(A));
+//        System.out.println("A.equals(AInnovative): " + A.equals(AInnovative));
+//    }
+//
+//    public static void task5_1_6(){
+//        Student student1 = new Student("Петя", 1, 2, 3, 4, 5);
+//        Student student2 = new Student("Петя", 1, 4, 5, 3, 2);
+//        Student student3 = new Student("Петя", 7, 2, 3, 4, 5);
+//        System.out.println(student1.equals(student2));
+//        System.out.println(student1.equals(student3));
+//    }
+//
+//    public static void task5_2_1(){
+//        Fraction fraction1 = new Fraction(1, 5);
+//        Fraction fraction2 = fraction1.clone();
+//        System.out.println(fraction1);
+//        System.out.println(fraction2);
+//    }
+//
+//    public static void task5_2_2(){
+//        Dot dot1 = new Dot(2, 7);
+//        Dot dot2 = dot1.clone();
+//        System.out.println(dot1);
+//        System.out.println(dot2);
+//    }
+//
+//    public static void task5_2_3(){
+//        Line line1 = new Line(new Dot(1, 4), new Dot(5, -3));
+//        Line line2 = line1.clone();
+//        System.out.println(line1);
+//        System.out.println(line2);
+//    }
 
     public static void task6_1_1(){
         Box<Integer> box = new Box<>();
@@ -834,6 +838,16 @@ public class MainTest {
         System.out.println(integerStorage4.getObj());
     }
 
+    public static void task6_1_4(){
+        Student student1 = new Student("Vasya", grade -> grade >= 2 && grade <= 5, 4, 5, 5, 4, 3, 3);
+        Student student2 = new Student("Sasha", grade -> grade >= 2 && grade <= 5, 4, 5, 5, 4, 3, 3);
+        Student student3 = new Student("Petya", grade -> grade >= 2 && grade <= 5, 2, 4, 3, 3, 3, 2);
+        Student student4 = new Student("Kolya", grade -> grade >= 2 && grade <= 5, 4, 5, 5, 4, 5, 5);
+        System.out.println(student1.compareTo(student2));
+        System.out.println(student1.compareTo(student3));
+        System.out.println(student1.compareTo(student4));
+    }
+
     public static void task6_1_5(){
         Dot dot1 = new Dot(1, 4);
         Dot dot2 = new Dot(9, -4);
@@ -844,6 +858,53 @@ public class MainTest {
         System.out.println(line1);
         System.out.println(line2);
 
+    }
+
+    public static void task6_1_6(){
+        Stack<String> stack = new Stack<>();
+        stack.push("one");
+        stack.push("two");
+        stack.push("three");
+        stack.push("four");
+        stack.push("five");
+        System.out.println(stack.peak());
+        System.out.println(stack.pop());
+        System.out.println(stack.peak());
+    }
+
+    public static void task6_2_1(){
+        Dot dot1 = new Dot(5, 1);
+        Dot dot2 = new Dot(8, 0);
+        Dot dot3 = new Dot(-7, 5);
+        Line<Dot> line = new Line<>(dot1, dot2);
+        Line<Dot> line1 = new Line<>(dot3, dot2);
+        line.moveXto10();
+        line1.moveXto10();
+        System.out.println(line);
+        System.out.println(line1);
+    }
+
+    public static void task6_2_2(){
+        Box<Double> box1= new Box<>();
+        box1.putObj(46.8);
+        Box<Integer> box2 = new Box<>();
+        box2.putObj(67);
+        Box<Short> box3 = new Box<>();
+        box3.putObj((short)32);
+        Box<Float> box4 = new Box<>();
+        box4.putObj(4.5f);
+
+        double doubleValue = MaximumFinder.maximum(box1, box2, box3, box4);
+        System.out.println(doubleValue);
+    }
+
+    public static void task6_2_3(){
+        ThreeCoordinatesDot dot = new ThreeCoordinatesDot(1, 7, 9);
+        Box<Dot> box= new Box<>();
+        Dot3DPutter dPutter = new Dot3DPutter();
+        dPutter.setDot(dot);
+        dPutter.put3DDot(box);
+        System.out.println(box);
     }
 
 }

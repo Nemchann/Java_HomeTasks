@@ -19,7 +19,7 @@ public class ClosedPolyline extends BrokenLine{
 //            com.sstu.war.geometry.Line line = new com.sstu.war.geometry.Line(points[i - 1], points[i]);
 //            space += line.getSpace();
 //        }
-        Line lastLine = new Line(points[0], points[points.length - 1]);
+        Line<Dot> lastLine = new Line<>(points[0], points[points.length - 1]);
         double lastSpace = lastLine.getSpace();
         space += lastSpace;
         return space;

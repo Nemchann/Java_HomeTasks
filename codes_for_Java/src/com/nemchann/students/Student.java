@@ -6,7 +6,7 @@ import com.nemchann.mathematic.Fraction;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Student implements Meowable {
+public class Student implements Meowable, Comparable<Student> {
     String name;
     int[] grades;
     GradeValidator validator;
@@ -85,6 +85,15 @@ public class Student implements Meowable {
         result += getAverage();
         System.out.println(result);
 
+    }
+
+    @Override
+    public int compareTo(Student other) {
+        double thisAvg = this.getAverage();
+        double otherAvg = other.getAverage();
+        if (thisAvg > otherAvg) return 1;
+        else if (thisAvg < otherAvg) return -1;
+        else return 0;
     }
 
     @Override

@@ -94,6 +94,17 @@ public class Line<T extends Dot> implements Sizeable, Cloneable {
         }
     }
 
+    public void moveXto10(){
+        int newX = 0;
+        if (this.start.x >= 0){
+            newX = this.start.x + 10;
+        }
+        else{
+            newX = this.start.x - 10;
+        }
+        this.start.x = newX;
+    }
+
     public String toString(){
         return "Линия от " + start + " до " + end;
     }

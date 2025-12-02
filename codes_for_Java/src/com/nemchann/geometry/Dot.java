@@ -5,7 +5,7 @@ import com.nemchann.mathematic.Fraction;
 import java.util.Objects;
 
 public sealed class Dot extends AbstractDot implements Cloneable permits ThreeCoordinatesDot {
-    final int x;
+    int x;
     final int y;
 
     public Dot(int x, int y) {

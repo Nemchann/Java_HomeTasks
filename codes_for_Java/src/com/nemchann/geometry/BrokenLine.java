@@ -26,7 +26,7 @@ public class BrokenLine implements Sizeable, Brokable {
             return 0;
         }
         for (int i = 1; i < points.length; i++){
-            Line line = new Line(points[i - 1], points[i]);
+            Line<Dot> line = new Line<>(points[i - 1], points[i]);
             space += line.getSpace();
         }
         return space;
@@ -57,28 +57,6 @@ public class BrokenLine implements Sizeable, Brokable {
 
         return compareDifferentTypes(that);
 
-//        if (points.length == bl.points.length && !(bl instanceof ClosedPolyline)){
-//            for (int i = 0; i < points.length; i++){
-//                if (points[i].equals(bl.points[i])){
-//                    continue;
-//                }
-//                else return false;
-//            }
-//        }
-//        else{
-//            if (bl instanceof ClosedPolyline && !(this instanceof ClosedPolyline)){
-//                for (int i = 0; i < points.length - 1; i++){
-//                    if (points[i].equals(bl.points[i])){
-//                        continue;
-//                    }
-//                    else return false;
-//                }
-//                if(this.points[0].equals(this.points[points.length - 1]) && this.points[0].equals(bl.points[0])){
-//                    return true;
-//                }
-//                else return false;
-//            }
-//        }
 
     }
 
