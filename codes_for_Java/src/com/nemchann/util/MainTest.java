@@ -16,13 +16,15 @@ import com.nemchann.storages.Storage;
 import com.nemchann.structures.Stack;
 import com.nemchann.students.GradeGenerator;
 import com.nemchann.students.Student;
+import com.nemchann.to_apply.Transformer;
+import com.nemchann.to_concise.ReducerUtils;
+import com.nemchann.to_filter.Filter;
 import com.nemchann.war.Gun;
 
+import java.lang.reflect.Array;
 import java.math.BigInteger;
-import java.util.Arrays;
+import java.util.*;
 import java.awt.Point;
-import java.util.List;
-import java.util.Scanner;
 
 public class MainTest {
 //    public static void task1_4_1(){
@@ -905,6 +907,100 @@ public class MainTest {
         dPutter.setDot(dot);
         dPutter.put3DDot(box);
         System.out.println(box);
+    }
+
+    public static void task6_3_1(){
+        List<String> strings = List.of("qwerty", "asdfg", "zx");
+
+        List<Integer> lengths = Transformer.transform(strings, str -> str.length());
+        System.out.println(lengths + "");
+
+        List<Integer> integers = List.of(1, -3, 7);
+
+        List<Integer> abss = Transformer.transform(integers, integer -> Math.abs(integer));
+        System.out.println(abss + "");
+
+        List<int[]> arrays = List.of(
+                new int[]{1, 2, 3},
+                new int[]{-5, 0, 5},
+                new int[]{10, 20, 30, 40});
+
+        List<Integer> maxes = Transformer.transform(arrays, array -> {
+            int max = array[0];
+
+            for (int i : array){
+                if (i > max) max = i;
+            }
+            return max;
+        });
+
+        System.out.println(maxes + "");
+    }
+
+    public static void task6_3_2(){
+        List<String> strings = List.of("qwerty", "asdfg", "zx");
+        List<String> filteredStrings = Filter.testing(strings, strs -> strs.length() < 3);
+        System.out.println(filteredStrings);
+
+        List<Integer> integers = List.of(1, -3, 7);
+        List<Integer> filteredIntegers = Filter.testing(integers, ints -> ints > 0);
+        System.out.println(filteredIntegers);
+
+        List<int[]> arrays = List.of(
+                new int[]{-1, -2, -3},
+                new int[]{-5, 0, 5},
+                new int[]{-10, -20, -30, -40});
+
+        List<int[]> filteredArrays = Filter.testing(arrays, arrs ->{
+            boolean res = true;
+            for (int i : arrs){
+                if (i > 0){
+                    res = false;
+                    break;
+                }
+            }
+            return res;
+        });
+
+        for (int[] i : filteredArrays){
+            System.out.println(Arrays.toString(i));
+        }
+    }
+
+    public static void task6_3_3(){
+        List<String> strings = List.of("qwerty", "asdfg", "zx");
+        String concatenated = ReducerUtils.reduce(strings, "",
+                (acc, current) -> acc + current
+        );
+
+        System.out.println(concatenated);
+        List<String> emptyStrings = List.of();
+        String emptyResult = ReducerUtils.reduce(emptyStrings, "",
+                (acc, current) -> acc + current
+        );
+        System.out.println("Пустой список: '" + emptyResult + "'"); // ""
+
+        // Сумма с 0 как identity
+        List<Integer> numbers = List.of(1, -3, 7);
+        Integer sum = ReducerUtils.reduce(numbers, 0,
+                (acc, current) -> acc + current
+        );
+        System.out.println(sum);
+
+        List<List<Integer>> listOfLists = List.of(
+                List.of(1, 2, 3),
+                List.of(4, 5),
+                List.of(6, 7, 8, 9)
+        );
+
+
+        Integer totalElements = ReducerUtils.reduce(
+                Transformer.transform(listOfLists, List::size),
+                0,
+                (acc, current) -> acc + current
+        );
+
+        System.out.println(totalElements);
     }
 
 }
