@@ -26,7 +26,12 @@ public class DotWithCharacteristics extends AbstractDot {
     @Override
     public String getCoordinates() {
         return dot.getCoordinates();
-    }   
+    }
+
+    @Override
+    public void shift(Coordinate coordinate, int value) {
+        System.out.println("Тут просто точечка с характеристиками");
+    }
 
     @Override
     public String getDescription() {

@@ -6,12 +6,12 @@ public class Fraction extends Number implements Numeric, Cloneable {
     private final int numerator;
     private final int denominator;
 
-    public Fraction(){
-        this.numerator = 1;
-        this.denominator = 1;
-    }
+//    public Fraction(){
+//        this.numerator = 1;
+//        this.denominator = 1;
+//    }
 
-    public Fraction(int numerator, int denominator){
+    Fraction(int numerator, int denominator){
         if (denominator <= 0){
             throw new IllegalArgumentException("denominator must be positive");
         }
@@ -157,21 +157,19 @@ public class Fraction extends Number implements Numeric, Cloneable {
         if (this == obj) return true;
         if (getClass() != obj.getClass()) return false;
         Fraction fraction = (Fraction) obj;
-        if (this.numerator != fraction.numerator || this.denominator != fraction.denominator) return false;
-        return true;
+        return this.numerator == fraction.numerator &&
+                this.denominator == fraction.denominator;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(numerator, denominator);
     }
+
     @Override
-    public Fraction clone(){
-        try{
-            return (Fraction) super.clone();
-        }catch(CloneNotSupportedException e){
-            throw new RuntimeException(e);
-        }
+    public final Fraction clone() {
+        // Возвращаем this, а не создаем новый объект
+        return this;
     }
 
     public String toString(){

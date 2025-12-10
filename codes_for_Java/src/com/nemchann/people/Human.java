@@ -4,20 +4,20 @@ public class Human {
     private Name fullName;
     private final Human father;
 
-    public Human(String name){
-        this.fullName = new Name(name);
-        this.father = null;
-    }
+//    public Human(String name){
+//        this.fullName = new Name(name);
+//        this.father = null;
+//    }
 
     public Human(Name fullName){
         this.fullName = fullName;
         this.father = null;
     }
-
-    public Human(Human father, String name){
-        this.father = father;
-        this.fullName = new Name(name);;
-    }
+//
+//    public Human(Human father, String name){
+//        this.father = father;
+//        this.fullName = new Name(name);;
+//    }
 
     public Human(Human father, Name fullName){
         this.fullName = fullName;

@@ -1,19 +1,19 @@
 package com.nemchann.people;
 
-class Name {
+public class Name {
     String surname;
     final String selfname;
     String patronymic;
 
-    public Name(String selfname){
-        this(selfname, null, null);
-    }
+//    public Name(String selfname){
+//        this(selfname, null, null);
+//    }
+//
+//    public Name(String selfname, String surname){
+//        this(selfname, surname, null);
+//    }
 
-    public Name(String selfname, String surname){
-        this(selfname, surname, null);
-    }
-
-    public Name(String selfname, String surname, String patronymic){
+    private Name(String selfname, String surname, String patronymic){
 
         boolean hasValidSelfname = selfname != null && !selfname.isEmpty();
         boolean hasValidSurname = surname != null && !surname.isEmpty();
@@ -47,6 +47,42 @@ class Name {
     public void setPatronymic(String patronymic) {
         this.patronymic = patronymic;
     }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder{
+        private String surname;
+        private String selfname;
+        private String patronymic;
+
+        private Builder(){
+            this.surname = null;
+            this.selfname = null;
+            this.patronymic = null;
+        }
+
+        public Builder surname(String surname){
+            this.surname = surname;
+            return this;
+        }
+
+        public Builder selfname(String selfname){
+            this.selfname = selfname;
+            return this;
+        }
+
+        public Builder patronymic(String patronymic){
+            this.patronymic = patronymic;
+            return this;
+        }
+
+        public Name build() {
+            return new Name(selfname, surname, patronymic);
+        }
+    }
+
 
     public String toString() {
         StringBuilder result = new StringBuilder();

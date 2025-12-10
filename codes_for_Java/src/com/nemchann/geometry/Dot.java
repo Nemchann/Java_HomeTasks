@@ -6,9 +6,9 @@ import java.util.Objects;
 
 public sealed class Dot extends AbstractDot implements Cloneable permits ThreeCoordinatesDot {
     int x;
-    final int y;
+    int y;
 
-    public Dot(int x, int y) {
+    Dot(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -20,6 +20,34 @@ public sealed class Dot extends AbstractDot implements Cloneable permits ThreeCo
     @Override
     public String getCoordinates() {
         return "{" + x + "; " + y + "}";
+    }
+
+    @Override
+    public void shift(Coordinate coordinate, int value) {
+        switch (coordinate) {
+            case X:
+                this.x += value;
+                break;
+            case Y:
+                this.y += value;
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported coordinate: " + coordinate);
+        }
+    }
+
+    public Dot shifted(Coordinate coordinate, int value) {
+        switch (coordinate) {
+            case X:
+                return new Dot(this.x + value, this.y);
+            case Y:
+                return new Dot(this.x, this.y + value);
+            default:
+                throw new IllegalArgumentException("Unsupported coordinate: " + coordinate);
+        }
+    }
+    public Dot shifted(int dx, int dy) {
+        return new Dot(this.x + dx, this.y + dy);
     }
 
     @Override

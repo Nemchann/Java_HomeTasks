@@ -7,7 +7,7 @@ import com.nemchann.util.StructuresTest;
 public class Main {
     public static void main(String[] args)
     {
-        MainTest.task6_3_3();
+        MainTest.task7_2_7();
         //StructuresTest.a_1_3();
     }
 

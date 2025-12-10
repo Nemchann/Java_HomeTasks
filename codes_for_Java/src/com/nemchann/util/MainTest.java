@@ -2,29 +2,25 @@ package com.nemchann.util;
 
 import com.nemchann.animals.*;
 import com.nemchann.banks.BankAccount;
-import com.nemchann.cities.City;
-import com.nemchann.cities.InnovativeCity;
+import com.nemchann.data_bases.DataBase;
+import com.nemchann.data_bases.DatabaseConnection;
 import com.nemchann.geometry.*;
-import com.nemchann.internet_connections.*;
-import com.nemchann.internet_connections.ExampleConnector;
-import com.nemchann.internet_connections.TestConnect;
 import com.nemchann.mathematic.*;
 import com.nemchann.storages.Box;
 import com.nemchann.storages.Dot3DPutter;
 import com.nemchann.storages.MaximumFinder;
 import com.nemchann.storages.Storage;
 import com.nemchann.structures.Stack;
-import com.nemchann.students.GradeGenerator;
 import com.nemchann.students.Student;
+import com.nemchann.temperatures.Temperature;
 import com.nemchann.to_apply.Transformer;
+import com.nemchann.to_collect.Collector;
 import com.nemchann.to_concise.ReducerUtils;
 import com.nemchann.to_filter.Filter;
-import com.nemchann.war.Gun;
+import com.nemchann.people.Name;
 
-import java.lang.reflect.Array;
-import java.math.BigInteger;
 import java.util.*;
-import java.awt.Point;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MainTest {
 //    public static void task1_4_1(){
@@ -828,17 +824,17 @@ public class MainTest {
         System.out.println(box);
     }
 
-    public static void task6_1_2(){
-        Storage<Integer> integerStorage1 = new Storage<>(null, 0);
-        Storage<Integer> integerStorage2 = new Storage<>(99, -1);
-        Storage<String> integerStorage3 = new Storage<String>(null, "default");
-        Storage<String> integerStorage4 = new Storage<String>("hello world", "hello");
-
-        System.out.println(integerStorage1.getObj());
-        System.out.println(integerStorage2.getObj());
-        System.out.println(integerStorage3.getObj());
-        System.out.println(integerStorage4.getObj());
-    }
+//    public static void task6_1_2(){
+//        Storage<Integer> integerStorage1 = new Storage<>(null, 0);
+//        Storage<Integer> integerStorage2 = new Storage<>(99, -1);
+//        Storage<String> integerStorage3 = new Storage<String>(null, "default");
+//        Storage<String> integerStorage4 = new Storage<String>("hello world", "hello");
+//
+//        System.out.println(integerStorage1.getObj());
+//        System.out.println(integerStorage2.getObj());
+//        System.out.println(integerStorage3.getObj());
+//        System.out.println(integerStorage4.getObj());
+//    }
 
     public static void task6_1_4(){
         Student student1 = new Student("Vasya", grade -> grade >= 2 && grade <= 5, 4, 5, 5, 4, 3, 3);
@@ -851,11 +847,11 @@ public class MainTest {
     }
 
     public static void task6_1_5(){
-        Dot dot1 = new Dot(1, 4);
-        Dot dot2 = new Dot(9, -4);
+        Dot dot1 = DotGenerator.create2DDot(1, 4);
+        Dot dot2 = DotGenerator.create2DDot(9, -4);
         Line<Dot> line1 = new Line<>(dot1, dot2);
-        ThreeCoordinatesDot dot3 = new ThreeCoordinatesDot(3, 9, 2);
-        ThreeCoordinatesDot dot4 = new ThreeCoordinatesDot(-5, 1, 8);
+        ThreeCoordinatesDot dot3 = DotGenerator.create3DDot(3, 9, 2);
+        ThreeCoordinatesDot dot4 = DotGenerator.create3DDot(-5, 1, 8);
         Line<ThreeCoordinatesDot> line2 = new Line<>(dot3, dot4);
         System.out.println(line1);
         System.out.println(line2);
@@ -875,9 +871,9 @@ public class MainTest {
     }
 
     public static void task6_2_1(){
-        Dot dot1 = new Dot(5, 1);
-        Dot dot2 = new Dot(8, 0);
-        Dot dot3 = new Dot(-7, 5);
+        Dot dot1 = DotGenerator.create2DDot(5, 1);
+        Dot dot2 = DotGenerator.create2DDot(8, 0);
+        Dot dot3 = DotGenerator.create2DDot(-7, 5);
         Line<Dot> line = new Line<>(dot1, dot2);
         Line<Dot> line1 = new Line<>(dot3, dot2);
         line.moveXto10();
@@ -901,7 +897,7 @@ public class MainTest {
     }
 
     public static void task6_2_3(){
-        ThreeCoordinatesDot dot = new ThreeCoordinatesDot(1, 7, 9);
+        ThreeCoordinatesDot dot = DotGenerator.create3DDot(1, 7, 9);
         Box<Dot> box= new Box<>();
         Dot3DPutter dPutter = new Dot3DPutter();
         dPutter.setDot(dot);
@@ -1003,4 +999,284 @@ public class MainTest {
         System.out.println(totalElements);
     }
 
+    public static void task6_3_4(){
+        List<Integer> numbers = List.of(1, -3, 7, -5, 0, 4, -2);
+
+        Collection<List<Integer>> groups = Collector.collect(
+                numbers,                       // исходная коллекция
+                ArrayList::new,                // создаем новый ArrayList
+                List::add,                     // добавляем элемент в список
+                num -> num >= 0 ? "positive" : "negative" // классификатор
+        );
+
+        System.out.println("Группы чисел: " + groups);
+
+        List<String> strings = List.of("qwerty", "asdfg", "zx", "qw", "hello", "ab");
+
+        Collection<List<String>> stringGroups = Collector.collect(
+                strings,
+                ArrayList::new,
+                List::add,
+                String::length  // ключ группировки - длина строки
+        );
+
+        System.out.println("Строки по длине: " + stringGroups);
+
+        List<String> duplicates = List.of("qwerty", "asdfg", "qwerty", "qw");
+
+// Используем HashSet для хранения уникальных элементов
+        Collection<Set<String>> uniqueGroups = Collector.collect(
+                duplicates,
+                HashSet::new,           // создаем HashSet (уникальные элементы)
+                Set::add,               // добавляем в Set (дубли игнорируются)
+                str -> "unique"         // все строки в одну группу
+        );
+
+        System.out.println("Уникальные строки: " + uniqueGroups);
+    }
+
+//    public static void task7_1_1(){
+//        Storage<String> nullableStorage = Storage.createNullable(null, "default");
+//        System.out.println(nullableStorage.getObj()); // "default"
+//
+//        Storage<String> nullableWithValue = Storage.createNullable("hello", "default");
+//        System.out.println(nullableWithValue.getObj()); // "hello"
+//
+//        // 2. Хранилище, запрещающее null (бросает исключение при создании)
+//        try {
+//            Storage<String> nonNullStorage = Storage.createNonNull(null); // Исключение!
+//        } catch (IllegalArgumentException e) {
+//            System.out.println("Поймали исключение: " + e.getMessage());
+//        }
+//
+//        Storage<Integer> validStorage = Storage.createNonNull(42);
+//        System.out.println(validStorage.getObj()); // 42
+//
+//
+//        // Проверка типа
+//        System.out.println(nullableStorage instanceof Storage); // true
+//    }
+
+//    public static void task7_1_3(){
+//        FractionGenerator fractionGenerator = FractionGenerator.getInstance();
+//        Fraction fraction = fractionGenerator.createFraction(3, 7);
+//        System.out.println(fraction);
+//    }
+
+    public static void task7_1_4(){
+        FractionGenerator fractionGenerator = FractionGenerator.getInstance();
+        Fraction fraction = fractionGenerator.getFraction(1, 6);
+        Fraction fraction1 = fractionGenerator.getFraction(2, 6);
+        Fraction fraction2 = fractionGenerator.getFraction(1, 6);
+        Fraction fraction3 = fractionGenerator.getFraction(2, 12);
+
+        System.out.println(fraction == fraction1);
+        System.out.println(fraction == fraction2);
+        System.out.println(fraction == fraction3);
+
+    }
+
+    public static void task7_1_5(){
+        Temperature cold = Temperature.getByTemperature(0);
+        Temperature warm = Temperature.getByTemperature(20);
+        Temperature hot = Temperature.getByTemperature(40);
+        Temperature hot1 = Temperature.HOT;
+
+        System.out.println(cold);
+        System.out.println(warm);
+        System.out.println(hot);
+        System.out.println(hot == hot1);
+    }
+
+    public static void task7_1_6(){
+        DataBase db = new DataBase(3);
+        DataBase db2 = new DataBase(7);
+
+        System.out.println("Изначально в БД: " + db.getRecordCount() + " записей");
+
+        // Пытаемся получить подключения
+        DatabaseConnection conn1 = db.getConnection();
+        DatabaseConnection conn2 = db.getConnection();
+        DatabaseConnection conn3 = db.getConnection();
+        DatabaseConnection conn4 = db.getConnection(); // null - превышен лимит
+
+        System.out.println("conn4 (превышение лимита): " + conn4); // null
+
+        if (conn1 != null) {
+            // Чтение данных
+            System.out.println("Запись 0: " + conn1.getRecord(0)); // Record_1
+            System.out.println("Запись 100: " + conn1.getRecord(100)); // null
+
+            // Добавление данных
+            conn1.addRecord("Новая запись 1");
+            System.out.println("Добавлена запись через conn1");
+
+            conn1.close(); // Освобождаем подключение
+        }
+
+        // Теперь можно получить новое подключение
+        DatabaseConnection conn5 = db.getConnection();
+        System.out.println("conn5 после освобождения conn1: " + (conn5 != null)); // true
+
+        // Использование try-with-resources для автоматического закрытия
+        try (DatabaseConnection conn6 = db.getConnection()) {
+            if (conn6 != null) {
+                conn6.addRecord("Новая запись 2");
+                System.out.println("Всего записей: " + db.getRecordCount());
+            }
+        } // conn6 автоматически закроется здесь
+
+        // Многопоточный пример
+        System.out.println("\nМногопоточный тест:");
+        for (int i = 0; i < 10; i++) {
+            final int threadId = i;
+            new Thread(() -> {
+                try (DatabaseConnection conn = db2.getConnection()) {
+                    if (conn != null) {
+                        System.out.println("Поток " + threadId + " получил подключение");
+                        Thread.sleep(100);
+                        conn.addRecord("Из потока " + threadId);
+                    } else {
+                        System.out.println("Поток " + threadId + " не получил подключение");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        }
+
+        // Даем время потокам завершиться
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("\nИтоговое количество записей: " + db.getRecordCount());
+    }
+
+    public static void task7_1_7(){
+        Dot dot1 = DotGenerator.create2DDot(1, 6);
+        Dot dot2 = DotGenerator.createDot(1, 5, 3);
+        Dot dot3 = DotGenerator.create3DDot(3, 8, 0);
+        System.out.println(dot1);
+        System.out.println(dot2);
+        System.out.println(dot3);
+
+        //Dot dot4 = DotGenerator.createDot(1, 7, 0, 5);
+    }
+
+    public static void task7_1_8(){
+        AtomicInteger attemptCount = new AtomicInteger();
+
+
+        Storage<String> storage1 = Storage.createNullable(
+                null, // основное значение null
+                () -> {
+                    System.out.println("Вычисляю альтернативное значение...");
+                    // Тяжелая операция, которая выполнится ТОЛЬКО при getObj()
+                    heavyComputation();
+                    return "Вычисленная альтернатива";
+                }
+        );
+
+        System.out.println(storage1.getObj());
+
+        Storage<Integer> storage2 = Storage.createNullable(
+                null,
+                () -> {
+                    attemptCount.getAndIncrement();
+                    System.out.println("Попытка " + attemptCount + ": вычисление альтернативы");
+                    if (attemptCount.get() < 3) {
+                        throw new RuntimeException("Временная ошибка");
+                    }
+                    return 42;
+                }
+        );
+
+        try {
+            storage2.getObj(); // Бросит исключение
+        } catch (Exception e) {
+            System.out.println("Ошибка: " + e.getMessage());
+        }
+
+        try {
+            storage2.getObj(); // Снова бросит исключение
+        } catch (Exception e) {
+            System.out.println("Ошибка: " + e.getMessage());
+        }
+
+        // Только с третьей попытки получим значение
+        System.out.println("Значение: " + storage2.getObj());
+    }
+
+    private static void heavyComputation() {
+        try {
+            Thread.sleep(1000); // Имитация тяжелой операции
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void task7_1_9(){
+        Name name1 = Name.builder()
+                .surname("Иванов")
+                .selfname("Альберт")
+                .patronymic("Васильевич")
+                .build();
+        System.out.println(name1);
+    }
+
+    public static void task7_2_1(){
+        double value = Calculator.sum(new StringSize("rjrkr"), new StringSize("rjrkdtgr"));
+        System.out.println(value);
+    }
+
+    public static void task7_2_2(){
+        double size = AllSizes.sumAllSizes(new StringSizing("3reur"), new StringSizing("rkjnqroer"));
+        System.out.println(size);
+    }
+
+    public static void task7_2_3(){
+        Cat domesticCat = new Cat("Мурзик");
+        WildCat wildCat = new WildCat("Багира");
+
+        // Вариант 1: С декоратором
+        CountingMeowable countingCat = new CountingMeowable(domesticCat);
+        countingCat.meow();
+        countingCat.meow();
+        System.out.println("Мяукнул " + countingCat.getMeowCount() + " раз");
+
+        //int count = MeowsCount.meowsCount(wildCat);
+        //System.out.println("Дикий кот мяукал " + count + " раз в тесте");
+    }
+
+    public static void task7_2_4(){
+        CatDog catDog = new CatDog("Котопес");
+        catDog.meow();
+        catDog.bark();
+
+        Meowable meowable = catDog;
+        Barkable barkable = catDog;
+
+        Cat cat = catDog.getCat();
+        Dog dog = catDog.getDog();
+    }
+
+    public static void task7_2_5(){
+        Circle circle = new Circle(DotGenerator.create2DDot(1, 0), 5);
+        Circle circle1 = circle.shifted(5, 8);
+        System.out.println(Arrays.toString(circle1.getPoints()));
+    }
+
+
+    public static void task7_2_7(){
+        Dot start = DotGenerator.create2DDot(0, 0);
+        Dot end = DotGenerator.create2DDot(3, 4);
+
+        Line<Dot> line = new Line<>(start, end);
+        CachedLine<Dot> cachedLine = new CachedLine<>(line);
+
+        System.out.println("Первое вычисление: " + cachedLine.getSize()); // Вычисляется
+        System.out.println("Второе вычисление: " + cachedLine.getSize());
+    }
 }
