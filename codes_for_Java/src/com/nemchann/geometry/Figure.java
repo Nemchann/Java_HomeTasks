@@ -1,6 +1,6 @@
 package com.nemchann.geometry;
 
-abstract class Figure {
+abstract class Figure implements Shiftable{
     protected Dot[] points;
 
     public Dot[] getPoints() {
@@ -8,6 +8,7 @@ abstract class Figure {
     }
 
     // Метод сдвига фигуры
+    @Override
     public void shift(Coordinate coordinate, int value) {
         if (points == null) return;
 
@@ -20,6 +21,7 @@ abstract class Figure {
     }
 
     // Метод сдвига по X и Y (для 2D фигур)
+    @Override
     public void shift(int dx, int dy) {
         if (points == null) return;
 

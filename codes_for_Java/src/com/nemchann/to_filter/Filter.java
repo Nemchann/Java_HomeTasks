@@ -5,7 +5,7 @@ import com.nemchann.to_apply.Appliable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Filter {
+public class    Filter {
 
     public static <T> List<T> testing(List<T> list, Testable<T> testable){
         List<T> result = new ArrayList<>();

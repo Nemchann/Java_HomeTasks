@@ -18,6 +18,7 @@ import com.nemchann.to_collect.Collector;
 import com.nemchann.to_concise.ReducerUtils;
 import com.nemchann.to_filter.Filter;
 import com.nemchann.people.Name;
+import com.nemchann.stream.Stream;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -1268,6 +1269,44 @@ public class MainTest {
         System.out.println(Arrays.toString(circle1.getPoints()));
     }
 
+    public static void task7_2_6(){
+        Dot dot1 = DotGenerator.create2DDot(1, 6);
+        Dot dot2 = DotGenerator.create2DDot(-4, -7);
+
+        Dot dot3 = DotGenerator.create2DDot(0, 4);
+        Dot dot4 = DotGenerator.create2DDot(-8, -2);
+        Dot dot5 = DotGenerator.create2DDot(10, -5);
+
+        Line<Dot> line1 = new Line<>(dot3, dot4);
+        Line<Dot> line2 = new Line<>(dot4, dot5);
+
+        NewSquare square = new NewSquare(dot5, 10);
+
+        CompositeGroup group1 = new CompositeGroup("Группа 1: Две точки");
+        group1.add(dot1);
+        group1.add(dot2);
+
+        CompositeGroup group2 = new CompositeGroup("Группа 2: Две линии");
+        group2.add(line1);
+        group2.add(line2);
+
+        CompositeGroup group3 = new CompositeGroup("Группа 3: Группы 1 и 2");
+        group3.add(group1);
+        group3.add(group2);
+
+        CompositeGroup group4 = new CompositeGroup("Группа 4: Квадрат и группа 3");
+        group4.add(square);
+        group4.add(group3);
+
+        System.out.println("\n=== Структура группы 4 ===");
+        group4.printStructure();
+
+        group4.shift(Coordinate.X, 10);
+
+        System.out.println("Точка 1: " + dot1.getCoordinates());
+        System.out.println("Линия 1 начало: " + line1.getStart().getCoordinates());
+        System.out.println("Квадрат точка: " + square.getPoints()[0].getCoordinates());
+    }
 
     public static void task7_2_7(){
         Dot start = DotGenerator.create2DDot(0, 0);
@@ -1279,4 +1318,45 @@ public class MainTest {
         System.out.println("Первое вычисление: " + cachedLine.getSize()); // Вычисляется
         System.out.println("Второе вычисление: " + cachedLine.getSize());
     }
+    public static void task7_3_6_1(){
+        List<String> strings = Arrays.asList(
+                "apple", "123", "banana", "456", "7", "orange", "89"
+        );
+
+        // Решение через Stream API
+        int sum = Stream.of(strings)
+                .filter(str -> {
+                    try {
+                        Integer.parseInt(str);
+                        return true;
+                    } catch (NumberFormatException e) {
+                        return false;
+                    }
+                })
+                .transform(Integer::parseInt)  // String -> Integer
+                .reduce(0, (acc, num) -> acc + num);
+
+        System.out.println("Сумма чисел в строках: " + sum);
+    }
+
+    public static void task7_3_6_2(){
+        List<String> strings = Arrays.asList(
+                "Apple", "banana", "Cherry", "date", "Eggplant"
+        );
+
+        // Решение через Stream API
+        long count = Stream.of(strings)
+                .filter(str -> !str.isEmpty() && Character.isUpperCase(str.charAt(0)))
+                .transform(str -> 1)
+                .reduce(0, (acc, num) -> acc + num);  // Просто считаем элементы
+
+        // Альтернативное решение с использованием toList()
+        List<String> uppercaseStrings = Stream.of(strings)
+                .filter(str -> !str.isEmpty() && Character.isUpperCase(str.charAt(0)))
+                .toList();
+
+        System.out.println("Строк с большой буквы: " + count); // 3
+        System.out.println("Список: " + uppercaseStrings);
+    }
+
 }

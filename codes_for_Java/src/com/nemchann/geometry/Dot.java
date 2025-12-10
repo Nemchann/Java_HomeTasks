@@ -4,7 +4,7 @@ import com.nemchann.mathematic.Fraction;
 
 import java.util.Objects;
 
-public sealed class Dot extends AbstractDot implements Cloneable permits ThreeCoordinatesDot {
+public sealed class Dot extends AbstractDot implements Cloneable, Shiftable permits ThreeCoordinatesDot {
     int x;
     int y;
 
@@ -48,6 +48,12 @@ public sealed class Dot extends AbstractDot implements Cloneable permits ThreeCo
     }
     public Dot shifted(int dx, int dy) {
         return new Dot(this.x + dx, this.y + dy);
+    }
+
+    @Override
+    public void shift(int dx, int dy) {
+        this.x += dx;
+        this.y += dy;
     }
 
     @Override

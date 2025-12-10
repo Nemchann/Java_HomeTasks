@@ -7,7 +7,7 @@ public class Collector {
     public static <T, K, P extends Collection<T>>
     Collection<P> collect(
             Collection<T> source,
-            Supplier<P> collectionSupplier,
+            MySupplier<P> collectionSupplier,
             Accumulator<P, T> accumulator,
             Function<T, K> classifier) {
 

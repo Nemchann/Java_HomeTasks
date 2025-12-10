@@ -2,7 +2,7 @@ package com.nemchann.geometry;
 
 import java.util.Objects;
 
-public class Line<T extends Dot> implements Sizeable, Cloneable {
+public class Line<T extends Dot> implements Sizeable, Cloneable, Shiftable {
     private T start;
     private T end;
 
@@ -39,6 +39,22 @@ public class Line<T extends Dot> implements Sizeable, Cloneable {
     @Override
     public double getSize() {
         return getSpace();
+    }
+
+    @Override
+    public void shift(Coordinate coordinate, int value) {
+        // Сдвигаем обе точки линии
+        start.shift(coordinate, value);
+        end.shift(coordinate, value);
+    }
+
+    @Override
+    public void shift(int dx, int dy) {
+        // Сдвигаем обе точки линии
+        start.x += dx;
+        start.y += dy;
+        end.x += dx;
+        end.y += dy;
     }
 
     @Override
