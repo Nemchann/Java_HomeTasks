@@ -1,6 +1,9 @@
 package com.nemchann.util;
 import com.nemchann.binary_tree.BinaryTree;
 import com.nemchann.binary_tree.Node;
+import com.nemchann.cities.City;
+import com.nemchann.cities.Route;
+import com.nemchann.secrets.Secret;
 import com.nemchann.structures.*;
 
 import java.util.ArrayList;
@@ -74,6 +77,19 @@ public class StructuresTest {
         System.out.println(us);
     }
 
+    public static void a_1_6(){
+        Secret secret = new Secret("Вася", "Тот чел никогда не катался на велике!");
+        Secret secret1 = new Secret(secret, "Петя");
+        Secret secret2 = new Secret(secret1, "Саша");
+        Secret secret3 = new Secret(secret2, "Антон");
+        Secret secret4 = new Secret(secret3, "Катя");
+        System.out.println(secret1.getNHolderName(3));
+        System.out.println(secret2.getCountAfterMe());
+        System.out.println(secret3.getCountAfterMe());
+        System.out.println(secret4.getOrderNumber());
+        System.out.println(secret.getHolderChain());
+    }
+
     public static void a_1_10(){
         BinaryTree bTree = new BinaryTree();
         bTree.addValue(3);
@@ -83,5 +99,50 @@ public class StructuresTest {
         bTree.addValue(1);
         bTree.addValue(2);
         System.out.println(bTree);
+    }
+
+    public static void a_1_11(){
+        BinaryTree bTree = new BinaryTree();
+        bTree.addValue(1);
+        bTree.addValue(5);
+        bTree.addValue(4);
+        bTree.addValue(7);
+        bTree.addValue(2);
+        bTree.addValue(10);
+        bTree.addValue(9);
+        bTree.addValue(8);
+        bTree.addValue(6);
+        System.out.println(bTree.inOrder());
+        bTree.remove(7);
+        System.out.println(bTree.isValidBST());
+        System.out.println(bTree.inOrder());
+        System.out.println(bTree.contains(5));
+
+    }
+
+    public static void a_1_12(){
+        City A = new City("A");
+        City B = new City("B");
+        City C = new City("C");
+        City D = new City("D");
+        City E = new City("E");
+        City F = new City("F");
+
+        A.addPath(B, 5);
+        B.addPath(A, 5);
+        A.addPath(F, 1);
+        A.addPath(D, 6);
+        B.addPath(C, 3);
+        C.addPath(B, 3);
+        C.addPath(D, 4);
+        D.addPath(E, 2);
+        D.addPath(A, 6);
+        E.addPath(F, 2);
+        F.addPath(E, 2);
+        F.addPath(B, 1);
+
+        Route route = new Route(A, B);
+        System.out.println(route.getCityCount());
+
     }
 }

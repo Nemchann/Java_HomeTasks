@@ -30,7 +30,7 @@ public class BinaryTree {
     }
 
     private void recursiveInsert(Node current, int value){
-        if (current.getValue() < value){
+        if (value < current.getValue()){
             if (current.hasLeft()){
                 recursiveInsert(current.getLeft(), value);
             }
@@ -62,6 +62,86 @@ public class BinaryTree {
             result.add(node.getValue());
             inOrderTraversal(node.getRight(), result);
         }
+    }
+
+    public boolean contains(int value) {
+        return containsRecursive(root, value);
+    }
+
+    private boolean containsRecursive(Node current, int value) {
+        if (current == null) {
+            return false;
+        }
+
+        if (value == current.getValue()) {
+            return true;
+        }
+
+        return value < current.getValue()
+                ? containsRecursive(current.getLeft(), value)
+                : containsRecursive(current.getRight(), value);
+    }
+
+    public void remove(int value) {
+        root = removeRecursive(root, value);
+        if (root != null) {
+            size--;
+        }
+    }
+
+    private Node removeRecursive(Node current, int value) {
+        if (current == null) {
+            return null;
+        }
+
+        if (value == current.getValue()) {
+            if (current.isLeaf()) {
+                return null;
+            }
+
+            if (current.getLeft() == null) {
+                return current.getRight();
+            }
+            if (current.getRight() == null) {
+                return current.getLeft();
+            }
+            // Находим минимальное значение в правом поддереве
+            int smallestValue = findSmallestValue(current.getRight());
+            current.setValue(smallestValue);
+            current.setRight(removeRecursive(current.getRight(), smallestValue));
+            return current;
+        }
+
+        if (value < current.getValue()) {
+            current.setLeft(removeRecursive(current.getLeft(), value));
+        } else {
+            current.setRight(removeRecursive(current.getRight(), value));
+        }
+
+        return current;
+    }
+
+    private int findSmallestValue(Node root) {
+        return root.getLeft() == null
+                ? root.getValue()
+                : findSmallestValue(root.getLeft());
+    }
+
+    public boolean isValidBST() {
+        return isValidBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    private boolean isValidBST(Node node, int min, int max) {
+        if (node == null) {
+            return true;
+        }
+
+        if (node.getValue() <= min || node.getValue() >= max) {
+            return false;
+        }
+
+        return isValidBST(node.getLeft(), min, node.getValue()) &&
+                isValidBST(node.getRight(), node.getValue(), max);
     }
 
     public Node getRoot() {

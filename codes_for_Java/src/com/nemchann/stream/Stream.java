@@ -21,7 +21,7 @@ public class Stream<T> {
         return new Stream<>(collection::iterator);
     }
 
-    // Map операция (ленивая)
+    // Map операция
     public <R> Stream<R> transform(Appliable<T, R> appliable) {
         return new Stream<>(() -> new Iterator<R>() {
             private final Iterator<T> sourceIterator = iteratorSupplier.get();
@@ -38,7 +38,7 @@ public class Stream<T> {
         });
     }
 
-    // Filter операция (ленивая)
+    // Filter операция
     public Stream<T> filter(Testable<T> testable) {
         return new Stream<>(() -> new Iterator<T>() {
             private final Iterator<T> sourceIterator = iteratorSupplier.get();
