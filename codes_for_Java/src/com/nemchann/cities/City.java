@@ -44,7 +44,7 @@ public class City {
     // Поиск пути к конкретному городу
     protected Path findPathToCity(City targetCity) {
         for (Path path : paths) {
-            if (path.city.equals(targetCity)) {
+            if (path.city == targetCity || path.city.name.equals(targetCity.name)) {
                 return path;
             }
         }
@@ -78,7 +78,7 @@ public class City {
 
         City otherCity = (City) obj;
 
-        return haveSamePaths(this, otherCity);
+        return this.name.equals(otherCity.name);
     }
 
     protected boolean haveSamePaths(City city1, City city2) {
@@ -112,11 +112,12 @@ public class City {
 
     @Override
     public int hashCode() {
-        List<City> targetCities = getTargetCities(this);
-
-        targetCities.sort((c1, c2) -> c1.name.compareTo(c2.name));
-
-        return Objects.hash(name, targetCities);
+//        List<City> targetCities = getTargetCities(this);
+//
+//        targetCities.sort((c1, c2) -> c1.name.compareTo(c2.name));
+//
+//        return Objects.hash(name, targetCities);
+        return Objects.hash(name);
     }
 
     public String toString(){

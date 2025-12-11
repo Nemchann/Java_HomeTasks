@@ -28,7 +28,7 @@ public class Line<T extends Dot> implements Sizeable, Cloneable, Shiftable {
     }
 
     public void setEnd(T end) {
-        this.start = (T) end.clone();
+        this.end = (T) end.clone();
     }
 
     public int getSpace(){

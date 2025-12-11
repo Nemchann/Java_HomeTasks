@@ -3,6 +3,7 @@ import com.nemchann.binary_tree.BinaryTree;
 import com.nemchann.binary_tree.Node;
 import com.nemchann.cities.City;
 import com.nemchann.cities.Route;
+import com.nemchann.phones_dictionary.PhoneDirectory;
 import com.nemchann.secrets.Secret;
 import com.nemchann.structures.*;
 
@@ -90,6 +91,43 @@ public class StructuresTest {
         System.out.println(secret.getHolderChain());
     }
 
+    public static void a_1_7(){
+        PhoneDirectory directory = new PhoneDirectory();
+        System.out.println("=== Добавление контактов ===");
+        directory.add("89003337788", "Вася");
+        directory.add("89004448899", "Петя");
+        directory.add("89005559900", "Маша");
+        directory.add("89006660011", "Анна");
+        directory.add("89007771122", "Антон");
+
+        System.out.println(directory);
+
+        // Получение телефона по имени
+        System.out.println("=== Поиск телефона ===");
+        System.out.println("Телефон Васи: " + directory.getPhoneByName("Вася"));
+        System.out.println("Телефон Маши: " + directory.getPhoneByName("Маша"));
+
+        // Обновление телефона
+        System.out.println("\n=== Обновление телефона ===");
+        String oldPhone = directory.add("89001112233", "Вася");
+        System.out.println("Старый телефон Васи: " + oldPhone);
+        System.out.println("Новый телефон Васи: " + directory.getPhoneByName("Вася"));
+
+        // Проверка существования
+        System.out.println("\n=== Проверка существования ===");
+        System.out.println("Есть ли Вася? " + directory.containsName("Вася"));
+        System.out.println("Есть ли телефон 89004448899? " + directory.containsPhone("89004448899"));
+        System.out.println("Есть ли Коля? " + directory.containsName("Коля"));
+
+        // Поиск по префиксу
+        System.out.println("\n=== Поиск по префиксу 'Ан' ===");
+        String[] namesWithPrefix = directory.getNamesByPrefix("Ан");
+        System.out.println("Найдено имен: " + namesWithPrefix.length);
+        for (String name : namesWithPrefix) {
+            System.out.println("- " + name + ": " + directory.getPhoneByName(name));
+        }
+    }
+
     public static void a_1_10(){
         BinaryTree bTree = new BinaryTree();
         bTree.addValue(3);
@@ -141,8 +179,9 @@ public class StructuresTest {
         F.addPath(E, 2);
         F.addPath(B, 1);
 
-        Route route = new Route(A, B);
+        Route route = new Route(F, D);
         System.out.println(route.getCityCount());
+
 
     }
 }

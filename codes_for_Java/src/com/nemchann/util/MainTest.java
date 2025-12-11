@@ -4,6 +4,8 @@ import com.nemchann.animals.*;
 import com.nemchann.banks.BankAccount;
 import com.nemchann.data_bases.DataBase;
 import com.nemchann.data_bases.DatabaseConnection;
+import com.nemchann.fight_club.CombinationManager;
+import com.nemchann.fight_club.Karateka;
 import com.nemchann.geometry.*;
 import com.nemchann.mathematic.*;
 import com.nemchann.storages.Box;
@@ -1318,6 +1320,26 @@ public class MainTest {
         System.out.println("Первое вычисление: " + cachedLine.getSize()); // Вычисляется
         System.out.println("Второе вычисление: " + cachedLine.getSize());
     }
+
+    public static void task7_3_3(){
+        Karateka tyler = new Karateka("Тайлер");
+        Karateka edward = new Karateka("Эдвард");
+        CombinationManager combo = new CombinationManager("Тайлер + Эдвард");
+        combo.addPunch(tyler);
+        combo.addKick(edward);
+        combo.addPunch(tyler);
+
+        combo.show();
+        combo.execute();
+
+        combo.addJumpKick(edward);
+        combo.addKick(tyler);
+        combo.addJumpKick(tyler);
+
+        combo.show();
+        combo.execute();
+    }
+
     public static void task7_3_6_1(){
         List<String> strings = Arrays.asList(
                 "apple", "123", "banana", "456", "7", "orange", "89"

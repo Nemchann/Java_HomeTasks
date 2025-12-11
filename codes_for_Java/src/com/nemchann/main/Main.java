@@ -7,8 +7,8 @@ import com.nemchann.util.StructuresTest;
 public class Main {
     public static void main(String[] args)
     {
-        MainTest.task7_3_6_2();
-        //StructuresTest.a_1_12();
+        //MainTest.task7_3_3();
+        StructuresTest.a_1_12();
     }
 
 }
