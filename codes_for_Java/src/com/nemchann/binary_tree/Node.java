@@ -2,9 +2,9 @@ package com.nemchann.binary_tree;
 
 public class Node {
     private int value;
-    private Node parent;
-    private Node left;
-    private Node right;
+    private Node parent; //Родитель
+    private Node left; //Левый ребенок
+    private Node right; //Правый ребенок
 
     public Node(){
         this.value = 0;
@@ -47,7 +47,7 @@ public class Node {
             right.setParent(this);
         }
     }
-
+//Является ли листом
     public boolean isLeaf(){
         return (left == null && right == null);
     }

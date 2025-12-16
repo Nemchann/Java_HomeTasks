@@ -5,11 +5,74 @@ import com.nemchann.mathematic.Fraction;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Stack;
 
 public class Student implements Meowable, Comparable<Student> {
     String name;
     int[] grades;
     GradeValidator validator;
+
+    // Стек для хранения состояний для отмены
+    private final Stack<StudentMemento> history = new Stack<>();
+    // Стек для повторения действий
+    private final Stack<StudentMemento> redoStack = new Stack<>();
+
+
+    public interface Memento {
+
+    }
+
+    // Внутренний класс Memento для сохранения состояния
+    private static class StudentMemento implements Memento{
+        private final String name;
+        private final int[] grades;
+
+        public StudentMemento(String name, int[] grades) {
+            this.name = name;
+            this.grades = (grades != null) ? Arrays.copyOf(grades, grades.length) : null;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int[] getGrades() {
+            return (grades != null) ? Arrays.copyOf(grades, grades.length) : null;
+        }
+    }
+
+    // Сохранить текущее состояние
+    private void saveState() {
+        history.push(new StudentMemento(name, grades));
+        redoStack.clear(); // При новом действии очищаем стек redo
+    }
+
+    // Восстановить состояние из memento
+    private void restoreState(StudentMemento memento) {
+        this.name = memento.getName();
+        this.grades = memento.getGrades();
+    }
+
+    public Memento save() {
+        return new StudentMemento(name, grades);
+    }
+
+    public void restore(Memento memento) {
+        if (memento == null) {
+            throw new IllegalArgumentException("Memento не может быть null");
+        }
+
+        if (!(memento instanceof StudentMemento)) {
+            throw new IllegalArgumentException("Некорректный тип Memento");
+        }
+
+        // Сохраняем текущее состояние в историю перед восстановлением
+        saveState();
+
+        // Восстанавливаем состояние
+        StudentMemento studentMemento = (StudentMemento) memento;
+        restoreState(studentMemento);
+    }
 
     public Student(String name, GradeValidator validator, int... params) {
         this.name = name;
@@ -26,16 +89,29 @@ public class Student implements Meowable, Comparable<Student> {
                 this.grades[i] = params[i];
             }
         }
+        saveState();
     }
     // Конструктор без валидатора (все оценки допустимы)
     public Student(String name, int... grades) {
         this(name, GradeValidator.any(), grades);
     }
 
+    // Изменение имени с сохранением состояния
+    public void setName(String newName) {
+        if (newName == null || newName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Имя не может быть пустым");
+        }
+        saveState();
+        this.name = newName;
+    }
+
     public void addGrade(int grade){
         if (!validator.isValid(grade)){
             throw new IncorrectGradeException("Студенту " + name + " нельзя присвоить оценку: " + grade);
         }
+
+        saveState();
+
         if (grades == null) {
             grades = new int[]{grade};
         } else {
@@ -45,6 +121,36 @@ public class Student implements Meowable, Comparable<Student> {
         }
     }
 
+    public void removeLastGrade() {
+        if (grades == null || grades.length == 0) {
+            throw new IllegalStateException("Нет оценок для удаления");
+        }
+        saveState();
+
+        if (grades.length == 1) {
+            grades = null;
+        } else {
+            grades = Arrays.copyOf(grades, grades.length - 1);
+        }
+    }
+
+    public boolean undo() {
+        if (history.size() <= 1) { // Не отменяем начальное состояние
+            return false;
+        }
+
+        // Сохраняем текущее состояние в redo стек
+        redoStack.push(new StudentMemento(name, grades));
+
+        // Удаляем текущее состояние из истории
+        history.pop();
+
+        // Восстанавливаем предыдущее состояние
+        StudentMemento previous = history.peek();
+        restoreState(previous);
+
+        return true;
+    }
 
     public int[] getGrades() {
         return Arrays.copyOf(this.grades, this.grades.length);

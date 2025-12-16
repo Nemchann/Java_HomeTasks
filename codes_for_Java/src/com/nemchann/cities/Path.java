@@ -1,7 +1,5 @@
 package com.nemchann.cities;
 
-import com.nemchann.mathematic.Fraction;
-
 import java.util.Objects;
 
 public class Path {

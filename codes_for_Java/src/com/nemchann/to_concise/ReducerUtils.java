@@ -12,7 +12,7 @@ public class ReducerUtils {
         T result = identity;
 
         for (T element : list) {
-            result = reducer.reduce(result, element);
+            result = reducer.reduce(result, element); // Сокращаем по переданной лямбда-функции
         }
 
         return result;

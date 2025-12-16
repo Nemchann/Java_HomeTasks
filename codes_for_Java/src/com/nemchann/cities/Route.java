@@ -36,7 +36,7 @@ public class Route {
         }
         this.endCity = endCity;
     }
-
+//Обход дерева в ширину
     public List<City> getWayBFS() {
         // Если начало и конец совпадают
         if (startCity.equals(endCity)) {
@@ -99,7 +99,7 @@ public class Route {
 
     @Override
     public String toString() {
-        List<City> way = getWayBFS(); // Используем самый дешевый путь
+        List<City> way = getWayBFS();
 
         if (way.isEmpty()) {
             return "Маршрут не найден";
@@ -119,7 +119,7 @@ public class Route {
 
         return sb.toString();
     }
-
+//    Стоимость пути
     private int calculateTotalCost(List<City> path) {
         if (path.size() < 2) {
             return 0;

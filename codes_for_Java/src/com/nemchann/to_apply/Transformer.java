@@ -9,7 +9,7 @@ public class Transformer {
         List<P> result = new ArrayList<>();
 
         for (T element : list) {
-            P transformed = appliable.apply(element);
+            P transformed = appliable.apply(element); // Применяем метод
             result.add(transformed);
         }
 

@@ -21,7 +21,7 @@ public class Stream<T> {
         return new Stream<>(collection::iterator);
     }
 
-    // Map операция
+    // Transform операция
     public <R> Stream<R> transform(Appliable<T, R> appliable) {
         return new Stream<>(() -> new Iterator<R>() {
             private final Iterator<T> sourceIterator = iteratorSupplier.get();

@@ -6,10 +6,10 @@ public class Collector {
 
     public static <T, K, P extends Collection<T>>
     Collection<P> collect(
-            Collection<T> source,
-            MySupplier<P> collectionSupplier,
-            Accumulator<P, T> accumulator,
-            Function<T, K> classifier) {
+            Collection<T> source, // Из какой коллекции проводим метод
+            MySupplier<P> collectionSupplier, // Куда сохраняем значения
+            Accumulator<P, T> accumulator, // Как именно добавляем в новую коллекцию
+            Function<T, K> classifier) { // По какому принципу добавляем (функция)
 
         // Создаем Map для группировки
         Map<K, P> groups = new HashMap<>();

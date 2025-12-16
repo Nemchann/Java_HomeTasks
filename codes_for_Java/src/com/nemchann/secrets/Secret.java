@@ -2,8 +2,8 @@ package com.nemchann.secrets;
 
 import java.util.Random;
 public class Secret {
-    private static final Random RANDOM = new Random();
-    private static final double NOISE_PERCENTAGE = 0.10;
+    private static final Random RANDOM = new Random(); //Чтобы можно было в случайное место добавлять символы
+    private static final double NOISE_PERCENTAGE = 0.10; // 10%
 
     private final String holderName;
     private final String secretText;
@@ -26,6 +26,8 @@ public class Secret {
         this.previousHolder = null;
     }
 
+    //Передача секрета другому человеку
+
     public Secret(Secret originalSecret, String newHolderName) {
         if (originalSecret == null) {
             throw new IllegalArgumentException("Исходный секрет не может быть null");
@@ -44,6 +46,7 @@ public class Secret {
         // Выводим сообщение о передаче
         System.out.println(originalSecret.holderName + " сказал что " + originalSecret.secretText);
 
+        //Изменяем текст секрета
         this.secretText = distortSecret(originalSecret.secretText);
 
         originalSecret.nextHolder = this;
@@ -87,6 +90,7 @@ public class Secret {
 
         return distortedText.toString();
     }
+
 // Порядковый номер
     public int getOrderNumber() {
         return this.order;
@@ -166,12 +170,12 @@ public class Secret {
         return this.holderName;
     }
 
-    // Получение следующего хранителя (только для внутреннего использования)
+    // Получение следующего хранителя
     Secret getNextHolder() {
         return this.nextHolder;
     }
 
-    // Получение предыдущего хранителя (только для внутреннего использования)
+    // Получение предыдущего хранителя
     Secret getPreviousHolder() {
         return this.previousHolder;
     }

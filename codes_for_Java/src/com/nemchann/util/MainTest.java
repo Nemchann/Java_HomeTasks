@@ -4,6 +4,7 @@ import com.nemchann.animals.*;
 import com.nemchann.banks.BankAccount;
 import com.nemchann.data_bases.DataBase;
 import com.nemchann.data_bases.DatabaseConnection;
+import com.nemchann.data_bases.Point;
 import com.nemchann.fight_club.CombinationManager;
 import com.nemchann.fight_club.Karateka;
 import com.nemchann.geometry.*;
@@ -1321,6 +1322,29 @@ public class MainTest {
         System.out.println("Второе вычисление: " + cachedLine.getSize());
     }
 
+    public static void task7_3_1(){
+        DataBase db = new DataBase(5);
+
+        // Получаем подключение
+        try (DatabaseConnection connection = db.getConnection()) {
+            test(connection);
+        } catch (Exception e) {
+            //e.printStackTrace();
+            System.out.println("Exception");
+        }
+    }
+
+    public static void test(DatabaseConnection db) {
+        // Пример из картинки:
+        String s = db.get(0, String.class);    // "Record_1"
+        //Integer i = db.get(0, Integer.class);   // Ошибка: "Record_1" нельзя преобразовать в Integer
+        Point p = db.get(10, Point.class);      // Point(5,10)
+
+        System.out.println("String: " + s);
+        //System.out.println("Integer: " + i);    // Будет исключение
+        System.out.println("Point: " + p);
+    }
+
     public static void task7_3_3(){
         Karateka tyler = new Karateka("Тайлер");
         Karateka edward = new Karateka("Эдвард");
@@ -1338,6 +1362,60 @@ public class MainTest {
 
         combo.show();
         combo.execute();
+    }
+
+    public static void task7_3_4(){
+        Student student = new Student("Иван", 4, 5, 3);
+        System.out.println("Начальное состояние: " + student);
+        System.out.println("Средний балл: " + student.getAverage());
+
+        System.out.println("\n1. Добавляем оценку 5");
+        student.addGrade(5);
+        System.out.println("Текущее состояние: " + student);
+        System.out.println("Средний балл: " + student.getAverage());
+
+        System.out.println("\n2. Добавляем оценку 2");
+        student.addGrade(2);
+        System.out.println("Текущее состояние: " + student);
+        System.out.println("Средний балл: " + student.getAverage());
+
+        System.out.println("\n3. Меняем имя на 'Иван Петров'");
+        student.setName("Иван Петров");
+        System.out.println("Текущее состояние: " + student);
+
+        if (student.undo()) {
+            System.out.println("Отмена выполнена");
+            System.out.println("Текущее состояние: " + student);
+        }
+
+        System.out.println("\n5. Отменяем добавление оценки 2");
+        if (student.undo()) {
+            System.out.println("Отмена выполнена");
+            System.out.println("Текущее состояние: " + student);
+            System.out.println("Средний балл: " + student.getAverage());
+        }
+    }
+
+    public static void task7_3_5(){
+        Student student = new Student("Иван", 4, 5, 3);
+        System.out.println("Начальное состояние: " + student);
+
+        // Получаем сохранение (Memento)
+        Student.Memento savedState = student.save();
+
+        // Вносим изменения
+        student.addGrade(5);
+        student.setName("Иван Петров");
+        student.addGrade(2);
+
+        System.out.println("После изменений: " + student);
+        System.out.println("Средний балл: " + student.getAverage());
+
+        // Восстанавливаем из сохранения
+        student.restore(savedState);
+
+        System.out.println("После восстановления: " + student);
+        System.out.println("Средний балл: " + student.getAverage());
     }
 
     public static void task7_3_6_1(){

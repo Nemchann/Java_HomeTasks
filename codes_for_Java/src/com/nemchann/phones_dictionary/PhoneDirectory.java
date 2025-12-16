@@ -11,6 +11,7 @@ public class PhoneDirectory {
         phoneToName = new HashMap<>();
     }
 
+//    Добавить имя с номером телефона
     public String add(String phone, String name) {
         if (phone == null || name == null) {
             throw new IllegalArgumentException("Телефон и имя не могут быть null");
@@ -57,19 +58,19 @@ public class PhoneDirectory {
         }
         return name;
     }
-
+//Получить номер телефона по имени
     public String getPhoneByName(String name) {
         return nameToPhone.get(name);
     }
-
+//    Получить имя по номеру телефона
     public String getNameByPhone(String phone) {
         return phoneToName.get(phone);
     }
-
+//Содержит ли такое имя
     public boolean containsName(String name) {
         return nameToPhone.containsKey(name);
     }
-
+    //Содержит ли такой номер телефона
     public boolean containsPhone(String phone) {
         return phoneToName.containsKey(phone);
     }
@@ -81,12 +82,13 @@ public class PhoneDirectory {
     public boolean isEmpty() {
         return nameToPhone.isEmpty();
     }
-
+//Очистить
     public void clear() {
         nameToPhone.clear();
         phoneToName.clear();
     }
 
+//    Все пары
     public String[] getAllPairs() {
         String[] pairs = new String[nameToPhone.size()];
         int i = 0;
@@ -97,15 +99,15 @@ public class PhoneDirectory {
 
         return pairs;
     }
-
+//Все телефоны
     public String[] getAllPhones() {
         return phoneToName.keySet().toArray(new String[0]);
     }
-
+//Все имена
     public String[] getAllNames() {
         return nameToPhone.keySet().toArray(new String[0]);
     }
-
+//Получить имена по первым буквам
     public String[] getNamesByPrefix(String prefix) {
         if (prefix == null) return new String[0];
 
@@ -119,7 +121,7 @@ public class PhoneDirectory {
 
         return result.toArray(new String[0]);
     }
-
+    //Получить имя и номер телефона по первым буквам имени
     public String[] getPairsByPrefix(String prefix) {
         if (prefix == null) return new String[0];
 
@@ -134,7 +136,7 @@ public class PhoneDirectory {
         return result.toArray(new String[0]);
     }
 
-
+//Посмотреть все пары, отсортированные в алфавитном порядке имени
     public String[] getAllPairsSortedByName() {
         List<String> names = new ArrayList<>(nameToPhone.keySet());
         Collections.sort(names);
@@ -150,7 +152,6 @@ public class PhoneDirectory {
 
     /**
      * Представление справочника в виде строки
-     * @return строковое представление всех пар
      */
     @Override
     public String toString() {
