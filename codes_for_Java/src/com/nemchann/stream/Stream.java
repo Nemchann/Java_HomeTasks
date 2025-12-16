@@ -101,8 +101,8 @@ public class Stream<T> {
         return result;
     }
 
-    public int count() {
-        return this.transform(item -> 1)
-                .reduce(0, (acc, num) -> acc + num);
-    }
+//    public int count() {
+//        return this.transform(item -> 1)
+//                .reduce(0, (acc, num) -> acc + num);
+//    }
 }
