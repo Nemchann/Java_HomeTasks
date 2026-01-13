@@ -2,7 +2,7 @@ package com.nemchann.animals;
 
 import java.net.DatagramPacket;
 
-public class CatDog implements Meowable, Barkable{
+public class  CatDog implements Meowable, Barkable{
     private Cat cat;
     private Dog dog;
     private String name;
