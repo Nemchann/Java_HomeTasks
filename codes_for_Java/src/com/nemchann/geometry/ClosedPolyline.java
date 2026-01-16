@@ -16,7 +16,7 @@ public class ClosedPolyline extends BrokenLine{
 //            return 0;
 //        }
 //        for (int i = 1; i < points.length; i++){
-//            com.sstu.war.geometry.Line line = new com.sstu.war.geometry.Line(points[i - 1], points[i]);
+//            Line line = new Line(points[i - 1], points[i]);
 //            space += line.getSpace();
 //        }
         Line<Dot> lastLine = new Line<>(points[0], points[points.length - 1]);
@@ -30,5 +30,23 @@ public class ClosedPolyline extends BrokenLine{
         ClosedPolyline closedPolyline = new ClosedPolyline(points);
         closedPolyline.addDots(points[0]);
         return closedPolyline;
+    }
+
+    /**
+     * Возвращает итератор для замкнутой полилинии
+     * @param startFromIndex индекс точки, с которой начать итерацию (по умолчанию 0)
+     */
+    @Override
+    public PolylineIterator iterator(int startFromIndex) {
+        PolylineIterator iterator = new PolylineIteratorImpl(points, true); // isCyclic = true
+        if (startFromIndex >= 0 && startFromIndex < points.length) {
+            iterator.setPosition(startFromIndex);
+        }
+        return iterator;
+    }
+
+    @Override
+    public PolylineIterator iterator() {
+        return iterator(0);
     }
 }

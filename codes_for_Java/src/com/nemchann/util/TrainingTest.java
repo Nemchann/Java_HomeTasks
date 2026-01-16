@@ -12,12 +12,21 @@ import com.nemchann.training.facade.*;
 import com.nemchann.training.visitor.*;
 import com.nemchann.training.state.*;
 import com.nemchann.training.command.*;
+import com.nemchann.training.proxy.*;
+import com.nemchann.training.chain_of_responsibility.*;
+import com.nemchann.training.iterator.*;
+import com.nemchann.training.bridge.*;
 
 import com.nemchann.training.coffee_shop.CoffeeShopManager;
 import com.nemchann.training.coffee_shop.factory.*;
 import com.nemchann.training.coffee_shop.strategy.*;
 import com.nemchann.training.coffee_shop.observer.*;
 import com.nemchann.training.coffee_shop.decorator.*;
+
+import com.nemchann.training.smart_house.SmartHomeController;
+import com.nemchann.training.smart_house.command.*;
+import com.nemchann.training.smart_house.facade.*;
+import com.nemchann.training.smart_house.strategy.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -203,21 +212,124 @@ public class TrainingTest {
     }
 
     public static void ex5_3(){
-        Light light = new Light();
-        RemoteControl remoteControl = new RemoteControl();
+        Light livingRoomLight = new Light("Гостиная");
+        Light kitchenLight = new Light("Кухня");
+        Stereo stereo = new Stereo();
 
-        Command command = new LightOnCommand(light);
-        Command command1 = new StereoOnCommand(light);
-        Command command2 = new LightOffCommand(light);
+        Command livingRoomLightOn = new LightOnCommand(livingRoomLight);
+        Command livingRoomLightOff = new LightOffCommand(livingRoomLight);
+        Command kitchenLightOn = new LightOnCommand(kitchenLight);
+        Command kitchenLightOff = new LightOffCommand(kitchenLight);
+        Command stereoOn = new StereoOnWithCDCommand(stereo);
+        Command stereoOff = new StereoOffCommand(stereo);
 
-        remoteControl.setCommand(0, command);
-        remoteControl.setCommand(1, command1);
-        remoteControl.setCommand(2, command2);
+        List<Command> partyCommands = new ArrayList<>();
+        partyCommands.add(livingRoomLightOn);
+        partyCommands.add(kitchenLightOn);
+        partyCommands.add(stereoOn);
+        Command partyMacro = new MacroCommand(partyCommands);
 
-        remoteControl.pressButton(0);
-        remoteControl.pressButton(1);
-        remoteControl.pressButton(2);
+        RemoteControl remote = new RemoteControl();
+        remote.setCommand(0, livingRoomLightOn, livingRoomLightOff);
+        remote.setCommand(1, kitchenLightOn, kitchenLightOff);
+        remote.setCommand(2, stereoOn, stereoOff);
+        remote.setCommand(3, partyMacro, new NoCommand());
 
+        remote.pressOnButton(0);  // Включить свет в гостиной
+        remote.pressOnButton(2);  // Включить стерео
+        remote.pressOffButton(0);
 
+        System.out.println("\n--- Отмена последней команды ---");
+        remote.pressUndoButton(); // Вернём свет в гостиной
+
+        System.out.println("\n--- Запуск макроса 'Вечеринка' ---");
+        remote.pressOnButton(3);  // Запускаем макрос
+
+        System.out.println("\n--- Отмена макроса ---");
+        remote.pressUndoButton(); // Отменяем макрос
+
+        System.out.println("\n--- Состояние пульта ---");
+        System.out.println(remote);
+    }
+
+    public static void ex5_4(){
+        VideoDownloadService service = new VideoDownloadService();
+        CachingProxy proxy = new CachingProxy(service);
+        VideoManager manager = new VideoManager(proxy);
+
+        manager.getVideo(0);
+        manager.getVideo(1);
+        manager.getVideo(0);
+    }
+
+    public static void smartHouseTask(){
+        SmartHomeController controller = SmartHomeController.getInstance();
+        SmartHouseRemoteControl remoteControl = new SmartHouseRemoteControl(controller);
+        remoteControl.setMode(new ComfortMode());
+
+        remoteControl.setCommand(0, new HumidityReduceSmartCommand(controller));
+        remoteControl.setCommand(1, new LightsOnSmartCommand(controller));
+        remoteControl.setCommand(2, new LightsOffSmartCommand(controller));
+
+        remoteControl.pressOnButton(0);
+        remoteControl.pressOnButton(1);
+        remoteControl.pressOnButton(2);
+    }
+
+    public static void ex6_1(){
+        LoanRequest request = new LoanRequest(500000, 5, "образование");
+        LoanRequest request1 = new LoanRequest(4000, 4, "Надо");
+        LoanRequest request2 = new LoanRequest(-18290, 4, "лечение");
+
+        Handler validator = new Validator();
+        Handler checker = new CreditChecker();
+        Handler manager = new LoanManager();
+        Handler notifier = new CreditNotifier();
+
+        validator.setNext(checker);
+        checker.setNext(manager);
+        manager.setNext(notifier);
+
+        System.out.println("Кредит 1");
+        validator.handle(request);
+
+        System.out.println("Кредит 2");
+        validator.handle(request1);
+
+        System.out.println("Кредит 3");
+        validator.handle(request2);
+    }
+
+    public static void ex6_2(){
+        Book book1 = new Book("Война и мир", "Л.Н. Толстой", 1960);
+        Book book2 = new Book("Преступление и наказание", "Ф.М.Достоевский", 1975);
+        Book book3 = new Book("Евгений Онегин", "А.С.Пушкин", 1930);
+
+        BookShelf shelf = new BookShelf(3);
+        shelf.add(book1);
+        shelf.add(book2);
+        shelf.add(book3);
+
+        Iterator shelfIterator = new ShelfIterator(shelf);
+
+        while (shelfIterator.hasNext()){
+            System.out.println(shelfIterator.next());
+        }
+        System.out.println();
+        Iterator reversedIterator = new ReversedShelfIterator(shelf);
+
+        while (reversedIterator.hasNext()){
+            System.out.println(reversedIterator.next());
+        }
+    }
+
+    public static void ex6_3(){
+        Renderer vector = new VectorRenderer();
+        Renderer raster = new RasterRenderer();
+        Shape circle = new Circle(vector);
+        Shape square = new Square(raster);
+
+        circle.draw();
+        square.draw();
     }
 }

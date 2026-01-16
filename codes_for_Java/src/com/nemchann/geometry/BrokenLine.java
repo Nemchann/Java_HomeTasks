@@ -96,6 +96,25 @@ public class BrokenLine implements Sizeable, Brokable {
         return true;
     }
 
+    /**
+     * Возвращает итератор для ломаной линии
+     * @param startFromIndex индекс точки, с которой начать итерацию (по умолчанию 0)
+     */
+    public PolylineIterator iterator(int startFromIndex) {
+        PolylineIterator iterator = new PolylineIteratorImpl(points, false); // isCyclic = false
+        if (startFromIndex >= 0 && startFromIndex < points.length) {
+            iterator.setPosition(startFromIndex);
+        }
+        return iterator;
+    }
+
+    /**
+     * Возвращает итератор, начинающий с первой точки
+     */
+    public PolylineIterator iterator() {
+        return iterator(0);
+    }
+
     @Override
     public int hashCode() {
         return Arrays.hashCode(points);

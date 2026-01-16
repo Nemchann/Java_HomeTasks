@@ -18,6 +18,9 @@ public class Point {
         return new Point(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
     }
 
+    public int getX() { return x; }
+    public int getY() { return y; }
+
     @Override
     public String toString() {
         return "Point(" + x + "," + y + ")";

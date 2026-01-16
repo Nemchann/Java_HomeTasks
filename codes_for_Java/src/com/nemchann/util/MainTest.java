@@ -4,6 +4,7 @@ import com.nemchann.animals.*;
 import com.nemchann.banks.BankAccount;
 import com.nemchann.data_bases.DataBase;
 import com.nemchann.data_bases.DatabaseConnection;
+import com.nemchann.data_bases.Db;
 import com.nemchann.data_bases.Point;
 import com.nemchann.fight_club.CombinationManager;
 import com.nemchann.fight_club.Karateka;
@@ -22,6 +23,10 @@ import com.nemchann.to_concise.ReducerUtils;
 import com.nemchann.to_filter.Filter;
 import com.nemchann.people.Name;
 import com.nemchann.stream.Stream;
+import com.nemchann.declaration.*;
+import com.nemchann.doorman.*;
+import com.nemchann.traffic_lights.*;
+
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -1345,6 +1350,35 @@ public class MainTest {
         System.out.println("Point: " + p);
     }
 
+    public static void task7_3_1_2(){
+        Db db = new Db();
+
+        // Регистрируем конвертеры
+        db.registerConverter(String.class, s -> s);
+
+        db.registerConverter(Integer.class, Integer::parseInt);
+
+        db.registerConverter(Point.class, s -> {
+            String[] parts = s.split(",");
+            int x = Integer.parseInt(parts[0]);
+            int y = Integer.parseInt(parts[1]);
+            return new Point(x, y);
+        });
+
+        // Теперь можно вызывать как в условии
+        test1(db);
+    }
+
+    public static void test1(Db db) {
+        String s = db.get(0, String.class);
+        Integer i = db.get(2, Integer.class); // Используем индекс 2 для числа
+        Point p = db.get(1, Point.class);
+
+        System.out.println("String: " + s);      // Hello
+        System.out.println("Integer: " + i);     // 42
+        System.out.println("Point: " + p);       // Point{x=100, y=200}
+    }
+
     public static void task7_3_3(){
         Karateka tyler = new Karateka("Тайлер");
         Karateka edward = new Karateka("Эдвард");
@@ -1458,5 +1492,87 @@ public class MainTest {
         System.out.println("Строк с большой буквы: " + count); // 3
         System.out.println("Список: " + uppercaseStrings);
     }
+
+    public static void task7_3_7(){
+        Declaration declaration = new Declaration("Хороший автор", "С большой буквы");
+        Declaration declaration1 = new Declaration("Запрещенное имя", "Ujjjj");
+
+        Department security = new SecurityDepartment();
+        Department personnel = new PersonnelDepartment();
+        Department accountant = new AccountantDepartment();
+
+        security.setNext(personnel);
+        personnel.setNext(accountant);
+
+        security.sign(declaration);
+        security.sign(declaration1);
+
+    }
+
+    public static void task7_3_9(){
+        TrafficLight light = new TrafficLight();
+        light.next();
+        light.next();
+        light.next();
+        light.next();
+        light.next();
+        light.next();
+    }
+
+    public static void task7_3_11(){
+        StudentPerson student = new StudentPerson("Петя", 452231);
+        StudentPerson student1 = new StudentPerson("", 452231);
+        Teacher teacher = new Teacher("Иванов", "преподаватель", 840233);
+        Teacher teacher1 = new Teacher("Иванов", "", 840233);
+        Teacher teacher2 = new Teacher("", "преподаватель", 840233);
+        Teacher teacher3 = new Teacher("Иванов", "", 0);
+        ParentPerson parent = new ParentPerson();
+
+        SecurityGuard guard = new SecurityGuard("Михаил");
+
+        System.out.println(guard.checkUser(student));
+        System.out.println(guard.checkUser(student1));
+        System.out.println(guard.checkUser(teacher));
+        System.out.println(guard.checkUser(teacher1));
+        System.out.println(guard.checkUser(teacher2));
+        System.out.println(guard.checkUser(teacher3));
+        System.out.println(guard.checkUser(parent));
+    }
+
+    public static void task7_3_12(){
+        Dot dot1 = DotGenerator.create2DDot(1, 5);
+        Dot dot2 = DotGenerator.create2DDot(7, 0);
+        Dot dot3 = DotGenerator.create2DDot(-1, 15);
+        Dot dot4 = DotGenerator.create2DDot(9, -12);
+
+        BrokenLine brokenLine = new BrokenLine(dot1, dot2, dot3, dot4);
+        ClosedPolyline polyline = new ClosedPolyline(dot1, dot2, dot3, dot4);
+
+        PolylineIterator brokenIterator = brokenLine.iterator();
+
+        while(brokenIterator.hasNext()){
+            Dot dot = brokenIterator.next();
+            System.out.println(dot);
+        }
+        System.out.println("Последняя точка (без перемещения): " + brokenIterator.current().getCoordinates());
+
+        PolylineIterator closedIterator = polyline.iterator();
+
+        for (int i = 0; i < 7; i++) {
+            Dot dot = closedIterator.next();
+            System.out.println("Точка " + i + ": " + dot.getCoordinates());
+        }
+
+        System.out.println("\n=== Тест с началом с определенной точки ===");
+        PolylineIterator iteratorFromMiddle = brokenLine.iterator(1); // Начинаем со второй точки
+        System.out.println("Начинаем с точки: " + iteratorFromMiddle.current().getCoordinates());
+
+        while (iteratorFromMiddle.hasNext()) {
+            Dot dot = iteratorFromMiddle.next();
+            System.out.println("Следующая: " + dot.getCoordinates());
+        }
+    }
+
+
 
 }

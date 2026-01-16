@@ -2,30 +2,25 @@ package com.nemchann.training.command;
 
 public class Light {
     private boolean isTurnedOn;
-    private boolean isColored;
+    private String location;
 
-    public Light(){
+    public Light(String location){
         this.isTurnedOn = false;
-        this.isColored = false;
+        this.location = location;
     }
-    void turnOn(){
+    public void turnOn(){
         isTurnedOn = true;
         System.out.println("Свет включен");
     }
 
-    void turnOff(){
+    public void turnOff(){
         isTurnedOn = false;
         System.out.println("Свет выключен");
     }
 
-    void stereoOn(){
-        isColored = true;
-        System.out.println("Дополнительный цвет включен");
+    public boolean isOn(){
+        return isTurnedOn;
     }
 
-    void stereoOff(){
-        isColored = false;
-        System.out.println("Дополнительный цвет выключен");
-    }
 
 }

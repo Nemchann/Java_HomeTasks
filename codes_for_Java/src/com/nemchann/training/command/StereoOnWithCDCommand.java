@@ -1,11 +1,11 @@
 package com.nemchann.training.command;
 
-public class StereoOffCommand implements Command{
+public class StereoOnWithCDCommand implements Command{
     private Stereo stereo;
     private int previousVolume;
     private boolean wasOn;
 
-    public StereoOffCommand(Stereo stereo) {
+    public StereoOnWithCDCommand(Stereo stereo) {
         this.stereo = stereo;
     }
 
@@ -13,14 +13,17 @@ public class StereoOffCommand implements Command{
     public void execute() {
         wasOn = stereo.isOn();
         previousVolume = stereo.getVolume();
-        stereo.turnOff();
+        stereo.turnOn();
+        stereo.setCD("Queen - Greatest Hits");
+        stereo.setVolume(70);
     }
 
     @Override
     public void undo() {
-        if (wasOn) {
-            stereo.turnOn();
+        if (!wasOn) {
+            stereo.turnOff();
         }
         stereo.setVolume(previousVolume);
     }
+
 }
