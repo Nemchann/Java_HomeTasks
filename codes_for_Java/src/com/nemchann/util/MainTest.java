@@ -2,12 +2,15 @@ package com.nemchann.util;
 
 import com.nemchann.animals.*;
 import com.nemchann.banks.BankAccount;
+import com.nemchann.converter.Converter;
+import com.nemchann.converter.TextConverter;
 import com.nemchann.data_bases.DataBase;
 import com.nemchann.data_bases.DatabaseConnection;
 import com.nemchann.data_bases.Db;
 import com.nemchann.data_bases.Point;
 import com.nemchann.fight_club.CombinationManager;
 import com.nemchann.fight_club.Karateka;
+import com.nemchann.fight_club.KickCommand;
 import com.nemchann.geometry.*;
 import com.nemchann.mathematic.*;
 import com.nemchann.storages.Box;
@@ -26,8 +29,13 @@ import com.nemchann.stream.Stream;
 import com.nemchann.declaration.*;
 import com.nemchann.doorman.*;
 import com.nemchann.traffic_lights.*;
+import com.nemchann.fields.*;
+import com.nemchann.entity.*;
+import com.nemchann.validation.*;
+import com.nemchann.io.*;
 
-
+import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -1373,10 +1381,12 @@ public class MainTest {
         String s = db.get(0, String.class);
         Integer i = db.get(2, Integer.class); // Используем индекс 2 для числа
         Point p = db.get(1, Point.class);
+        String si = db.get(2, String.class);
 
         System.out.println("String: " + s);      // Hello
         System.out.println("Integer: " + i);     // 42
         System.out.println("Point: " + p);       // Point{x=100, y=200}
+        System.out.println("String: " + si);
     }
 
     public static void task7_3_3(){
@@ -1519,6 +1529,11 @@ public class MainTest {
         light.next();
     }
 
+    public static void task7_3_10(){
+        Converter textConverter = new TextConverter();
+        textConverter.convert("input.txt", "output.txt");
+    }
+
     public static void task7_3_11(){
         StudentPerson student = new StudentPerson("Петя", 452231);
         StudentPerson student1 = new StudentPerson("", 452231);
@@ -1570,6 +1585,69 @@ public class MainTest {
         while (iteratorFromMiddle.hasNext()) {
             Dot dot = iteratorFromMiddle.next();
             System.out.println("Следующая: " + dot.getCoordinates());
+        }
+    }
+
+    public static void task8_1_1(){
+        Line<Dot> line = new Line<>(DotGenerator.create2DDot(1, 5), DotGenerator.create2DDot(-5, 0));
+        List<Field> fields = CollectFields.fieldCollection(line.getClass());
+        System.out.println(fields);
+        String str = new String();
+        List<Field> fields2 = CollectFields.fieldCollection(str.getClass());
+        System.out.println(fields2);
+        KickCommand cmd = new KickCommand(new Karateka("Me"));
+        List<Field> fields3 = CollectFields.fieldCollection(cmd.getClass());
+        System.out.println(fields3);
+    }
+
+    public static void task8_1_2() throws NoSuchFieldException, IllegalAccessException {
+        Line<Dot> line1 = new Line<>(DotGenerator.create2DDot(1, 5), DotGenerator.create2DDot(1, 0));
+        Line<Dot> line2 = new Line<>(DotGenerator.create2DDot(9, 2), DotGenerator.create2DDot(4, 8));
+        LinesConnector.<Dot>lineConnector(line1, line2);
+
+        Dot end1 = line1.getEnd();
+        Dot start2 = line2.getStart();
+        System.out.println(end1.equals(start2));
+
+    }
+
+    public static void task8_1_3(){
+        A a = new A();
+        System.out.println(a);
+        B b = new B();
+        System.out.println(b);
+    }
+
+    public static void task8_1_4(){
+        Human human1 = new Human("Васька", 300);
+        String human2Name = "skdllllllllllllorjfwpojowhwprhwivnivwp[wntiqbgtebgeoarvaiugrevp895gq938gb8rvbaiuuirbiegllvnnnnnnnnnnnnnksldmclsdkmcsldkmcslkdmcsklmcsldmcsldkmcsleiwioebvobvuobowebweinpvnpdwrwelmw;eflw";
+        Human human2 = new Human(human2Name, 14);
+        System.out.println(human2Name.length());
+        Validator.validate(human2, HumanTest.class);
+    }
+
+    public static void task8_1_5() throws IOException {
+        try{
+            List<Object> objects = Arrays.asList(
+                    new Human("Иванушка", 27),
+                    new Human("Прикольная_девушка", 20),
+                    new Cat("Мурзик")
+            );
+            ObjectWriter writer = new ObjectWriter("objects.txt");
+            writer.write(objects);
+            System.out.println("Записано в файл");
+
+            ObjectReader<Human> reader = new ObjectReader<>("objects.txt", Human.class);
+            List<Human> humans = reader.read();
+
+            System.out.println("\nПрочитанные объекты Human:");
+            for (Human human : humans) {
+                System.out.println(human);
+            }
+        }
+
+        catch (IOException | ReflectiveOperationException e) {
+            e.printStackTrace();
         }
     }
 

@@ -1,0 +1,3 @@
+com.nemchann.validation.Human Иванушка 27
+com.nemchann.validation.Human Прикольная_девушка 20
+com.nemchann.animals.Cat Мурзик
