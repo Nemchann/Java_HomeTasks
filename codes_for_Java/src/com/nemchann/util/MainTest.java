@@ -8,6 +8,8 @@ import com.nemchann.data_bases.DataBase;
 import com.nemchann.data_bases.DatabaseConnection;
 import com.nemchann.data_bases.Db;
 import com.nemchann.data_bases.Point;
+import com.nemchann.default_value.AnnotationProcessor;
+import com.nemchann.default_value.ClassA;
 import com.nemchann.fight_club.CombinationManager;
 import com.nemchann.fight_club.Karateka;
 import com.nemchann.fight_club.KickCommand;
@@ -31,11 +33,16 @@ import com.nemchann.doorman.*;
 import com.nemchann.traffic_lights.*;
 import com.nemchann.fields.*;
 import com.nemchann.entity.*;
+import com.nemchann.two_parameteres.DataHandler;
+import com.nemchann.two_parameteres.Processor;
 import com.nemchann.validation.*;
 import com.nemchann.io.*;
+import com.nemchann.generateConfig.*;
+
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -1618,13 +1625,13 @@ public class MainTest {
         System.out.println(b);
     }
 
-    public static void task8_1_4(){
-        Human human1 = new Human("Васька", 300);
-        String human2Name = "skdllllllllllllorjfwpojowhwprhwivnivwp[wntiqbgtebgeoarvaiugrevp895gq938gb8rvbaiuuirbiegllvnnnnnnnnnnnnnksldmclsdkmcsldkmcslkdmcsklmcsldmcsldkmcsleiwioebvobvuobowebweinpvnpdwrwelmw;eflw";
-        Human human2 = new Human(human2Name, 14);
-        System.out.println(human2Name.length());
-        Validator.validate(human2, HumanTest.class);
-    }
+//    public static void task8_1_4(){
+//        Human human1 = new Human("Васька", 300);
+//        String human2Name = "skdllllllllllllorjfwpojowhwprhwivnivwp[wntiqbgtebgeoarvaiugrevp895gq938gb8rvbaiuuirbiegllvnnnnnnnnnnnnnksldmclsdkmcsldkmcslkdmcsklmcsldmcsldkmcsleiwioebvobvuobowebweinpvnpdwrwelmw;eflw";
+//        Human human2 = new Human(human2Name, 14);
+//        System.out.println(human2Name.length());
+//        Validator.validate(human2, HumanTest.class);
+//    }
 
     public static void task8_1_5() throws IOException {
         try{
@@ -1652,5 +1659,72 @@ public class MainTest {
     }
 
 
+    public static void processing() {
+        Map<String, Object> objects = Processing.process(Config.class);
+        for (Map.Entry<String, Object> entry : objects.entrySet()) {
+            System.out.println("Ключ: " + entry.getKey() +
+                    " -> Значение: " + entry.getValue() +
+                    " (тип: " + entry.getValue().getClass().getSimpleName() + ")");
+        }
+
+        Aclass a = (Aclass) objects.get("createAClass");
+        Bclass b = (Bclass) objects.get("createBclass");
+
+        System.out.println("\nПолученный Aclass: " + a);
+        System.out.println("Полученный Bclass: " + b);
+    }
+
+    public static void task8_2_5(){
+        Processor.process(DataHandler.class);
+    }
+
+    public static void task8_3_1(){
+        Map<String, Object> objects = ProcessingInvoke.collect(Config.class);
+        for (Map.Entry<String, Object> entry : objects.entrySet()) {
+            System.out.println("Ключ: " + entry.getKey() +
+                    " -> Значение: " + entry.getValue() +
+                    " (тип: " + entry.getValue().getClass().getSimpleName() + ")");
+        }
+
+        Aclass a = (Aclass) objects.get("createAClass");
+        Bclass b = (Bclass) objects.get("createBclass");
+
+        System.out.println("\nПолученный Aclass: " + a);
+        System.out.println("Полученный Bclass: " + b);
+    }
+
+
+    public static void task8_3_2(){
+        ClassA a = new ClassA();
+
+        System.out.println(a);
+
+        AnnotationProcessor.reset(a);
+
+        System.out.println(a);
+    }
+
+    public static void task8_3_3(){
+        A a = new A();
+        System.out.println(a);
+        B b = new B();
+        System.out.println(b);
+    }
+
+    public static void task8_3_4(){
+        Human h = new Human("Petya", 700);
+        System.out.println(h);
+
+        try {
+            Validator.validate(h);
+        } catch (ValidateException e) {
+            System.out.println("Exception caught: " + e.getMessage());
+        }
+    }
+
+    public static void task8_3_5(){
+        User user = new User(-7);
+        Validator.validate(user);
+    }
 
 }

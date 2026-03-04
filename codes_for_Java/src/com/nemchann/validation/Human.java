@@ -1,5 +1,6 @@
 package com.nemchann.validation;
 
+@Validate(value = {HumanTest.class})
 public class Human {
     private String name;
     private int age;

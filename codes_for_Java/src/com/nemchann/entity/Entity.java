@@ -22,12 +22,30 @@ public class Entity {
         for (Field field : allFields) {
             field.setAccessible(true);
 
+            //Если аннотация на поле
+            if (field.isAnnotationPresent(ToString.class)){
+                ToString fieldAnnotation = field.getAnnotation(ToString.class);
+
+                if (fieldAnnotation.value() == Option.NO) continue;
+            }
+            else{
+                Class<?> declaringClass = field.getDeclaringClass();
+                //Ищем аннотацию на самом классе
+                if (declaringClass.isAnnotationPresent(ToString.class)){
+                    ToString classAnnotation = declaringClass.getAnnotation(ToString.class);
+
+                    if (classAnnotation.value() == Option.NO){
+                        continue;
+                    }
+                }
+            }
+
             str.append(field.getName()).append("=");
             try {
                 Object value = field.get(this);
                 str.append(value);
             } catch (IllegalAccessException e) {
-                str.append("доступ запрещен");
+                str.append("N/A");
             }
             str.append(", ");
         }

@@ -66,7 +66,7 @@ public class ObjectReader<T> {
 
     }
 
-
+    //Не самый лучший метод
     private Object convertStringToType(String value, Class<?> targetType) {
         if (targetType == String.class) {
             return value;
@@ -81,7 +81,6 @@ public class ObjectReader<T> {
         } else if (targetType == float.class || targetType == Float.class) {
             return Float.parseFloat(value);
         } else {
-
             return value;
         }
     }

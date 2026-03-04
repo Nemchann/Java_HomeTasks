@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 public class ObjectWriter {
-    private String fileName;
+    private final String fileName;
 
     public ObjectWriter(String fileName){
         this.fileName = fileName;
