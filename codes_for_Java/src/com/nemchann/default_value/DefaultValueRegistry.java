@@ -3,6 +3,7 @@ package com.nemchann.default_value;
 import java.util.HashMap;
 import java.util.Map;
 
+//Нужно через collect и Config
 public class DefaultValueRegistry {
     private static final Map<Class<?>, Object> defaults = new HashMap<>();
 

@@ -3,7 +3,7 @@ package com.nemchann.validation;
 
 import com.nemchann.mathematic.IntegerWrapper;
 
-@AValidate // Мы используем псевдоним вместо длинного @Validate({Funs.class})
+@AValidate
 public class User {
     private int accounts;
 

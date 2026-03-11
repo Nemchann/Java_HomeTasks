@@ -17,7 +17,7 @@ import com.nemchann.training.Solution;
 
 public class Main {
     public static void main(String[] args) {
-        MainTest.task8_2_5();
+        MainTest.task8_3_5();
         //StructuresTest.a_1_12();
         //TrainingTest.ex6_3();
     }

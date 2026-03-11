@@ -1675,6 +1675,7 @@ public class MainTest {
     }
 
     public static void task8_2_5(){
+        //DataHandler handler = new DataHandler("file1", "file2");
         Processor.process(DataHandler.class);
     }
 

@@ -43,7 +43,7 @@ public class Validator {
     private static void checkObject(Object object){
         Class<?> objectClass = object.getClass();
 
-
+        // Если аннотация @Validate
         if (objectClass.isAnnotationPresent(Validate.class)) {
             Validate directAnnotation = objectClass.getAnnotation(Validate.class);
             runTests(object, directAnnotation.value());
