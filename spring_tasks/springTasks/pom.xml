@@ -15,7 +15,6 @@
     </properties>
 
     <dependencies>
-        <!-- Главная библиотека ядра Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
