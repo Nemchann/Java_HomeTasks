@@ -1,8 +1,14 @@
 package com.nemchann;
 
+import com.nemchann.campaign.Bot;
+import com.nemchann.campaign.Printer;
+import com.nemchann.campaign.Stock;
 import com.nemchann.feedbacks.Feedback;
+import com.nemchann.spring_traffics.TrafficLight;
+import com.nemchann.student.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -25,16 +31,6 @@ public class AppConfig {
     @Lazy
     public Date dateBean(){
         return new Date();
-    }
-
-    @Bean
-    public Predicate<Integer> predicateBean(){
-        return new Predicate<Integer>() {
-            @Override
-            public boolean test(Integer integer) {
-                return integer >= 2 && integer <= 5;
-            }
-        };
     }
 
     //Рандом, мин, макс
@@ -63,6 +59,7 @@ public class AppConfig {
         return 10;
     }
 
+
     //Отзывы
     @Bean
     public Feedback feedbackGood(){
@@ -79,14 +76,59 @@ public class AppConfig {
         return new Feedback(randomIntBean, "Сложно сказать");
     }
 
-//    @Bean
-//    public Feedback feedbackBest(@Qualifier("feedbackGood") Feedback feedbackGood, @Qualifier("feedbackNormal") Feedback feedbackNormal,
-//                                 @Qualifier("feedbackRandom") Feedback feedbackRandom){
-//
-//
-//    }
-//
-//    private Feedback maxGrade(Feedback fdb1, Feedback fdb2, Feedback fdb3){
-//
-//    }
+    @Bean
+    public Feedback bestFeedback(List<Feedback> allFeedbacks) {
+        return allFeedbacks.stream()
+                .max(Comparator.comparingInt(Feedback::getGrade))// Сравнивает отзывы по оценке
+                .orElseThrow(() -> new IllegalStateException("Нет доступных отзывов"));
+    }
+
+    //Студенты
+    @Bean
+    @Qualifier("gradePredicate")
+    public Predicate<Integer> predicateBean(){
+        return new Predicate<Integer>() {
+            @Override
+            public boolean test(Integer integer) {
+                return integer >= 2 && integer <= 5;
+            }
+        };
+    }
+
+    @Bean
+    public Student firstStudentBean(@Qualifier("predicateBean") Predicate<Integer> gradeValidator){
+        return new Student("Vasya", gradeValidator, 3, 5, 2, 4, 5, 4, 3, 3, 3, 5, 5, 5);
+    }
+
+    @Bean
+    public Student secondStudentBean(@Qualifier("predicateBean") Predicate<Integer> gradeValidator){
+        return new Student("Anya", gradeValidator, 5, 5, 4, 4, 4, 5, 5, 5, 3, 3, 5, 4);
+    }
+
+
+
+
+
+    //Акции
+    @Bean
+    public Set<String> printerStocks() {
+        return Set.of("ORCL", "TSLA");
+    }
+
+    @Bean
+    public String botStock() {
+        return "ORCL";
+    }
+
+    @Bean
+    public Stock orclStock(ApplicationEventPublisher eventPublisher) {
+        return new Stock("ORCL", 75.0, eventPublisher);
+    }
+
+    @Bean
+    public Stock tslaStock(ApplicationEventPublisher eventPublisher) {
+        return new Stock("TSLA", 696.0, eventPublisher);
+    }
+
+
 }

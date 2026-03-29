@@ -33,7 +33,7 @@ public class TrafficLight {
         this.state.setLight(this);
     }
 
-    // Метод для установки стратегии (можно менять в зависимости от времени)
+    // Метод для установки стратегии
     public void setTransitionStrategy(TransitionStrategy strategy) {
         this.transitionStrategy = strategy;
     }

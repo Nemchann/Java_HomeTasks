@@ -3,7 +3,7 @@ package com.nemchann.traffic_lights;
 public class GreenState extends ColorState{
     @Override
     public void next() {
-        // Логика перехода определена в контексте (TrafficLight)
+        // Логика перехода определена в контексте
         light.transitionFromGreen();
     }
 
