@@ -5,6 +5,7 @@ import com.nemchann.feedbacks.Feedback;
 import com.nemchann.spring_traffics.TrafficLight;
 import com.nemchann.student.Student;
 import com.nemchann.student.StudentBuilder;
+import com.nemchann.training.spring_configuration.GreetingController;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -104,14 +105,6 @@ public class MainTest {
         trafficLight.next();
         trafficLight.next();
     }
-
-
-
-
-
-
-
-
 
     public static void task9_2_8(){
         ApplicationContext ac = applicationContext();
