@@ -14,6 +14,7 @@ public class AppConfig {
         private static final AppConfig INSTANCE = new AppConfig();
     }
 
+
     public static AppConfig getInstance(){
         return Holder.INSTANCE;
     }
