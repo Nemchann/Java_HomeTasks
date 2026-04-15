@@ -1,7 +1,6 @@
 package com.nemchann.corporation_database.database_corporation.repositories;
 
 import com.nemchann.corporation_database.database_corporation.pojo.Department;
-import com.nemchann.corporation_database.database_corporation.pojo.Employee;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -12,7 +11,6 @@ import java.util.List;
 public class DepartmentRepository {
     private final Connection connection;
 
-    // Внедряем бин соединения через конструктор
     public DepartmentRepository(Connection connection) {
         this.connection = connection;
     }
@@ -40,7 +38,6 @@ public class DepartmentRepository {
         String sql = "INSERT INTO departments (name) VALUES (?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            // Устанавливаем значения вместо знаков вопроса (индексация с 1!)
             preparedStatement.setString(1, department.getName());
 
             int rowsAffected = preparedStatement.executeUpdate();
@@ -48,6 +45,18 @@ public class DepartmentRepository {
 
         } catch (SQLException e) {
             System.err.println("Ошибка при вставке: " + e.getMessage());
+        }
+    }
+
+    public void delete(Department department) {
+        String sql = "DELETE FROM departments WHERE id=" + department.getId();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+
+            int deletedRows = preparedStatement.executeUpdate();
+            System.out.println("Удалено строк: " + deletedRows);
+
+        }catch (SQLException e){
+            throw new RuntimeException(e);
         }
     }
 }

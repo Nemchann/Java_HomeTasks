@@ -1,5 +1,6 @@
 package com.nemchann.corporation_database.database_corporation.repositories;
 
+import com.nemchann.corporation_database.database_corporation.pojo.Department;
 import com.nemchann.corporation_database.database_corporation.pojo.Employee;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -51,6 +52,18 @@ public class EmployeeRepository {
 
         } catch (SQLException e) {
             System.err.println("Ошибка при вставке: " + e.getMessage());
+        }
+    }
+
+    public void delete(Employee employee) {
+        String sql = "DELETE FROM employees WHERE id=" + employee.getId();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+
+            int deletedRows = preparedStatement.executeUpdate();
+            System.out.println("Удалено строк: " + deletedRows);
+
+        }catch (SQLException e){
+            throw new RuntimeException(e);
         }
     }
 }

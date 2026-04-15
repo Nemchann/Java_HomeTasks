@@ -12,13 +12,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-@Repository
+//@Repository
 public class UniversalDao<T> {
-    private Class<T> clazz;
+    private final Class<T> clazz;
     @Autowired
     private Connection connection;
 
     private Field primaryField = null;
+
+    public UniversalDao(Class<T> clazz){
+        this.clazz = clazz;
+        for (Field field : clazz.getDeclaredFields()) {
+            if (field.isAnnotationPresent(PrimaryKey.class)) {
+                field.setAccessible(true);
+                this.primaryField = field;
+                break;
+            }
+        }
+    }
 
     public List<T> findAll(){
         String tableName = clazz.getSimpleName();
@@ -36,9 +47,26 @@ public class UniversalDao<T> {
         return objects;
     }
 
-//    public Stream<T> findAllStream(){
-//        String tableName = clazz.getSimpleName();
-//    }
+    public Stream<T> findAllStream() {
+        return findAll().stream();
+    }
+
+    public List<T> findAll(int limit, int offset) {
+        List<T> objects = new ArrayList<>();
+
+        String sql = String.format("SELECT * FROM %s LIMIT %d OFFSET %d",
+                clazz.getSimpleName(), limit, offset);
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sql)) {
+
+            while (resultSet.next()) {
+                objects.add(convert(resultSet));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return objects;
+    }
 
     public int insert(T obj){
         try{
@@ -49,9 +77,7 @@ public class UniversalDao<T> {
 
             return statement.executeUpdate("INSERT INTO " + clazz.getSimpleName() + " VALUES " + convertFields(obj));
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
+        } catch (SQLException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }
@@ -65,7 +91,7 @@ public class UniversalDao<T> {
             Statement statement = connection.createStatement();
             Object id = primaryField.get(obj);
 
-            return statement.executeUpdate("DELETE FROM " + clazz.getSimpleName() + "WHERE id = " + id) > 0;
+            return statement.executeUpdate("DELETE FROM " + clazz.getSimpleName() + " WHERE id = " + id) > 0;
 
         }catch (SQLException | IllegalAccessException e){
             throw new RuntimeException();
@@ -91,13 +117,19 @@ public class UniversalDao<T> {
         Field[] fields = clazz.getDeclaredFields();
         try{
             for (Field field : fields){
-                result += field.get(obj).toString() + ", ";
+                Object fieldValue = field.get(obj);
+                if (fieldValue instanceof String){
+                    result += "'" + fieldValue + "', ";
+                }
+                result += fieldValue.toString() + ", ";
             }
         }catch (IllegalAccessException e){
             throw new RuntimeException();
         }
-        result += ")";
-        return result;
+        String fullResult = result.substring(0, result.length() - 2); // Убираем последние запятую и пробел
+
+        fullResult += ")";
+        return fullResult;
     }
 
 

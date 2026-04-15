@@ -15,7 +15,9 @@ public class DatabaseDepartmentTestRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        repository.save(new Department(2L, "personnel department"));
+        Department department = new Department(4L, "PR department");
+        repository.save(department);
+        //repository.delete(department);
         System.out.println("Все отделы: " + repository.findAll());
     }
 }

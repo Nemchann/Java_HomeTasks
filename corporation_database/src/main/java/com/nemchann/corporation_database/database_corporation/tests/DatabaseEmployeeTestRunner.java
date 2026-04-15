@@ -15,8 +15,9 @@ public class DatabaseEmployeeTestRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        System.out.println("Тестируем сохранение...");
-        repository.save(new Employee(5L, "Petya", 1L));
+        Employee employee = new Employee(5L, "Petya", 1L);
+        //repository.save(employee);
+        //repository.delete(employee);
         System.out.println("Все сотрудники: " + repository.findAll());
     }
 }
