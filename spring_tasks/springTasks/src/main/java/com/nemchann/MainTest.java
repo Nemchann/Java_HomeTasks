@@ -9,7 +9,7 @@ import com.nemchann.training.spring_configuration.GreetingController;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.sql.Timestamp;
+import java.sql.*;
 
 public class MainTest {
 
@@ -113,5 +113,12 @@ public class MainTest {
         stockService.updatePrice("TSLA", 570.0);
         stockService.updatePrice("ORCL", 78.0);
 
+    }
+
+    public void task09_05() throws SQLException {
+        ApplicationContext ac = applicationContext();
+        Connection connection = DriverManager.getConnection("jdbc:h2:file:~");
+        Statement statement = connection.createStatement();
+        statement.execute("Create table Humans");
     }
 }
