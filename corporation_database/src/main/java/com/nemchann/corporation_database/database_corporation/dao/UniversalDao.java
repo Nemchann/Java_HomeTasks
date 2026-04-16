@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-//@Repository
+@Repository
 public class UniversalDao<T> {
     private final Class<T> clazz;
     @Autowired
@@ -31,12 +31,13 @@ public class UniversalDao<T> {
         }
     }
 
+    //Старый метод
     public List<T> findAll(){
         String tableName = clazz.getSimpleName();
         List<T> objects = new ArrayList<>();
         try{
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM " + clazz.getSimpleName());
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM " + tableName);
             while(resultSet.next()){
                 objects.add(convert(resultSet));
             }
@@ -47,8 +48,9 @@ public class UniversalDao<T> {
         return objects;
     }
 
-    public Stream<T> findAllStream() {
-        return findAll().stream();
+    //Новые методы
+    public Stream<T> findAllStream(int limit, int offset) {
+        return findAll(limit, offset).stream();
     }
 
     public List<T> findAll(int limit, int offset) {
@@ -82,9 +84,6 @@ public class UniversalDao<T> {
         }
     }
 
-    public boolean update(T obj){
-        return false; // тут додумать
-    }
 
     public boolean delete(T obj){
         try{
