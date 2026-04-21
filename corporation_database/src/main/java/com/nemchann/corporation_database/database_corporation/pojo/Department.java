@@ -1,6 +1,9 @@
 package com.nemchann.corporation_database.database_corporation.pojo;
 
+import com.nemchann.corporation_database.database_corporation.dao.PrimaryKey;
+
 public class Department {
+    @PrimaryKey
     private Long id;
     private String name;
 

@@ -29,7 +29,7 @@ public class DepartmentRepository {
                 departments.add(department);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException();
         }
         return departments;
     }
@@ -44,7 +44,7 @@ public class DepartmentRepository {
             System.out.println("Добавлено строк: " + rowsAffected);
 
         } catch (SQLException e) {
-            System.err.println("Ошибка при вставке: " + e.getMessage());
+            throw new RuntimeException();
         }
     }
 
